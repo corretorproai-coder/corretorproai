@@ -64,7 +64,14 @@
         .status-atendimento { background: #e0f2fe; color: #0369a1; }
         .status-frio { background: #f1f5f9; color: #64748b; }
 
-        /* FICHAS DETALHADAS NA ABA LEADS */
+        .action-buttons-flex { display: flex; gap: 8px; }
+        .btn-action-click { border: none; padding: 6px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; cursor: pointer; transition: 0.15s; }
+        .btn-whatsapp { background-color: #25d366; color: white; }
+        .btn-whatsapp:hover { background-color: #1ebd59; transform: translateY(-1px); }
+        .btn-call { background-color: #0ea5e9; color: white; }
+        .btn-call:hover { background-color: #0284c7; transform: translateY(-1px); }
+
+        /* FICHAS DETALHADAS */
         .lead-profile-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 5px solid #cbd5e1; }
         .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .lead-profile-card.medium-border { border-left-color: #f59e0b; }
@@ -73,7 +80,6 @@
         .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 14px; color: #475569; }
         .lead-profile-info-grid span strong { color: #0f172a; }
 
-        /* BOX DE ALERTA INTELIGENTE IA (RÉGUA DE TEMPO) */
         .ia-smart-alert { margin-top: 15px; background: rgba(15, 23, 42, 0.02); padding: 12px 16px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; gap: 10px; border: 1px solid #e2e8f0; }
         .ia-smart-alert.alert-urgent { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
         .ia-smart-alert.alert-medium { background: #fffbeb; border-color: #fde68a; color: #92400e; }
@@ -121,6 +127,7 @@
             .main-content { margin-left: 0; padding: 20px 16px; }
             .dash-header { flex-direction: column; align-items: flex-start; gap: 14px; }
             .dashboard-workspace { grid-template-columns: 1fr; gap: 20px; }
+            .action-buttons-flex { flex-direction: column; gap: 4px; }
         }
     </style>
 </head>
@@ -132,6 +139,7 @@
             <li id="menu-resumo" class="active" onclick="switchTab('resumo')"><a href="#"><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
             <li id="menu-leads" onclick="switchTab('leads')"><a href="#"><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
             <li id="menu-central-ia" onclick="switchTab('central-ia')"><a href="#"><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
+            <li><a href="https://wa.me/5511919912900?text=Olá!%20Sou%20assinante%20do%20CorretorPro%20AI%20e%20preciso de suporte no meu painel." target="_blank"><i class="fa-solid fa-circle-question"></i><span>Suporte</span></a></li>
             <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
         </ul>
     </nav>
@@ -150,7 +158,7 @@
             <section class="metrics-grid">
                 <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p>42</p></div><div class="metric-icon"><i class="fa-solid fa-users"></i></div></div>
                 <div class="metric-card"><div class="metric-info"><h3>Leads Elite</h3><p>12</p></div><div class="metric-icon"><i class="fa-solid fa-crown"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Alertas Ativos</h3><p id="metrics-alerts-count">3</p></div><div class="metric-icon"><i class="fa-solid fa-bell"></i></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Alertas Ativos</h3><p>3</p></div><div class="metric-icon"><i class="fa-solid fa-bell"></i></div></div>
             </section>
 
             <div class="dashboard-workspace">
@@ -163,28 +171,55 @@
                                     <tr>
                                         <th>Nome do Lead</th>
                                         <th>Origem</th>
-                                        <th>Contato</th>
                                         <th>Status</th>
+                                        <th>Conectar Direto</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td><span class="lead-click-link" onclick="goToLeadProfile('lead-marcos')">Marcos da Silva</span></td>
                                         <td><i class="fa-brands fa-facebook" style="color: #1877f2; margin-right: 4px;"></i> Facebook Ads</td>
-                                        <td>(11) 99999-1234</td>
                                         <td><span class="status-badge status-novo">Novo</span></td>
+                                        <td>
+                                            <div class="action-buttons-flex">
+                                                <a href="https://wa.me/5511999991234?text=Olá%20Marcos,%20aqui%20é%20o%20Víctor%20da%20CorretorPro%20AI.%20Recebi%20seu%20contato%20sobre%20o%20imóvel%20em%20Guarulhos%20e%20separei%20as%20melhores%20opções%20para%20você!" target="_blank" class="btn-action-click btn-whatsapp">
+                                                    <i class="fa-brands fa-whatsapp"></i> Zap
+                                                </a>
+                                                <a href="tel:+5511999991234" class="btn-action-click btn-call">
+                                                    <i class="fa-solid fa-phone"></i> Ligar
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><span class="lead-click-link" onclick="goToLeadProfile('lead-ana')">Ana Júlia Ramos</span></td>
                                         <td><i class="fa-brands fa-google" style="color: #ea4335; margin-right: 4px;"></i> Google Ads</td>
-                                        <td>(11) 98888-5678</td>
                                         <td><span class="status-badge status-atendimento">Médio</span></td>
+                                        <td>
+                                            <div class="action-buttons-flex">
+                                                <a href="https://wa.me/5511988885678?text=Olá%20Ana%20Júlia,%20tudo%20bem?%20Aqui%20é%20o%20Víctor.%20Conseguiu%20avançar%20com%20aquela%20documentação%20da%20simulação%20bancária%20do%20apartamento?" target="_blank" class="btn-action-click btn-whatsapp">
+                                                    <i class="fa-brands fa-whatsapp"></i> Zap
+                                                </a>
+                                                <a href="tel:+5511988885678" class="btn-action-click btn-call">
+                                                    <i class="fa-solid fa-phone"></i> Ligar
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><span class="lead-click-link" onclick="goToLeadProfile('lead-roberto')">Roberto Alencar</span></td>
                                         <td><i class="fa-brands fa-instagram" style="color: #e1306c; margin-right: 4px;"></i> Instagram</td>
-                                        <td>(11) 97777-4321</td>
                                         <td><span class="status-badge status-frio">Frio</span></td>
+                                        <td>
+                                            <div class="action-buttons-flex">
+                                                <a href="https://wa.me/5511977774321?text=Olá%20Roberto,%20Víctor%20da%20CorretorPro.%20Estou%20te%20enviando%20o%20catálogo%20dos%20novos%20lançamentos%20do%20Minha%20Casa%20Minha%20Vida." target="_blank" class="btn-action-click btn-whatsapp">
+                                                    <i class="fa-brands fa-whatsapp"></i> Zap
+                                                </a>
+                                                <a href="tel:+5511977774321" class="btn-action-click btn-call">
+                                                    <i class="fa-solid fa-phone"></i> Ligar
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -210,10 +245,15 @@
                 <div class="right-workspace-column">
                     <section class="content-box">
                         <div class="box-title"><i class="fa-solid fa-clock"></i> Alertas de Retorno (Agenda IA)</div>
-                        <div class="agenda-list" id="main-agenda-list">
+                        <div class="agenda-list">
                             <div class="agenda-item" style="border-left: 4px solid #ef4444;">
                                 <div class="agenda-time">HOJE<br>Agora</div>
-                                <div class="agenda-info"><h4>Ligar: Marcos da Silva</h4><p><i class="fa-solid fa-phone"></i> (11) 99999-1234</p></div>
+                                <div class="agenda-info">
+                                    <h4>Ligar: Marcos da Silva</h4>
+                                    <p style="margin-top: 4px;">
+                                        <a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366; text-decoration:none; font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp</a>
+                                    </p>
+                                </div>
                                 <div class="alarm-indicator"><i class="fa-solid fa-bell"></i></div>
                             </div>
                             <div class="agenda-item" style="border-left: 4px solid #f59e0b;">
@@ -251,7 +291,7 @@
                     <span style="background: #ef4444; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-fire"></i> QUENTE (10/10)</span>
                 </div>
                 <div class="lead-profile-info-grid">
-                    <span><strong>WhatsApp:</strong> (11) 99999-1234</span>
+                    <span><strong>WhatsApp:</strong> <a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366; font-weight:bold; text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> (11) 99999-1234 (Chamar)</a></span>
                     <span><strong>Budget:</strong> R$ 400.000</span>
                     <span><strong>Preferência:</strong> 3 Dorms (Guarulhos)</span>
                 </div>
@@ -267,133 +307,4 @@
                     <span style="background: #f59e0b; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-bolt"></i> MÉDIO (6/10)</span>
                 </div>
                 <div class="lead-profile-info-grid">
-                    <span><strong>WhatsApp:</strong> (11) 98888-5678</span>
-                    <span><strong>Budget:</strong> R$ 280.000</span>
-                    <span><strong>Preferência:</strong> Apartamento Centro</span>
-                </div>
-                <div class="ia-smart-alert alert-medium">
-                    <i class="fa-solid fa-hourglass-half"></i>
-                    <span><strong>Alerta Alavancado IA:</strong> Interesse moderado. Alerta programado automaticamente para daqui a <strong>5 dias</strong> para manter o relacionamento.</span>
-                </div>
-            </div>
-
-            <div id="lead-roberto" class="lead-profile-card cold-border">
-                <div class="lead-profile-header">
-                    <div><h2>Roberto Alencar</h2><span class="status-badge status-frio" style="margin-top: 6px;">Nutrição Distante</span></div>
-                    <span style="background: #3b82f6; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-snowflake"></i> FRIO (3/10)</span>
-                </div>
-                <div class="lead-profile-info-grid">
-                    <span><strong>WhatsApp:</strong> (11) 97777-4321</span>
-                    <span><strong>Budget:</strong> R$ 190.000</span>
-                    <span><strong>Preferência:</strong> Minha Casa Minha Vida</span>
-                </div>
-                <div class="ia-smart-alert alert-cold">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    <span><strong>Alerta Alavancado IA:</strong> Lead curioso/frio. Alerta programado para daqui a <strong>20 dias</strong> na agenda para envio de conteúdo de mercado genérico.</span>
-                </div>
-            </div>
-        </div>
-
-        <div id="central-ia" class="tab-content">
-            <div class="dash-header">
-                <div class="dash-title">
-                    <h1>Central de Inteligência Artificial</h1>
-                    <p>Cole o chat e deixe a IA calcular a temperatura e os gatilhos da agenda automaticamente</p>
-                </div>
-            </div>
-
-            <div class="dashboard-workspace">
-                <div class="left-col" style="grid-column: span 2;">
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Analisador Preditivo de WhatsApp</div>
-                        <div class="ia-analyzer">
-                            <div class="ia-input-group">
-                                <label>Selecione o Cliente para Analisar</label>
-                                <select id="ia-select-lead" class="ia-select">
-                                    <option value="Marcos">Marcos da Silva (Conversa Urgente)</option>
-                                    <option value="Ana">Ana Júlia Ramos (Simulação Devagar)</option>
-                                    <option value="Roberto">Roberto Alencar (Apenas Curioso)</option>
-                                </select>
-                            </div>
-                            <div class="ia-input-group">
-                                <label>Histórico Bruto da Conversa</label>
-                                <textarea id="chat-input" class="ia-textarea" placeholder="Cole os balões de texto do WhatsApp aqui..."></textarea>
-                            </div>
-                            <button class="btn-ai" onclick="runSmartAIAnalysis()"><i class="fa-solid fa-brain"></i> PROCESSAR INTENÇÃO E PROGRAMAR RÉGUA DE ALERTAS</button>
-                        </div>
-
-                        <div id="ai-result-box">
-                            <h3 id="ai-result-title" style="display:flex; align-items:center; gap:6px; font-size:16px;"></h3>
-                            <p id="ai-result-desc" style="margin-top: 10px; font-size: 14px; color: #1e293b; line-height: 1.5;"></p>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        // CRONOGRAMA DE NAVEGAÇÃO
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById('menu-' + tabId).classList.add('active');
-        }
-
-        function goToLeadProfile(leadElementId) {
-            switchTab('leads');
-            setTimeout(() => {
-                const element = document.getElementById(leadElementId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    element.style.transform = 'scale(1.02)';
-                    element.style.transition = '0.3s';
-                    setTimeout(() => { element.style.transform = 'scale(1)'; }, 800);
-                }
-            }, 100);
-        }
-
-        // MOTOR DE SIMULAÇÃO DE REGRAS DE IA (O QUE VOCÊ PEDIU)
-        function runSmartAIAnalysis() {
-            const btn = document.querySelector('.btn-ai');
-            const resultBox = document.getElementById('ai-result-box');
-            const selectedLead = document.getElementById('ia-select-lead').value;
-            
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Calculando Régua de Relacionamento...';
-            
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-brain"></i> ANÁLISE INTEGRADA COM SUCESSO';
-                resultBox.style.display = 'block';
-                resultBox.style.animation = 'fadeIn 0.5s ease';
-                
-                let title = "";
-                let desc = "";
-                
-                if(selectedLead === "Marcos") {
-                    resultBox.style.background = "#fef2f2";
-                    resultBox.style.border = "1px solid #fca5a5";
-                    title = '<span style="color:#ef4444; font-weight:800;"><i class="fa-solid fa-fire"></i> LEAD DIAGNOSTICADO COMO QUENTE (10/10)</span>';
-                    desc = '<strong>Gatilho de Urgência Detectado:</strong> O cliente informou capital à vista imediato e precisa mudar rápido. <br><br><span style="background:#ef4444; color:white; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;"><i class="fa-solid fa-calendar-check"></i> AÇÃO DA IA:</span> Alerta disparado na Agenda para <strong>HOJE - IMEDIATO</strong> com nome e telefone em destaque.';
-                } else if(selectedLead === "Ana") {
-                    resultBox.style.background = "#fffbeb";
-                    resultBox.style.border = "1px solid #fde68a";
-                    title = '<span style="color:#d97706; font-weight:800;"><i class="fa-solid fa-bolt"></i> LEAD DIAGNOSTICADO COMO MÉDIO (6/10)</span>';
-                    desc = '<strong>Gatilho de Ritmo Detectado:</strong> O cliente depende de aprovação bancária e está enviando documentos devagar. <br><br><span style="background:#f59e0b; color:white; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;"><i class="fa-solid fa-calendar-check"></i> AÇÃO DA IA:</span> Evitando importunação. Alerta de retorno agendado automaticamente na régua para daqui a <strong>5 DIAS</strong>.';
-                } else {
-                    resultBox.style.background = "#eff6ff";
-                    resultBox.style.border = "1px solid #bfdbfe";
-                    title = '<span style="color:#1e40af; font-weight:800;"><i class="fa-solid fa-snowflake"></i> LEAD DIAGNOSTICADO COMO FRIO (3/10)</span>';
-                    desc = '<strong>Gatilho de Curiosidade Detectado:</strong> Histórico mostra respostas curtas, sem definição de prazo ou orçamento claro. <br><br><span style="background:#3b82f6; color:white; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;"><i class="fa-solid fa-calendar-check"></i> AÇÃO DA IA:</span> Protegendo sua agenda. Afastamos o acompanhamento. Alerta programado de forma espaçada para daqui a <strong>20 DIAS</strong>.';
-                }
-                
-                document.getElementById('ai-result-title').innerHTML = title;
-                document.getElementById('ai-result-desc').innerHTML = desc;
-                
-            }, 1500);
-        }
-    </script>
-</body>
-</html>
+                    <span><strong>WhatsApp:</strong> <a href="https://wa.me/5511988885678" target="_blank
