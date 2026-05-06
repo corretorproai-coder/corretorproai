@@ -13,10 +13,8 @@
         html { scroll-behavior: smooth; }
         body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; overflow-x: hidden; }
 
-        .container { max-width: 1140px; margin: 0 auto; width: 100%; }
-
         /* ================================================================= */
-        /* MENU LATERAL COMPACTO */
+        /* MENU LATERAL PRINCIPAL CORRIGIDO */
         /* ================================================================= */
         .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
         .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: #f2b705; letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
@@ -60,7 +58,6 @@
         .leads-table th { background: #f8fafc; padding: 12px 14px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
         .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
         
-        /* Links clicáveis de leads */
         .lead-click-link { color: #0f172a; text-decoration: none; font-weight: 700; cursor: pointer; transition: color 0.15s; }
         .lead-click-link:hover { color: #d9a304; text-decoration: underline; }
 
@@ -145,7 +142,7 @@
                 </div>
                 <div class="user-profile">
                     <i class="fa-solid fa-circle-user"></i>
-                    <span>Plano Professional</span>
+                    <span>Plano Imobiliária</span>
                 </div>
             </div>
 
@@ -184,6 +181,12 @@
                                         <td>(11) 98888-5678</td>
                                         <td><span class="status-badge status-atendimento">Atendimento</span></td>
                                     </tr>
+                                    <tr>
+                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-roberto')">Roberto Ávila</span></td>
+                                        <td><i class="fa-solid fa-building" style="color: #f2b705; margin-right: 4px;"></i> VivaReal</td>
+                                        <td>(11) 97777-4321</td>
+                                        <td><span class="status-badge status-novo">Novo</span></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -197,7 +200,7 @@
                             <tr style="border-bottom: 1px solid #f1f5f9;">
                                 <td style="padding: 12px 0;">
                                     <strong>Marcos da Silva</strong><br>
-                                    <small style="color: #64748b;">Budget: R$ 400 Mil • Perfil: Prontidão À Vista</small>
+                                    <small style="color: #64748b;">Orçamento: R$ 400 Mil • Perfil: Prontidão À Vista</small>
                                 </td>
                                 <td style="text-align: right;">
                                     <span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 4px; font-weight: 800; font-size: 11px;">ELITE 10/10</span>
@@ -252,8 +255,8 @@
                 <div class="lead-profile-info-grid">
                     <span><strong>WhatsApp:</strong> (11) 99999-1234</span>
                     <span><strong>Origem:</strong> Facebook Anúncios</span>
-                    <span><strong>Budget Máximo:</strong> R$ 400.000</span>
-                    <span><strong>Preferência:</strong> Imóvel 3 Dorms (Guarulhos)</span>
+                    <span><strong>Orçamento Máximo:</strong> R$ 400.000</span>
+                    <span><strong>Preferência:</strong> Imóvel 3 Dormitórios (Guarulhos)</span>
                 </div>
                 <div style="margin-top: 20px; background: #f8fafc; padding: 14px; border-radius: 6px; font-size: 13px; border: 1px dashed #cbd5e1;">
                     <strong>Último Alerta da IA:</strong> Cliente demonstrou urgência crítica por ter vendido o carro corporativo. Foco total em fechar proposta esta semana.
@@ -271,8 +274,24 @@
                 <div class="lead-profile-info-grid">
                     <span><strong>WhatsApp:</strong> (11) 98888-5678</span>
                     <span><strong>Origem:</strong> Google Pesquisa</span>
-                    <span><strong>Budget Máximo:</strong> R$ 280.000</span>
+                    <span><strong>Orçamento Máximo:</strong> R$ 280.000</span>
                     <span><strong>Preferência:</strong> Apartamento Centro</span>
+                </div>
+            </div>
+
+            <div id="lead-roberto" class="lead-profile-card">
+                <div class="lead-profile-header">
+                    <div>
+                        <h2>Roberto Ávila</h2>
+                        <span class="status-badge status-novo" style="margin-top: 6px;">Novo Lead</span>
+                    </div>
+                    <span style="background: #e2e8f0; color: #475569; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-brain"></i> IA PRIORIDADE: PENDENTE</span>
+                </div>
+                <div class="lead-profile-info-grid">
+                    <span><strong>WhatsApp:</strong> (11) 97777-4321</span>
+                    <span><strong>Origem:</strong> VivaReal</span>
+                    <span><strong>Orçamento Máximo:</strong> Não Informado</span>
+                    <span><strong>Preferência:</strong> Sobrado</span>
                 </div>
             </div>
         </div>
@@ -281,7 +300,7 @@
             <div class="dash-header">
                 <div class="dash-title">
                     <h1>Central de Inteligência Artificial</h1>
-                    <p>Análise preditiva de mensagens e arquivamento estratégico</p>
+                    <p>Análise de conversas e detecção automática de intenções de compra</p>
                 </div>
             </div>
 
@@ -291,15 +310,16 @@
                         <div class="box-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Analisador de Conversas do WhatsApp</div>
                         <div class="ia-analyzer">
                             <div class="ia-input-group">
-                                <label>Vincular a qual Lead?</label>
+                                <label>Vincular ao Lead</label>
                                 <select class="ia-select">
                                     <option>Marcos da Silva</option>
                                     <option>Ana Júlia Ramos</option>
+                                    <option>Roberto Ávila</option>
                                 </select>
                             </div>
                             <div class="ia-input-group">
-                                <label>Cole o histórico de texto ou observações brutas do cliente</label>
-                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: Ele disse que tem 400 mil na mão liberados e quer assinar contrato essa semana sem falta..."></textarea>
+                                <label>Cole o histórico de mensagens ou observações do cliente</label>
+                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: Cliente disse que vendeu o carro, tem 400 mil na mão liberados e quer assinar contrato essa semana sem falta..."></textarea>
                             </div>
                             <button class="btn-ai" onclick="runAIAnalysis()"><i class="fa-solid fa-brain"></i> EXTRAIR INTENÇÃO E SALVAR PRIORIDADE</button>
                         </div>
@@ -307,7 +327,7 @@
                         <div id="ai-result-box">
                             <div class="priority-high"><i class="fa-solid fa-circle-check"></i> ANÁLISE SALVA E ADICIONADA À FICHA DO LEAD</div>
                             <p style="margin-top: 10px; font-size: 14px; color: #1e293b;">
-                                <strong>Inteligência do CorretorPro:</strong> Detetada alta prontidão financeira (R$ 400.000). Os dados visuais de prioridade foram sincronizados com as fichas de leads com sucesso.
+                                <strong>Inteligência do CorretorPro:</strong> Identificado gatilho de urgência crítica e capital disponível imediato. Os dados de prioridade foram sincronizados com as fichas de leads com sucesso.
                             </p>
                         </div>
                     </section>
@@ -318,7 +338,7 @@
     </main>
 
     <script>
-        // SISTEMA DE TROCA DE ABAS NATIVO
+        // SISTEMA DE TROCA DE ABAS NATIVO CORRIGIDO
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
@@ -327,24 +347,21 @@
             document.getElementById('menu-' + tabId).classList.add('active');
         }
 
-        // FUNÇÃO DE CONEXÃO: CLICA NO RESUMO -> ABRE EM LEADS FOCADO NO CARDT
+        // FUNÇÃO DE CONEXÃO: CLICA NO RESUMO -> ABRE EM LEADS FOCADO NO CARTÃO
         function goToLeadProfile(leadElementId) {
-            // 1. Muda para a aba de leads
             switchTab('leads');
             
-            // 2. Espera um milissegundo para a tela carregar e rola até a ficha do cliente
             setTimeout(() => {
                 const element = document.getElementById(leadElementId);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    // Adiciona um efeito rápido de piscar para destacar a ficha clicada
                     element.style.backgroundColor = '#fef3c7';
                     setTimeout(() => { element.style.backgroundColor = '#ffffff'; }, 1000);
                 }
             }, 100);
         }
 
-        // SIMULAÇÃO DO COMPORTAMENTO DA API
+        // SIMULAÇÃO DA API
         function runAIAnalysis() {
             const btn = document.querySelector('.btn-ai');
             const resultBox = document.getElementById('ai-result-box');
