@@ -10,7 +10,11 @@
     <style>
         /* RESET E CORES ULTRA CLEAN */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; }
         body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; overflow-x: hidden; }
+
+        /* REGRA DO ALINHAMENTO DO SITE */
+        .container { max-width: 1140px; margin: 0 auto; width: 100%; }
 
         /* ================================================================= */
         /* MENU LATERAL COMPACTO (COMPUTADOR) */
@@ -23,7 +27,6 @@
         .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: #475569; font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; transition: all 0.15s; }
         .sidebar-menu li a:hover, .sidebar-menu li.active a { background-color: rgba(242, 183, 5, 0.08); color: #d9a304; }
         
-        /* Tag de recurso premium bloqueado para o plano Básico */
         .badge-premium { background: #0f172a; color: #f2b705; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 800; margin-left: auto; }
 
         /* ================================================================= */
@@ -31,7 +34,6 @@
         /* ================================================================= */
         .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; }
         
-        /* Topo do painel */
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
         .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
         .dash-title p { font-size: 15px; color: #64748b; margin-top: 4px; }
@@ -39,55 +41,74 @@
         .user-profile { display: flex; align-items: center; gap: 12px; background: #ffffff; padding: 8px 16px; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 14px; font-weight: 600; }
         .user-profile i { color: #f2b705; font-size: 18px; }
 
-        /* QUADRADOS DE MÉTRICAS (MÁXIMO VISUAL) */
-        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        /* QUADRADOS DE MÉTRICAS */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 35px; }
         .metric-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01); display: flex; align-items: center; justify-content: space-between; }
         .metric-info h3 { font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; letter-spacing: -1px; }
         .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 
-        /* SEÇÃO FLUXO DE LEADS (KANBAN / TABELA CLEAN) */
-        .content-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01); }
-        .box-title { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        /* LAYOUT EM DUAS COLUNAS PARA O TRABALHO DO DIA */
+        .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
+
+        .content-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01); margin-bottom: 24px; }
+        .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
         .box-title i { color: #f2b705; }
 
-        /* Tabela Organizadora */
+        /* Tabela de Leads */
         .leads-table-wrapper { width: 100%; overflow-x: auto; }
-        .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 15px; }
-        .leads-table th { background: #f8fafc; padding: 14px 16px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
-        .leads-table td { padding: 16px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+        .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        .leads-table th { background: #f8fafc; padding: 12px 14px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
+        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
         
-        .status-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .status-novo { background: rgba(242, 183, 5, 0.1); color: #d9a304; }
         .status-atendimento { background: #e0f2fe; color: #0369a1; }
 
+        /* NOVO BLOCO: AGENDA INTELIGENTE COM ALARME */
+        .agenda-list { display: flex; flex-direction: column; gap: 12px; }
+        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+        .agenda-time { font-size: 14px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; }
+        .agenda-info h4 { font-size: 14px; font-weight: 700; color: #0f172a; }
+        .agenda-info p { font-size: 13px; color: #64748b; margin-top: 2px; }
+        .alarm-indicator { margin-left: auto; color: #f2b705; font-size: 14px; animation: pulse 2s infinite; }
+
+        /* NOVO BLOCO: CENTRAL DE RESPOSTAS HISTÓRICO IA */
+        .ia-copilot-box { display: flex; flex-direction: column; gap: 15px; }
+        .ia-saved-response { background: #0f172a; color: #ffffff; padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5; border-left: 4px solid #f2b705; position: relative; }
+        .ia-saved-response p { color: #cbd5e1; font-style: italic; margin-bottom: 10px; }
+        .btn-copy { background: rgba(255, 255, 255, 0.1); border: none; color: #f2b705; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; text-decoration: none; width: fit-content; }
+        .btn-copy:hover { background: rgba(255, 255, 255, 0.2); color: #ffffff; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         /* ================================================================= */
-        /* 🚨 TOTALMENTE CONFIGURADO PARA CELULAR (MOBILE FIRST ENGINE) 🚨 */
+        /* CONFIGURADO PARA CELULAR (MOBILE FIRST ENGINE) */
         /* ================================================================= */
         @media (max-width: 768px) {
-            body { flex-direction: column; padding-bottom: 70px; } /* Dá espaço para a barra de botões de baixo */
+            body { flex-direction: column; padding-bottom: 70px; }
             
-            /* Transforma o menu lateral em uma barra fixa embaixo do celular */
             .sidebar { width: 100%; height: 65px; flex-direction: row; position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-right: none; border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); }
-            .sidebar-brand { display: none; } /* Esconde o logo na barra inferior do celular */
+            .sidebar-brand { display: none; }
             .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; align-items: center; gap: 0; }
             .sidebar-menu li { flex: 1; text-align: center; }
             .sidebar-menu li a { flex-direction: column; gap: 4px; padding: 8px 0; font-size: 11px; border-radius: 0; justify-content: center; }
             .sidebar-menu li a i { font-size: 18px; }
-            .badge-premium { display: none; } /* Oculta a tag para não amassar o menu no mobile */
+            .badge-premium { display: none; }
 
-            /* Ajusta a área de conteúdo no Celular */
             .main-content { margin-left: 0; padding: 20px 16px; }
-            .dash-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .dash-header { flex-direction: column; align-items: flex-start; gap: 14px; }
             .user-profile { width: 100%; justify-content: center; }
 
-            /* Grid se ajusta automático */
             .metrics-grid { gap: 16px; }
-            .metric-card { padding: 20px; }
+            .dashboard-workspace { grid-template-columns: 1fr; gap: 20px; }
 
-            /* Tabela vira cartões de rolagem automática para não deformar lateralmente */
             .leads-table th:not(:first-child):not(:last-child), 
-            .leads-table td:not(:first-child):not(:last-child) { display: none; } /* Deixa apenas nome e status visíveis para não amassar a tela */
+            .leads-table td:not(:first-child):not(:last-child) { display: none; }
         }
     </style>
 </head>
@@ -135,57 +156,95 @@
             </div>
             <div class="metric-card">
                 <div class="metric-info">
-                    <h3>Novos hoje</h3>
-                    <p>5</p>
+                    <h3>Reuniões Hoje</h3>
+                    <p>2</p>
                 </div>
-                <div class="metric-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="metric-icon"><i class="fa-solid fa-calendar-day"></i></div>
             </div>
             <div class="metric-card">
                 <div class="metric-info">
-                    <h3>IA Respostas</h3>
+                    <h3>Sugestões IA</h3>
                     <p>18</p>
                 </div>
-                <div class="metric-icon"><i class="fa-solid fa-message"></i></div>
+                <div class="metric-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
             </div>
         </section>
 
-        <section class="content-box">
-            <div class="box-title">
-                <i class="fa-solid fa-bars-staggered"></i> Últimos Leads Recebidos
+        <div class="dashboard-workspace">
+            
+            <div class="left-workspace-column">
+                <section class="content-box">
+                    <div class="box-title">
+                        <i class="fa-solid fa-bars-staggered"></i> Últimos Leads Recebidos
+                    </div>
+                    <div class="leads-table-wrapper">
+                        <table class="leads-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome do Lead</th>
+                                    <th>Origem</th>
+                                    <th>Contato</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Marcos da Silva</strong></td>
+                                    <td><i class="fa-brands fa-facebook" style="color: #1877f2; margin-right: 4px;"></i> Facebook</td>
+                                    <td>(11) 99999-1234</td>
+                                    <td><span class="status-badge status-novo">Novo</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ana Júlia Ramos</strong></td>
+                                    <td><i class="fa-brands fa-google" style="color: #ea4335; margin-right: 4px;"></i> Google</td>
+                                    <td>(11) 98888-5678</td>
+                                    <td><span class="status-badge status-atendimento">Atendimento</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-box">
+                    <div class="box-title">
+                        <i class="fa-solid fa-robot"></i> Histórico de Respostas Salvas (API Copiloto)
+                    </div>
+                    <div class="ia-copilot-box">
+                        <div class="ia-saved-response">
+                            <span style="font-size: 11px; text-transform: uppercase; color: #f2b705; font-weight: 800; display: block; margin-bottom: 6px;">Lead: Marcos da Silva</span>
+                            <p>"Olá Marcos, vi que você se interessou pelo imóvel de 3 dormitórios em Guarulhos. Conseguimos agendar uma visita amanhã às 14h para você conhecer as condições exclusivas?"</p>
+                            <button class="btn-copy" onclick="alert('Texto copiado para a área de transferência!')"><i class="fa-solid fa-copy"></i> Copiar Script</button>
+                        </div>
+                    </div>
+                </section>
             </div>
-            <div class="leads-table-wrapper">
-                <table class="leads-table">
-                    <thead>
-                        <tr>
-                            <th>Nome do Lead</th>
-                            <th>Origem do Anúncio</th>
-                            <th>Contato</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Marcos da Silva</strong></td>
-                            <td><i class="fa-brands fa-facebook" style="color: #1877f2; margin-right: 6px;"></i> Facebook Ads</td>
-                            <td>(11) 99999-1234</td>
-                            <td><span class="status-badge status-novo">Novo</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Ana Júlia Ramos</strong></td>
-                            <td><i class="fa-brands fa-google" style="color: #ea4335; margin-right: 6px;"></i> Google Ads</td>
-                            <td>(11) 98888-5678</td>
-                            <td><span class="status-badge status-atendimento">Em Atendimento</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Rodrigo Trivinho</strong></td>
-                            <td><i class="fa-brands fa-facebook" style="color: #1877f2; margin-right: 6px;"></i> Facebook Ads</td>
-                            <td>(11) 97777-4321</td>
-                            <td><span class="status-badge status-novo">Novo</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <div class="right-workspace-column">
+                <section class="content-box">
+                    <div class="box-title">
+                        <i class="fa-solid fa-clock"></i> Agenda do Dia (Alarme Ativo)
+                    </div>
+                    <div class="agenda-list">
+                        <div class="agenda-item">
+                            <div class="agenda-time">10:00</div>
+                            <div class="agenda-info">
+                                <h4>Reunião com João</h4>
+                                <p>Apresentação de Proposta</p>
+                            </div>
+                            <div class="alarm-indicator"><i class="fa-solid fa-bell"></i></div>
+                        </div>
+                        <div class="agenda-item" style="border-left-color: #cbd5e1;">
+                            <div class="agenda-time">15:30</div>
+                            <div class="agenda-info">
+                                <h4>Visita - Ap. Centro</h4>
+                                <p>Lead: Ana Júlia</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
+
+        </div>
     </main>
 
 </body>
