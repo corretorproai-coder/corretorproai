@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>CorretorPro AI | Plataforma Unificada de Vendas com Inteligência Artificial</title>
+    <meta name="description" content="Aumente suas vendas com o CorretorPro AI. Plataforma unificada que conecta anúncios, gestão de leads e WhatsApp com Inteligência Artificial.">
+    <meta name="robots" content="index, follow">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* RESET TOTAL E AJUSTE DE RENDERIZAÇÃO */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #ffffff; color: #0f172a; overflow-x: hidden; }
+
+        /* LINHA IMAGINÁRIA DE ALINHAMENTO DO SITE INTEIRO */
+        .container { max-width: 1200px; margin: 0 auto; width: 100%; padding: 0 4%; }
+
+        /* ================================================================= */
+        /* HEADER DUPLO PERFEITAMENTE CENTRALIZADO */
+        /* ================================================================= */
+        .hub-utility-bar { width: 100%; height: 45px; background: #f6f9fc; border-bottom: 1px solid #cbd5e1; display: flex; align-items: center; position: fixed; top: 0; left: 0; z-index: 10001; }
+        .hub-utility-bar .utility-wrapper { display: flex; justify-content: flex-end; align-items: center; gap: 25px; width: 100%; }
+        .hub-utility-bar a { color: #475569; text-decoration: none; font-size: 14px; font-weight: 600; }
+        .hub-utility-bar a:hover { color: #ff5a1f; }
+
+        header { width: 100%; height: 95px; background: #ffffff; border-bottom: 2px solid #e2e8f0; position: fixed; top: 45px; left: 0; z-index: 10000; box-shadow: 0 4px 20px rgba(0,0,0,0.02); display: flex; align-items: center; }
+        .header-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        
+        .logo { font-size: 34px; font-weight: 900; color: #ff5a1f; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -1.5px; }
+        .logo span { color: #0f172a; }
+        
+        .nav-menu { display: flex; list-style: none; gap: 40px; font-size: 19px; font-weight: 700; }
+        .nav-menu li a { color: #334155; text-decoration: none; transition: 0.15s; }
+        .nav-menu li a:hover { color: #ff5a1f; }
+
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .btn-login { font-size: 19px; font-weight: 700; color: #334155; text-decoration: none; transition: 0.15s; }
+        
+        /* BOTÕES DE CONVERSÃO */
+        .btn-orange-filled { background: #ff5a1f; color: #ffffff; padding: 18px 40px; border-radius: 4px; font-weight: 800; font-size: 18px; text-decoration: none; border: 2px solid #ff5a1f; transition: all 0.15s ease-in-out; cursor: pointer; display: inline-block; text-align: center; box-shadow: 0 4px 14px rgba(255, 90, 31, 0.25); }
+        .btn-orange-filled:hover { background: #e04f1a; border-color: #e04f1a; transform: translateY(-2px); }
+        
+        .btn-orange-stroke { background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 18px 40px; border-radius: 4px; font-weight: 800; font-size: 18px; text-decoration: none; border: 2px solid #ffffff; transition: all 0.15s ease-in-out; cursor: pointer; display: inline-block; text-align: center; backdrop-filter: blur(4px); }
+        .btn-orange-stroke:hover { background: #ffffff; color: #0f172a; transform: translateY(-2px); }
+
+        /* HERO SECTION */
+        .hero-section { min-height: 95vh; padding-top: 190px; padding-bottom: 100px; background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover; background-attachment: fixed; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #cbd5e1; }
+        .hero-content { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .hero-tagline { font-size: 16px; font-weight: 800; color: #ff5a1f; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+        
+        .hero-title { font-family: 'Georgia', serif; font-size: 78px; font-weight: 700; color: #ffffff; line-height: 1.15; max-width: 1050px; letter-spacing: -2px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); }
+        .hero-title span { color: #ff5a1f; }
+        
+        .hero-description { font-size: 26px; color: #ffffff; max-width: 850px; line-height: 1.6; margin-top: 35px; margin-bottom: 50px; font-weight: 600; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); }
+        .hero-buttons { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
+        .hero-footer-text { font-size: 16px; color: #cbd5e1; margin-top: 25px; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+
+        /* FAIXA DE PROVA SOCIAL */
+        .social-proof-bar { width: 100%; border-bottom: 1px solid #e2e8f0; padding: 60px 0; background: #ffffff; }
+        .social-proof-content { display: flex; flex-direction: column; align-items: center; }
+        .social-proof-title { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 40px; text-align: center; max-width: 850px; line-height: 1.4; }
+        .logos-flex { display: flex; justify-content: center; align-items: center; gap: 100px; flex-wrap: wrap; font-weight: 900; font-size: 34px; color: #475569; letter-spacing: -1.5px; opacity: 0.8; }
+        .logo-item i { color: #ff5a1f; margin-right: 10px; font-size: 38px; }
+
+        /* HEADLINE DO MEIO CORES PRETO PURO CONTEXTUALIZADO */
+        .section-headline-block { text-align: center; padding: 120px 0 60px 0; width: 100%; }
+        .section-headline-block h2 { font-family: 'Georgia', serif; font-size: 54px; color: #0f172a; max-width: 1000px; margin: 0 auto; line-height: 1.2; font-weight: 400; letter-spacing: -1px; }
+        .section-headline-block p { font-size: 24px; color: #000000; max-width: 850px; margin: 25px auto 0 auto; line-height: 1.6; font-weight: 600; }
+
+        /* RECURSOS EM LINHA AJUSTADOS */
+        .body-row-section { width: 100%; padding: 80px 0; display: flex; gap: 80px; align-items: center; justify-content: space-between; }
+        .body-row-section .row-text-side { flex: 1; }
+        .body-row-section .row-visual-side { flex: 1; }
+
+        /* SEÇÃO INTEIRA DO WHATSAPP REESTRUTURADA PARA IMPEDIR ERRO DE LARGURA */
+        .whatsapp-outer-section { width: 100%; background: #f6f9fc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 100px 0; }
+        .row-inner-container { display: flex; gap: 80px; align-items: center; justify-content: space-between; width: 100%; }
+        .row-inner-container .row-text-side { flex: 1; }
+        .row-inner-container .row-visual-side { flex: 1; }
+
+        .row-text-side { display: flex; flex-direction: column; gap: 25px; }
+        .row-badge { background: rgba(255, 90, 31, 0.1); color: #ff5a1f; font-size: 15px; font-weight: 800; padding: 6px 16px; border-radius: 4px; text-transform: uppercase; width: fit-content; letter-spacing: 1px; }
+        .row-title { font-family: 'Georgia', serif; font-size: 46px; color: #0f172a; line-height: 1.2; font-weight: 400; letter-spacing: -0.5px; }
+        .row-desc { font-size: 22px; color: #334155; line-height: 1.6; }
+        
+        .row-bullets { list-style: none; display: flex; flex-direction: column; gap: 20px; font-size: 20px; color: #1e293b; font-weight: 600; }
+        .row-bullets li { display: flex; align-items: center; gap: 14px; }
+        .row-bullets li i { color: #ff5a1f; font-size: 20px; background: rgba(255, 90, 31, 0.08); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255, 90, 31, 0.15); }
+
+        .row-visual-side { height: 480px; border-radius: 12px; box-shadow: 0 25px 50px rgba(15, 23, 42, 0.15); border: 2px solid #cbd5e1; overflow: hidden; position: relative; width: 100%; }
+        .visual-img { width: 100%; height: 100%; object-fit: cover; }
+        .visual-floating-card { position: absolute; bottom: 30px; left: 30px; right: 30px; background: #0f172a; color: #ffffff; padding: 22px; border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.35); border-left: 5px solid #ff5a1f; font-size: 15px; }
+
+        /* ================================================================= */
+        /* SEÇÃO DE PREÇOS CORRIGIDA: QUADRADOS REAIS REFORÇADOS */
+        /* ================================================================= */
+        .pricing-section { padding: 120px 0; background: #f6f9fc; border-top: 1px solid #e2e8f0; width: 100%; }
+        .pricing-section-title { text-align: center; margin-bottom: 60px; }
+        .pricing-section-title h2 { font-family: 'Georgia', serif; font-size: 54px; color: #0f172a; font-weight: 400; letter-spacing: -1px; }
+        .pricing-section-title p { font-size: 24px; color: #475569; margin-top: 20px; }
+        
+        /* Grid flexível para os cards de preço */
+        .pricing-grid { display: flex; gap: 30px; justify-content: space-between; align-items: stretch; margin-top: 60px; width: 100%; flex-wrap: wrap; }
+        
+        /* Garante que os quadrados fiquem perfeitos e independentes */
+        .pricing-card { background: #ffffff; border: 2px solid #cbd5e1; border-radius: 12px; padding: 50px 40px; text-align: left; display: flex; flex-direction: column; gap: 25px; transition: all 0.3s ease; position: relative; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.06); flex: 1; min-width: 320px; }
+        .pricing-card:hover { border-color: #ff5a1f; box-shadow: 0 25px 50px rgba(15, 23, 42, 0.12); transform: translateY(-4px); }
+        
+        /* DESTAQUE DO CARD PROFESSIONAL */
+        .pricing-card.featured { border-color: #ff5a1f; border-width: 3px; box-shadow: 0 20px 40px rgba(255, 90, 31, 0.15); }
+        .featured-badge { position: absolute; top: 15px; right: -35px; background: #ff5a1f; color: #fff; font-size: 12px; font-weight: 800; padding: 8px 40px; transform: rotate(45deg); text-transform: uppercase; letter-spacing: 1px; }
+
+        .plan-name { font-size: 26px; font-weight: 800; color: #0f172a; }
+        .plan-desc { font-size: 16px; color: #475569; min-height: 48px; line-height: 1.5; }
+        .plan-price { font-size: 54px; font-weight: 800; color: #0f172a; letter-spacing: -2px; margin: 10px 0; }
+        .plan-price span { font-size: 18px; color: #64748b; font-weight: 600; }
+        
+        .plan-features-list { list-style: none; display: flex; flex-direction: column; gap: 16px; font-size: 16px; color: #334155; border-top: 1px solid #e2e8f0; padding-top: 25px; margin-top: 10px; }
+        .plan-features-list li { display: flex; align-items: center; gap: 12px; }
+        .plan-features-list li i { color: #22c55e; font-size: 19px; }
+
+        /* BANNER FINAL CTA */
+        .final-cta-section { background: #0f172a; color: #ffffff; padding: 140px 0; text-align: center; background: linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.95)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920&auto=format&fit=crop') center center/cover; background-attachment: fixed; width: 100%; }
+        .final-cta-content { display: flex; flex-direction: column; align-items: center; gap: 35px; }
+        .final-cta-title { font-family: 'Georgia', serif; font-size: 58px; font-weight: 400; max-width: 950px; line-height: 1.2; letter-spacing: -1px; }
+        .final-cta-desc { font-size: 24px; color: #cbd5e1; max-width: 750px; line-height: 1.6; }
+
+        /* RESPONSIVIDADE CELULAR */
+        @media (max-width: 768px) {
+            .hub-utility-bar { display: none; }
+            header { top: 0; height: 80px; }
+            .nav-menu { display: none; }
+            .nav-right { gap: 15px; }
+            .logo { font-size: 28px; }
+
+            .hero-section { padding-top: 140px; padding-bottom: 70px; }
+            .hero-title { font-size: 38px; }
+            .hero-description { font-size: 18px; margin-top: 20px; margin-bottom: 35px; }
+
+            .body-row-section { flex-direction: column; gap: 40px; padding: 60px 0; }
+            .whatsapp-outer-section { padding: 60px 0; }
+            .row-inner-container { flex-direction: column; gap: 40px; }
+            
+            .row-title { font-size: 28px; }
+            .row-desc, .row-bullets { font-size: 16px; }
+            .row-visual-side { height: 300px; }
+
+            .pricing-grid { flex-direction: column; gap: 30px; }
+            .pricing-card { padding: 40px 25px; min-width: 100%; }
+            .plan-price { font-size: 42px; }
+            
+            .final-cta-title { font-size: 32px; }
+            .final-cta-desc { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hub-utility-bar">
+        <div class="container">
+            <div class="utility-wrapper">
+                <a href="#">🌐 Português (Brasil) <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                <span>|</span>
+                <a href="#">Alto Contraste</a>
+                <span>|</span>
+                <a href="dashboard.html">Suporte</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container header-wrapper">
+            <a href="#" class="logo">Corretor<span>Pro AI</span></a>
+            <ul class="nav-menu">
+                <li><a href="#produtos">Produtos <i class="fa-solid fa-chevron-down" style="font-size: 12px; color: #cbd5e1;"></i></a></li>
+                <li><a href="#solucoes">Soluções <i class="fa-solid fa-chevron-down" style="font-size: 12px; color: #cbd5e1;"></i></a></li>
+                <li><a href="#precos">Preços</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="dashboard.html" class="btn-login">Log in</a>
+                <a href="dashboard.html" class="btn-orange-filled">Começar grátis</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <span class="hero-tagline">Plataforma Unificada de Gestão Comercial</span>
+            <h1 class="hero-title">O lugar onde as equipes comerciais vão para <span>reter e vender mais.</span></h1>
+            <p class="hero-description">Conecte a captura de leads em tempo real dos seus anúncios e o atendimento inteligente por WhatsApp em um único ecossistema focado em faturamento.</p>
+            <div class="hero-buttons">
+                <a href="dashboard.html" class="btn-orange-filled" style="padding: 20px 45px; font-size: 20px;">Solicitar demonstração</a>
+                <a href="dashboard.html" class="btn-orange-stroke" style="padding: 20px 45px; font-size: 20px;">Começar gratuitamente</a>
+            </div>
+            <p class="hero-footer-text">Nenhum cartão de crédito obrigatório • Configuração em 5 minutos</p>
+        </div>
+    </section>
+
+    <section class="social-proof-bar">
+        <div class="container social-proof-content">
+            <h3 class="social-proof-title">Mais de 280.000 empresas em todo o mundo aceleram suas conversões com nossa arquitetura de dados.</h3>
+            <div class="logos-flex">
+                <div class="logo-item"><i class="fa-brands fa-ebay"></i>ebay</div>
+                <div class="logo-item"><i class="fa-solid fa-bolt"></i>DOORDASH</div>
+                <div class="logo-item"><i class="fa-brands fa-reddit"></i>reddit</div>
+                <div class="logo-item"><i class="fa-brands fa-tripadvisor"></i>Tripadvisor</div>
+            </div>
+        </div>
+    </section>
+
+    <div id="produtos" class="container">
+        <div class="section-headline-block">
+            <h2>Sistemas desconectados quebram suas vendas. O CorretorPro AI une toda a sua jornada.</h2>
+            <p>Pare de perder leads em planilhas antigas e abas esquecidas. Veja como nossa tecnologia gerencia e escala seu fluxo de vendas.</p>
+        </div>
+
+        <section class="body-row-section">
+            <div class="row-text-side">
+                <span class="row-badge">Captação Ativa</span>
+                <h2 class="row-title">Sincronização imediata com Facebook e Google Ads</h2>
+                <p class="row-desc">No exato segundo em que o lead preenche o formulário ou clica no seu anúncio, os dados entram limpos e organizados dentro do seu painel operacional.</p>
+                <ul class="row-bullets">
+                    <li><i class="fa-solid fa-bolt"></i> Captura em tempo real integrada às APIs de anúncios.</li>
+                    <li><i class="fa-solid fa-filter"></i> Distribuição automática e inteligente para a sua equipe.</li>
+                </ul>
+                <a href="dashboard.html" class="btn-orange-filled" style="width: fit-content; margin-top: 15px;">Conhecer Automação →</a>
+            </div>
+            <div class="row-visual-side">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" class="visual-img" alt="Automação">
+                <div class="visual-floating-card">
+                    <div style="font-weight: 800; color: #ff5a1f; margin-bottom: 5px; font-size: 12px; text-transform: uppercase;">⚡ Fluxo Ativo</div>
+                    <p>"Lead capturado via formulário enviado para a nuvem com sucesso."</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="solucoes" class="whatsapp-outer-section">
+        <div class="container row-inner-container">
+            <div class="row-visual-side">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop" class="visual-img" alt="WhatsApp Comercial">
+                <div class="visual-floating-card" style="border-left-color: #00f2fe;">
+                    <div style="font-weight: 800; color: #00f2fe; margin-bottom: 5px; font-size: 12px; text-transform: uppercase;">🤖 Copiloto de Atendimento</div>
+                    <p>"Sugestão de resposta comercial de alta conversão estruturada pela IA."</p>
+                </div>
+            </div>
+            <div class="row-text-side">
+                <span class="row-badge">Atendimento Otimizado</span>
+                <h2 class="row-title">Central do WhatsApp com leitura de intenção por IA</h2>
+                <p class="row-desc">Nesta seção, a Inteligência Artificial integrada monitora o chat, identifica o nível de interesse real do comprador e monta sugestões de respostas perfeitas para o seu time usar instantaneamente.</p>
+                <ul class="row-bullets">
+                    <li><i class="fa-solid fa-robot"></i> Alertas automáticos para contatos parados há dias.</li>
+                    <li><i class="fa-solid fa-wand-magic-sparkles"></i> Copie scripts validados de fechamento em 1 clique.</li>
+                </ul>
+                <a href="dashboard.html" class="btn-orange-filled" style="width: fit-content; margin-top: 15px;">Ver Demonstração de Chat →</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="precos" class="pricing-section">
+        <div class="container">
+            <div class="pricing-section-title">
+                <h2>Preços transparentes para escalar sua operação</h2>
+                <p>Escolha o plano ideal para o momento do seu negócio. Comece grátis e evolua conforme suas vendas crescem.</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Acesso Grátis</div>
+                    <p class="plan-desc">Perfeito para testar o sistema e fechar seus primeiros negócios sem custo.</p>
+                    <div class="plan-price">R$ 0 <span>/sempre</span></div>
+                    <a href="dashboard.html" class="btn-orange-stroke" style="width: 100%; text-align: center; border-color: #cbd5e1; color: #0f172a; text-decoration: none;">Começar Grátis</a>
+                    <ul class="plan-features-list">
+                        <li><i class="fa-solid fa-check"></i> 1 Usuário Operacional</li>
+                        <li><i class="fa-solid fa-check"></i> Até 50 Leads por Mês</li>
+                        <li><i class="fa-solid fa-check"></i> Funil Kanban Básico</li>
+                        <li><i class="fa-solid fa-check"></i> Suporte pela Comunidade</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Mais Popular</div>
+                    <div class="plan-name">Professional</div>
+                    <p class="plan-desc">Para imobiliárias e times estruturados que precisam de inteligência e escala.</p>
+                    <div class="plan-price">R$ 499 <span>/mês</span></div>
+                    <a href="dashboard.html" class="btn-orange-filled" style="width: 100%; text-align: center; text-decoration: none;">Falar com Consultor</a>
+                    <ul class="plan-features-list">
+                        <li><i class="fa-solid fa-check"></i> Até 5 Usuários Ativos</li>
+                        <li><i class="fa-solid fa-check"></i> Copiloto de IA no WhatsApp</li>
+                        <li><i class="fa-solid fa-check"></i> Distribuição Inteligente de Leads</li>
+                        <li><i class="fa-solid fa-check"></i> Relatórios de Performance</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <p class="plan-desc">Para grandes operações que exigem customização avançada e máxima segurança.</p>
+                    <div class="plan-price">Sob Consulta</div>
+                    <a href="dashboard.html" class="btn-orange-stroke" style="width: 100%; text-align: center; border-color: #cbd5e1; color: #0f172a; text-decoration: none;">Contatar Vendas</a>
+                    <ul class="plan-features-list">
+                        <li><i class="fa-solid fa-check"></i> Usuários e Canais Ilimitados</li>
+                        <li><i class="fa-solid fa-check"></i> Integrações via API Aberta</li>
+                        <li><i class="fa-solid fa-check"></i> Suporte e Onboarding Dedicado</li>
+                        <li><i class="fa-solid fa-check"></i> SLA Gerenciado de Atendimento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="final-cta-section">
+        <div class="container final-cta-content">
+            <h2 class="final-cta-title">Pronto para dominar o gerenciamento dos seus clientes?</h2>
+            <p class="final-cta-desc">Elimine as perdas de leads, otimize o tempo de resposta da sua equipe e impulsione seu fechamento usando IA.</p>
+            <a href="dashboard.html" class="btn-orange-filled" style="font-size: 24px; padding: 22px 65px; text-decoration: none;">Criar Conta Gratuita</a>
+        </div>
+    </section>
+
+</body>
+</html>
