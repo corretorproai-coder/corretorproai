@@ -13,39 +13,70 @@
         html { scroll-behavior: smooth; }
         body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; overflow-x: hidden; }
 
-        /* MENU LATERAL */
+        /* MENU LATERAL COMPACTO */
         .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
         .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: #f2b705; letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
         .sidebar-brand span { color: #0f172a; }
+        
         .sidebar-menu { list-style: none; padding: 24px 16px; display: flex; flex-direction: column; gap: 8px; }
         .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: #475569; font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; transition: 0.15s; }
         .sidebar-menu li.active a, .sidebar-menu li a:hover { background-color: rgba(242, 183, 5, 0.08); color: #d9a304; }
+        
         .badge-premium { background: #0f172a; color: #f2b705; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 800; margin-left: auto; }
 
-        /* CONTEÚDO PRINCIPAL */
+        /* ÁREA CONTEÚDO PRINCIPAL */
         .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; }
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-
+        
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
-        .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
+        .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
         .dash-title p { font-size: 15px; color: #64748b; margin-top: 4px; }
+        
         .user-profile { display: flex; align-items: center; gap: 12px; background: #ffffff; padding: 8px 16px; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 14px; font-weight: 600; }
-        .user-profile i { color: #f2b705; }
+        .user-profile i { color: #f2b705; font-size: 18px; }
 
-        /* GRID DE MÉTRICAS */
+        /* QUADRADOS DE MÉTRICAS */
         .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 35px; }
-        .metric-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: space-between; }
+        .metric-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01); display: flex; align-items: center; justify-content: space-between; }
         .metric-info h3 { font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; letter-spacing: -1px; }
         .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 
+        /* LAYOUT EM DUAS COLUNAS */
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
-        .content-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin-bottom: 24px; }
-        .box-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 20px; }
+
+        .content-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01); margin-bottom: 24px; }
+        .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
         .box-title i { color: #f2b705; }
 
-        /* CENTRAL IA - FERRAMENTA DE ANÁLISE */
+        /* TABELA DE LEADS COMPLETA ORIGINAL */
+        .leads-table-wrapper { width: 100%; overflow-x: auto; }
+        .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        .leads-table th { background: #f8fafc; padding: 12px 14px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
+        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+        
+        .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .status-novo { background: rgba(242, 183, 5, 0.1); color: #d9a304; }
+        .status-atendimento { background: #e0f2fe; color: #0369a1; }
+
+        /* AGENDA INTELIGENTE */
+        .agenda-list { display: flex; flex-direction: column; gap: 12px; }
+        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; border: 1px solid #e2e8f0; border-left: 4px solid #f2b705; }
+        .agenda-time { font-size: 14px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; }
+        .agenda-info h4 { font-size: 14px; font-weight: 700; color: #0f172a; }
+        .agenda-info p { font-size: 13px; color: #64748b; margin-top: 2px; }
+        .alarm-indicator { margin-left: auto; color: #f2b705; font-size: 14px; animation: pulse 2s infinite; }
+
+        /* NOTÍCIAS RADAR DO MERCADO */
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item { text-decoration: none; display: block; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
+        .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .news-source { font-size: 11px; font-weight: 800; color: #d9a304; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; line-height: 1.4; }
+        .news-time { font-size: 12px; color: #94a3b8; margin-top: 4px; display: block; }
+
+        /* CONFIGURAÇÃO DA CENTRAL IA */
         .ia-analyzer { display: flex; flex-direction: column; gap: 20px; }
         .ia-input-group { display: flex; flex-direction: column; gap: 8px; }
         .ia-input-group label { font-size: 14px; font-weight: 700; color: #475569; }
@@ -53,44 +84,28 @@
         .ia-textarea { height: 120px; resize: none; }
         .btn-ai { background: #0f172a; color: #f2b705; border: none; padding: 14px; border-radius: 6px; font-weight: 800; cursor: pointer; transition: 0.2s; }
         .btn-ai:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-
-        /* RESULTADO DA ANÁLISE IA */
+        
         #ai-result-box { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; }
         .priority-high { color: #166534; font-weight: 800; display: flex; align-items: center; gap: 6px; }
 
-        /* AGENDA COM ALARME */
-        .agenda-list { display: flex; flex-direction: column; gap: 12px; }
-        .agenda-item { padding: 14px; background: #f8fafc; border-radius: 4px; display: flex; gap: 15px; border: 1px solid #e2e8f0; border-left: 4px solid #f2b705; align-items: center; }
-        .agenda-time { font-size: 14px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; }
-        .agenda-info h4 { font-size: 14px; font-weight: 700; color: #0f172a; }
-        .agenda-info p { font-size: 13px; color: #64748b; margin-top: 2px; }
-        .alarm-indicator { margin-left: auto; color: #f2b705; font-size: 14px; animation: pulse 2s infinite; }
-
-        /* BLOCO DE NOTÍCIAS */
-        .news-list { display: flex; flex-direction: column; gap: 16px; }
-        .news-item { text-decoration: none; display: block; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-        .news-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .news-source { font-size: 11px; font-weight: 800; color: #d9a304; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
-        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; line-height: 1.4; }
-        .news-item:hover .news-title { color: #f2b705; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* CONFIGURADO PARA CELULAR (BARRA INFERIOR FIXA) */
+        /* RESPONSIVIDADE MOBILE */
         @media (max-width: 768px) {
             body { flex-direction: column; padding-bottom: 70px; }
-            .sidebar { width: 100%; height: 65px; flex-direction: row; top: auto; bottom: 0; border-right: none; border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); }
+            .sidebar { width: 100%; height: 65px; flex-direction: row; position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-right: none; border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); }
             .sidebar-brand { display: none; }
             .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; align-items: center; gap: 0; }
             .sidebar-menu li { flex: 1; text-align: center; }
-            .sidebar-menu li a { flex-direction: column; font-size: 11px; gap: 4px; padding: 8px 0; justify-content: center; }
+            .sidebar-menu li a { flex-direction: column; gap: 4px; padding: 8px 0; font-size: 11px; justify-content: center; }
             .sidebar-menu li a i { font-size: 18px; }
             .badge-premium { display: none; }
             .main-content { margin-left: 0; padding: 20px 16px; }
             .dash-header { flex-direction: column; align-items: flex-start; gap: 14px; }
             .user-profile { width: 100%; justify-content: center; }
-            .dashboard-workspace { grid-template-columns: 1fr; }
+            .dashboard-workspace { grid-template-columns: 1fr; gap: 20px; }
+            .leads-table th:not(:first-child):not(:last-child), .leads-table td:not(:first-child):not(:last-child) { display: none; }
         }
     </style>
 </head>
@@ -100,7 +115,6 @@
         <div class="sidebar-brand">Corretor<span>Pro AI</span></div>
         <ul class="sidebar-menu">
             <li id="menu-resumo" class="active" onclick="switchTab('resumo')"><a href="#"><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
-            <li id="menu-leads" onclick="switchTab('leads')"><a href="#"><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
             <li id="menu-central-ia" onclick="switchTab('central-ia')"><a href="#"><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
             <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
         </ul>
@@ -110,30 +124,76 @@
         
         <div id="resumo" class="tab-content active">
             <div class="dash-header">
-                <div class="dash-title"><h1>Resumo Geral</h1><p>Métricas de performance em tempo real</p></div>
-                <div class="user-profile"><i class="fa-solid fa-circle-user"></i><span>Plano Professional</span></div>
+                <div class="dash-title">
+                    <h1>Painel de Controle</h1>
+                    <p>Bem-vindo de volta, Víctor Ávila</p>
+                </div>
+                <div class="user-profile">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Plano Professional</span>
+                </div>
             </div>
 
             <section class="metrics-grid">
+                <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p>42</p></div><div class="metric-icon"><i class="fa-solid fa-users"></i></div></div>
                 <div class="metric-card"><div class="metric-info"><h3>Leads Elite</h3><p>12</p></div><div class="metric-icon"><i class="fa-solid fa-crown"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Vendas Mês</h3><p>R$ 1.2M</p></div><div class="metric-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>IA Alertas</h3><p>3</p></div><div class="metric-icon"><i class="fa-solid fa-bell"></i></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Alertas IA</h3><p>3</p></div><div class="metric-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div></div>
             </section>
 
             <div class="dashboard-workspace">
-                <div class="left-col">
+                <div class="left-workspace-column">
+                    
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-fire"></i> Leads de Alta Prioridade (Analisados por IA)</div>
+                        <div class="box-title">
+                            <i class="fa-solid fa-address-book"></i> Todos os Leads Recebidos
+                        </div>
+                        <div class="leads-table-wrapper">
+                            <table class="leads-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome do Lead</th>
+                                        <th>Origem do Anúncio</th>
+                                        <th>Contato</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Marcos da Silva</strong></td>
+                                        <td><i class="fa-brands fa-facebook" style="color: #1877f2; margin-right: 4px;"></i> Facebook Ads</td>
+                                        <td>(11) 99999-1234</td>
+                                        <td><span class="status-badge status-novo">Novo</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ana Júlia Ramos</strong></td>
+                                        <td><i class="fa-brands fa-google" style="color: #ea4335; margin-right: 4px;"></i> Google Ads</td>
+                                        <td>(11) 98888-5678</td>
+                                        <td><span class="status-badge status-atendimento">Atendimento</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="content-box">
+                        <div class="box-title">
+                            <i class="fa-solid fa-fire"></i> Mapeamento de Leads Quentes (Prioridades IA)
+                        </div>
                         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
                             <tr style="border-bottom: 1px solid #f1f5f9;">
-                                <td style="padding: 12px 0;"><strong>Marcos Silva</strong><br><small>400k - À vista</small></td>
-                                <td style="text-align: right;"><span class="status-badge" style="background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 4px; font-weight: 800;">QUENTE</span></td>
+                                <td style="padding: 12px 0;">
+                                    <strong>Marcos da Silva</strong><br>
+                                    <small style="color: #64748b;">Budget: R$ 400 Mil • Perfil: Prontidão À Vista</small>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 4px; font-weight: 800; font-size: 11px;">ELITE 10/10</span>
+                                </td>
                             </tr>
                         </table>
                     </section>
                 </div>
-                
-                <div class="right-col">
+
+                <div class="right-workspace-column">
                     <section class="content-box">
                         <div class="box-title"><i class="fa-solid fa-clock"></i> Agenda do Dia (Alarme Ativo)</div>
                         <div class="agenda-list">
@@ -149,8 +209,9 @@
                         <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado (Exame)</div>
                         <div class="news-list">
                             <a href="#" class="news-item" onclick="event.preventDefault();">
-                                <span class="news-source"><i class="fa-solid fa-trend-up"></i> Exame Imobiliário</span>
-                                <h4 class="news-title">Procura por imóveis de médio padrão cresce 14% na grande SP</h4>
+                                <span class="news-source">Exame Imobiliário</span>
+                                <h4 class="news-title">Procura por imóveis de médio padrão cresce 14% em SP</h4>
+                                <span class="news-time">Há 45 minutos</span>
                             </a>
                         </div>
                     </section>
@@ -160,145 +221,66 @@
 
         <div id="central-ia" class="tab-content">
             <div class="dash-header">
-                <div class="dash-title"><h1>Central de Inteligência</h1><p>Análise preditiva e transcrição de conversas</p></div>
+                <div class="dash-title">
+                    <h1>Central de Inteligência Artificial</h1>
+                    <p>Análise de conversas e detecção automática de intenções de compra</p>
+                </div>
             </div>
 
             <div class="dashboard-workspace">
-                <div class="left-col">
+                <div class="left-col" style="grid-column: span 2;">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Analisador de Potencial de Compra</div>
+                        <div class="box-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Analisador de Conversas do WhatsApp</div>
                         <div class="ia-analyzer">
                             <div class="ia-input-group">
-                                <label>Selecione o Lead</label>
-                                <select id="lead-select" class="ia-select">
-                                    <option value="400000">Marcos Silva (Interesse: Casa Jardim)</option>
-                                    <option value="150000">Joana Darc (Interesse: Terreno)</option>
+                                <label>Vincular ao Lead</label>
+                                <select class="ia-select">
+                                    <option>Marcos da Silva</option>
+                                    <option>Ana Júlia Ramos</option>
                                 </select>
                             </div>
                             <div class="ia-input-group">
-                                <label>Cole aqui a conversa do WhatsApp ou observações</label>
-                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: O cliente disse que tem 400 mil em dinheiro e quer fechar até semana que vem..."></textarea>
+                                <label>Cole o histórico de mensagens ou observações do cliente</label>
+                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: Cliente disse que vendeu o carro, tem 400 mil na mão liberados e quer assinar contrato essa semana sem falta..."></textarea>
                             </div>
-                            <button class="btn-ai" onclick="runAIAnalysis()"><i class="fa-solid fa-brain"></i> ANALISAR COM INTELIGÊNCIA ARTIFICIAL</button>
+                            <button class="btn-ai" onclick="runAIAnalysis()"><i class="fa-solid fa-brain"></i> EXTRAIR INTENÇÃO E SALVAR PRIORIDADE</button>
                         </div>
 
                         <div id="ai-result-box">
-                            </div>
-                    </section>
-                </div>
-
-                <div class="right-col">
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-database"></i> Conversas Salvas (Supabase)</div>
-                        <p style="font-size: 13px; color: #64748b;">As análises enviadas acima ficarão gravadas de forma permanente no seu banco de dados.</p>
+                            <div class="priority-high"><i class="fa-solid fa-circle-check"></i> LEAD COPIADO E MAPEADO COMO ELITE</div>
+                            <p style="margin-top: 10px; font-size: 14px; color: #1e293b;">
+                                <strong>Inteligência de Vendas:</strong> Identificado gatilho de urgência crítica e capital disponível imediato (R$ 400.000). <br><br>
+                                <strong>Ação Recomendada:</strong> Parar outras atividades secundárias e enviar portfólio de fechamento.
+                            </p>
+                        </div>
                     </section>
                 </div>
             </div>
-        </div>
-
-        <div id="leads" class="tab-content">
-            <div class="dash-header">
-                <div class="dash-title"><h1>Sua Carteira de Leads</h1><p>Gerenciamento completo de contatos</p></div>
-            </div>
-            <section class="content-box">
-                <p style="font-size: 14px; color: #475569;">Lista unificada integrada com Facebook Ads e Google Ads.</p>
-            </section>
         </div>
 
     </main>
 
     <script>
-        // Configurações do ecossistema (Altere com os dados reais do seu projeto)
-        const SUPABASE_URL = "https://SEU_PROJETO.supabase.co";
-        const SUPABASE_KEY = "SUA_ANON_KEY_DO_SUPABASE";
-        const GEMINI_API_KEY = "SUA_CHAVE_DA_API_DO_GEMINI";
-
-        // Mecanismo nativo de troca de Abas
+        // Lógica de Troca de Abas Remodelada
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
             
             document.getElementById(tabId).classList.add('active');
-            
-            // Garante o destaque visual no menu correto (computador ou celular)
-            const activeMenu = document.getElementById(`menu-${tabId}`);
-            if (activeMenu) {
-                activeMenu.classList.add('active');
-            }
+            document.getElementById('menu-' + tabId).classList.add('active');
         }
 
-        // CONEXÃO REAL: Dispara para o Gemini e grava os dados no Supabase
-        async function runAIAnalysis() {
+        // Análise Simulação IA
+        function runAIAnalysis() {
             const btn = document.querySelector('.btn-ai');
             const resultBox = document.getElementById('ai-result-box');
-            const leadSelect = document.getElementById('lead-select');
-            const chatInput = document.getElementById('chat-input').value;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Computando Prioridades...';
             
-            if (!chatInput.trim()) {
-                alert("Por favor, digite ou cole o texto da conversa antes de analisar.");
-                return;
-            }
-
-            const leadNome = leadSelect.options[leadSelect.selectedIndex].text;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> O motor da IA está analisando...';
-            btn.disabled = true;
-
-            try {
-                // 1. Chamada estruturada para a API do Google Gemini
-                const prompt = `Você é a inteligência preditiva do CorretorPro AI. Analise a seguinte conversa, defina a prioridade (Alta se tiver dinheiro na mão/urgência, Média ou Baixa) e sugira o próximo passo comercial: "${chatInput}"`;
-                
-                const aiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                });
-                
-                const aiData = await aiResponse.json();
-                const textoResultado = aiData.candidates[0].content.parts[0].text;
-                
-                // Regra inteligente de detecção automática de prioridade
-                let prioridade = "Média";
-                if (textoResultado.toLowerCase().includes("alta") || chatInput.toLowerCase().includes("400 mil") || chatInput.toLowerCase().includes("à vista")) {
-                    prioridade = "Elite / Alta";
-                }
-
-                // 2. Gravação em tempo real das tabelas do Supabase
-                await fetch(`${SUPABASE_URL}/rest/v1/insights_ia`, {
-                    method: "POST",
-                    headers: {
-                        "apikey": SUPABASE_KEY,
-                        "Authorization": `Bearer ${SUPABASE_KEY}`,
-                        "Content-Type": "application/json",
-                        "Prefer": "return=minimal"
-                    },
-                    body: JSON.stringify({
-                        lead_nome: leadNome,
-                        conversa_texto: chatInput,
-                        prioridade: prioridade,
-                        analise_resultado: textoResultado
-                    })
-                });
-
-                // 3. Atualiza os componentes visuais da tela
-                btn.innerHTML = '<i class="fa-solid fa-brain"></i> ANÁLISE CONCLUÍDA';
-                btn.disabled = false;
-                
-                resultBox.innerHTML = `
-                    <div class="priority-high"><i class="fa-solid fa-circle-check"></i> ANÁLISE DO MOTOR PRO: ${leadNome}</div>
-                    <p style="margin-top: 10px; font-size: 14px; color: #1e293b; white-space: pre-line;">
-                        <strong>Prioridade Calculada:</strong> ${prioridade}<br><br>
-                        <strong>Diagnóstico da Inteligência:</strong><br>${textoResultado}
-                    </p>
-                `;
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-brain"></i> INTENÇÃO SALVA COM SUCESSO';
                 resultBox.style.display = 'block';
                 resultBox.style.animation = 'fadeIn 0.5s ease';
-
-            } catch (error) {
-                console.error("Erro na integração:", error);
-                btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Falha no Motor';
-                btn.disabled = false;
-                alert("Não foi possível processar. Verifique se suas chaves do Supabase e do Gemini foram inseridas corretamente no código.");
-            }
+            }, 1800);
         }
     </script>
 </body>
