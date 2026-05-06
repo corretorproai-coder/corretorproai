@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* RESET E CORES ULTRA CLEAN */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
         html { scroll-behavior: smooth; }
         body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; overflow-x: hidden; }
@@ -28,12 +29,15 @@
 
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
         .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
+        .dash-title p { font-size: 15px; color: #64748b; margin-top: 4px; }
         .user-profile { display: flex; align-items: center; gap: 12px; background: #ffffff; padding: 8px 16px; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 14px; font-weight: 600; }
         .user-profile i { color: #f2b705; }
 
         /* GRID DE MÉTRICAS */
         .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 35px; }
         .metric-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: space-between; }
+        .metric-info h3 { font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; letter-spacing: -1px; }
         .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
@@ -54,19 +58,38 @@
         #ai-result-box { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; }
         .priority-high { color: #166534; font-weight: 800; display: flex; align-items: center; gap: 6px; }
 
-        /* AGENDA E NOTÍCIAS */
-        .agenda-item { padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; margin-bottom: 12px; display: flex; gap: 15px; border: 1px solid #e2e8f0; border-left: 4px solid #f2b705; }
-        .news-item { display: block; border-bottom: 1px solid #f1f5f9; padding: 12px 0; text-decoration: none; }
-        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; }
+        /* AGENDA COM ALARME */
+        .agenda-list { display: flex; flex-direction: column; gap: 12px; }
+        .agenda-item { padding: 14px; background: #f8fafc; border-radius: 4px; display: flex; gap: 15px; border: 1px solid #e2e8f0; border-left: 4px solid #f2b705; align-items: center; }
+        .agenda-time { font-size: 14px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; }
+        .agenda-info h4 { font-size: 14px; font-weight: 700; color: #0f172a; }
+        .agenda-info p { font-size: 13px; color: #64748b; margin-top: 2px; }
+        .alarm-indicator { margin-left: auto; color: #f2b705; font-size: 14px; animation: pulse 2s infinite; }
+
+        /* BLOCO DE NOTÍCIAS */
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item { text-decoration: none; display: block; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
+        .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .news-source { font-size: 11px; font-weight: 800; color: #d9a304; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; line-height: 1.4; }
+        .news-item:hover .news-title { color: #f2b705; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
 
+        /* CONFIGURADO PARA CELULAR (BARRA INFERIOR FIXA) */
         @media (max-width: 768px) {
-            .sidebar { width: 100%; height: 65px; flex-direction: row; top: auto; bottom: 0; border-top: 1px solid #e2e8f0; }
+            body { flex-direction: column; padding-bottom: 70px; }
+            .sidebar { width: 100%; height: 65px; flex-direction: row; top: auto; bottom: 0; border-right: none; border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); }
             .sidebar-brand { display: none; }
-            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; }
-            .sidebar-menu li a { flex-direction: column; font-size: 10px; }
-            .main-content { margin-left: 0; padding: 20px 16px; padding-bottom: 100px; }
+            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; align-items: center; gap: 0; }
+            .sidebar-menu li { flex: 1; text-align: center; }
+            .sidebar-menu li a { flex-direction: column; font-size: 11px; gap: 4px; padding: 8px 0; justify-content: center; }
+            .sidebar-menu li a i { font-size: 18px; }
+            .badge-premium { display: none; }
+            .main-content { margin-left: 0; padding: 20px 16px; }
+            .dash-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+            .user-profile { width: 100%; justify-content: center; }
             .dashboard-workspace { grid-template-columns: 1fr; }
         }
     </style>
@@ -76,9 +99,9 @@
     <nav class="sidebar">
         <div class="sidebar-brand">Corretor<span>Pro AI</span></div>
         <ul class="sidebar-menu">
-            <li class="active" onclick="switchTab('resumo')"><a href="#"><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
-            <li onclick="switchTab('leads')"><a href="#"><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
-            <li onclick="switchTab('central-ia')"><a href="#"><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
+            <li id="menu-resumo" class="active" onclick="switchTab('resumo')"><a href="#"><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
+            <li id="menu-leads" onclick="switchTab('leads')"><a href="#"><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
+            <li id="menu-central-ia" onclick="switchTab('central-ia')"><a href="#"><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
             <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
         </ul>
     </nav>
@@ -109,11 +132,26 @@
                         </table>
                     </section>
                 </div>
+                
                 <div class="right-col">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado</div>
+                        <div class="box-title"><i class="fa-solid fa-clock"></i> Agenda do Dia (Alarme Ativo)</div>
+                        <div class="agenda-list">
+                            <div class="agenda-item">
+                                <div class="agenda-time">10:00</div>
+                                <div class="agenda-info"><h4>Reunião com João</h4><p>Apresentação de Proposta</p></div>
+                                <div class="alarm-indicator"><i class="fa-solid fa-bell"></i></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-box">
+                        <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado (Exame)</div>
                         <div class="news-list">
-                            <a href="#" class="news-item"><h4 class="news-title">Selic estável aquece financiamento bancário...</h4><small>Há 10 min</small></a>
+                            <a href="#" class="news-item" onclick="event.preventDefault();">
+                                <span class="news-source"><i class="fa-solid fa-trend-up"></i> Exame Imobiliário</span>
+                                <h4 class="news-title">Procura por imóveis de médio padrão cresce 14% na grande SP</h4>
+                            </a>
                         </div>
                     </section>
                 </div>
@@ -145,48 +183,122 @@
                         </div>
 
                         <div id="ai-result-box">
-                            <div class="priority-high"><i class="fa-solid fa-circle-check"></i> LEAD ELITE DETECTADO</div>
-                            <p style="margin-top: 10px; font-size: 14px; color: #1e293b;">
-                                <strong>Análise da IA:</strong> Este cliente possui alta liquidez (cash) e urgência de fechamento. <br><br>
-                                <strong>Sugestão:</strong> Enviar a minuta do contrato e agendar vistoria técnica imediatamente. Prioridade 10/10.
-                            </p>
-                        </div>
+                            </div>
                     </section>
                 </div>
 
                 <div class="right-col">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-database"></i> Conversas Salvas</div>
-                        <p style="font-size: 13px; color: #64748b;">Nenhuma conversa salva recentemente.</p>
+                        <div class="box-title"><i class="fa-solid fa-database"></i> Conversas Salvas (Supabase)</div>
+                        <p style="font-size: 13px; color: #64748b;">As análises enviadas acima ficarão gravadas de forma permanente no seu banco de dados.</p>
                     </section>
                 </div>
             </div>
         </div>
 
+        <div id="leads" class="tab-content">
+            <div class="dash-header">
+                <div class="dash-title"><h1>Sua Carteira de Leads</h1><p>Gerenciamento completo de contatos</p></div>
+            </div>
+            <section class="content-box">
+                <p style="font-size: 14px; color: #475569;">Lista unificada integrada com Facebook Ads e Google Ads.</p>
+            </section>
+        </div>
+
     </main>
 
     <script>
-        // Função para trocar de abas
+        // Configurações do ecossistema (Altere com os dados reais do seu projeto)
+        const SUPABASE_URL = "https://SEU_PROJETO.supabase.co";
+        const SUPABASE_KEY = "SUA_ANON_KEY_DO_SUPABASE";
+        const GEMINI_API_KEY = "SUA_CHAVE_DA_API_DO_GEMINI";
+
+        // Mecanismo nativo de troca de Abas
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
             
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            
+            // Garante o destaque visual no menu correto (computador ou celular)
+            const activeMenu = document.getElementById(`menu-${tabId}`);
+            if (activeMenu) {
+                activeMenu.classList.add('active');
+            }
         }
 
-        // Simulação da Lógica de IA (O que vamos conectar com Gemini/ChatGPT)
-        function runAIAnalysis() {
+        // CONEXÃO REAL: Dispara para o Gemini e grava os dados no Supabase
+        async function runAIAnalysis() {
             const btn = document.querySelector('.btn-ai');
             const resultBox = document.getElementById('ai-result-box');
+            const leadSelect = document.getElementById('lead-select');
+            const chatInput = document.getElementById('chat-input').value;
             
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processando dados...';
-            
-            setTimeout(() => {
+            if (!chatInput.trim()) {
+                alert("Por favor, digite ou cole o texto da conversa antes de analisar.");
+                return;
+            }
+
+            const leadNome = leadSelect.options[leadSelect.selectedIndex].text;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> O motor da IA está analisando...';
+            btn.disabled = true;
+
+            try {
+                // 1. Chamada estruturada para a API do Google Gemini
+                const prompt = `Você é a inteligência preditiva do CorretorPro AI. Analise a seguinte conversa, defina a prioridade (Alta se tiver dinheiro na mão/urgência, Média ou Baixa) e sugira o próximo passo comercial: "${chatInput}"`;
+                
+                const aiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                
+                const aiData = await aiResponse.json();
+                const textoResultado = aiData.candidates[0].content.parts[0].text;
+                
+                // Regra inteligente de detecção automática de prioridade
+                let prioridade = "Média";
+                if (textoResultado.toLowerCase().includes("alta") || chatInput.toLowerCase().includes("400 mil") || chatInput.toLowerCase().includes("à vista")) {
+                    prioridade = "Elite / Alta";
+                }
+
+                // 2. Gravação em tempo real das tabelas do Supabase
+                await fetch(`${SUPABASE_URL}/rest/v1/insights_ia`, {
+                    method: "POST",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=minimal"
+                    },
+                    body: JSON.stringify({
+                        lead_nome: leadNome,
+                        conversa_texto: chatInput,
+                        prioridade: prioridade,
+                        analise_resultado: textoResultado
+                    })
+                });
+
+                // 3. Atualiza os componentes visuais da tela
                 btn.innerHTML = '<i class="fa-solid fa-brain"></i> ANÁLISE CONCLUÍDA';
+                btn.disabled = false;
+                
+                resultBox.innerHTML = `
+                    <div class="priority-high"><i class="fa-solid fa-circle-check"></i> ANÁLISE DO MOTOR PRO: ${leadNome}</div>
+                    <p style="margin-top: 10px; font-size: 14px; color: #1e293b; white-space: pre-line;">
+                        <strong>Prioridade Calculada:</strong> ${prioridade}<br><br>
+                        <strong>Diagnóstico da Inteligência:</strong><br>${textoResultado}
+                    </p>
+                `;
                 resultBox.style.display = 'block';
                 resultBox.style.animation = 'fadeIn 0.5s ease';
-            }, 2000);
+
+            } catch (error) {
+                console.error("Erro na integração:", error);
+                btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Falha no Motor';
+                btn.disabled = false;
+                alert("Não foi possível processar. Verifique se suas chaves do Supabase e do Gemini foram inseridas corretamente no código.");
+            }
         }
     </script>
 </body>
