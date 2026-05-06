@@ -13,9 +13,7 @@
         html { scroll-behavior: smooth; }
         body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; overflow-x: hidden; }
 
-        /* ================================================================= */
-        /* MENU LATERAL PRINCIPAL CORRIGIDO */
-        /* ================================================================= */
+        /* MENU LATERAL COMPACTO */
         .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
         .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: #f2b705; letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
         .sidebar-brand span { color: #0f172a; }
@@ -64,18 +62,27 @@
         .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .status-novo { background: rgba(242, 183, 5, 0.1); color: #d9a304; }
         .status-atendimento { background: #e0f2fe; color: #0369a1; }
+        .status-frio { background: #f1f5f9; color: #64748b; }
 
         /* FICHAS DETALHADAS NA ABA LEADS */
         .lead-profile-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 5px solid #cbd5e1; }
-        .lead-profile-card.hot-border { border-left-color: #f2b705; }
+        .lead-profile-card.hot-border { border-left-color: #ef4444; }
+        .lead-profile-card.medium-border { border-left-color: #f59e0b; }
+        .lead-profile-card.cold-border { border-left-color: #3b82f6; }
         .lead-profile-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
         .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 14px; color: #475569; }
         .lead-profile-info-grid span strong { color: #0f172a; }
 
+        /* BOX DE ALERTA INTELIGENTE IA (RÉGUA DE TEMPO) */
+        .ia-smart-alert { margin-top: 15px; background: rgba(15, 23, 42, 0.02); padding: 12px 16px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; gap: 10px; border: 1px solid #e2e8f0; }
+        .ia-smart-alert.alert-urgent { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+        .ia-smart-alert.alert-medium { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+        .ia-smart-alert.alert-cold { background: #eff6ff; border-color: #bfdbfe; color: #1e40af; }
+
         /* AGENDA INTELIGENTE */
         .agenda-list { display: flex; flex-direction: column; gap: 12px; }
-        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; border: 1px solid #e2e8f0; border-left: 4px solid #f2b705; }
-        .agenda-time { font-size: 14px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; }
+        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; border: 1px solid #e2e8f0; }
+        .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; line-height: 1.2; }
         .agenda-info h4 { font-size: 14px; font-weight: 700; color: #0f172a; }
         .agenda-info p { font-size: 13px; color: #64748b; margin-top: 2px; }
         .alarm-indicator { margin-left: auto; color: #f2b705; font-size: 14px; animation: pulse 2s infinite; }
@@ -97,9 +104,8 @@
         .btn-ai { background: #0f172a; color: #f2b705; border: none; padding: 14px; border-radius: 6px; font-weight: 800; cursor: pointer; transition: 0.2s; }
         .btn-ai:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         
-        #ai-result-box { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; }
-        .priority-high { color: #166534; font-weight: 800; display: flex; align-items: center; gap: 6px; }
-
+        #ai-result-box { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; }
+        
         @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -114,9 +120,7 @@
             .sidebar-menu li a i { font-size: 18px; }
             .main-content { margin-left: 0; padding: 20px 16px; }
             .dash-header { flex-direction: column; align-items: flex-start; gap: 14px; }
-            .user-profile { width: 100%; justify-content: center; }
             .dashboard-workspace { grid-template-columns: 1fr; gap: 20px; }
-            .leads-table th:not(:first-child):not(:last-child), .leads-table td:not(:first-child):not(:last-child) { display: none; }
         }
     </style>
 </head>
@@ -140,30 +144,25 @@
                     <h1>Painel de Controle</h1>
                     <p>Bem-vindo de volta, Víctor Ávila</p>
                 </div>
-                <div class="user-profile">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <span>Plano Imobiliária</span>
-                </div>
+                <div class="user-profile"><i class="fa-solid fa-circle-user"></i> <span>Plano Professional</span></div>
             </div>
 
             <section class="metrics-grid">
                 <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p>42</p></div><div class="metric-icon"><i class="fa-solid fa-users"></i></div></div>
                 <div class="metric-card"><div class="metric-info"><h3>Leads Elite</h3><p>12</p></div><div class="metric-icon"><i class="fa-solid fa-crown"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Alertas IA</h3><p>3</p></div><div class="metric-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Alertas Ativos</h3><p id="metrics-alerts-count">3</p></div><div class="metric-icon"><i class="fa-solid fa-bell"></i></div></div>
             </section>
 
             <div class="dashboard-workspace">
                 <div class="left-workspace-column">
                     <section class="content-box">
-                        <div class="box-title">
-                            <i class="fa-solid fa-address-book"></i> Todos os Leads Recebidos
-                        </div>
+                        <div class="box-title"><i class="fa-solid fa-address-book"></i> Todos os Leads Recebidos</div>
                         <div class="leads-table-wrapper">
                             <table class="leads-table">
                                 <thead>
                                     <tr>
                                         <th>Nome do Lead</th>
-                                        <th>Origem do Anúncio</th>
+                                        <th>Origem</th>
                                         <th>Contato</th>
                                         <th>Status</th>
                                     </tr>
@@ -179,13 +178,13 @@
                                         <td><span class="lead-click-link" onclick="goToLeadProfile('lead-ana')">Ana Júlia Ramos</span></td>
                                         <td><i class="fa-brands fa-google" style="color: #ea4335; margin-right: 4px;"></i> Google Ads</td>
                                         <td>(11) 98888-5678</td>
-                                        <td><span class="status-badge status-atendimento">Atendimento</span></td>
+                                        <td><span class="status-badge status-atendimento">Médio</span></td>
                                     </tr>
                                     <tr>
-                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-roberto')">Roberto Ávila</span></td>
-                                        <td><i class="fa-solid fa-building" style="color: #f2b705; margin-right: 4px;"></i> VivaReal</td>
+                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-roberto')">Roberto Alencar</span></td>
+                                        <td><i class="fa-brands fa-instagram" style="color: #e1306c; margin-right: 4px;"></i> Instagram</td>
                                         <td>(11) 97777-4321</td>
-                                        <td><span class="status-badge status-novo">Novo</span></td>
+                                        <td><span class="status-badge status-frio">Frio</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -193,14 +192,12 @@
                     </section>
 
                     <section class="content-box">
-                        <div class="box-title">
-                            <i class="fa-solid fa-fire"></i> Mapeamento de Leads Quentes (Prioridades IA)
-                        </div>
+                        <div class="box-title"><i class="fa-solid fa-fire"></i> Mapeamento de Leads Quentes (Prioridades IA)</div>
                         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
                             <tr style="border-bottom: 1px solid #f1f5f9;">
                                 <td style="padding: 12px 0;">
                                     <strong>Marcos da Silva</strong><br>
-                                    <small style="color: #64748b;">Orçamento: R$ 400 Mil • Perfil: Prontidão À Vista</small>
+                                    <small style="color: #64748b;">Budget: R$ 400 Mil • Perfil: Prontidão À Vista</small>
                                 </td>
                                 <td style="text-align: right;">
                                     <span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 4px; font-weight: 800; font-size: 11px;">ELITE 10/10</span>
@@ -212,18 +209,22 @@
 
                 <div class="right-workspace-column">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-clock"></i> Agenda do Dia (Alarme Ativo)</div>
-                        <div class="agenda-list">
-                            <div class="agenda-item">
-                                <div class="agenda-time">10:00</div>
-                                <div class="agenda-info"><h4>Reunião com João</h4><p>Apresentação de Proposta</p></div>
+                        <div class="box-title"><i class="fa-solid fa-clock"></i> Alertas de Retorno (Agenda IA)</div>
+                        <div class="agenda-list" id="main-agenda-list">
+                            <div class="agenda-item" style="border-left: 4px solid #ef4444;">
+                                <div class="agenda-time">HOJE<br>Agora</div>
+                                <div class="agenda-info"><h4>Ligar: Marcos da Silva</h4><p><i class="fa-solid fa-phone"></i> (11) 99999-1234</p></div>
                                 <div class="alarm-indicator"><i class="fa-solid fa-bell"></i></div>
+                            </div>
+                            <div class="agenda-item" style="border-left: 4px solid #f59e0b;">
+                                <div class="agenda-time">Em 5<br>Dias</div>
+                                <div class="agenda-info"><h4>Retorno: Ana Júlia Ramos</h4><p>Cobrar simulação de crédito bancário</p></div>
                             </div>
                         </div>
                     </section>
 
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado (Exame)</div>
+                        <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado</div>
                         <div class="news-list">
                             <a href="#" class="news-item" onclick="event.preventDefault();">
                                 <span class="news-source">Exame Imobiliário</span>
@@ -240,58 +241,55 @@
             <div class="dash-header">
                 <div class="dash-title">
                     <h1>Gerenciador de Leads</h1>
-                    <p>Fichas detalhadas, intenções salvas e histórico do cliente</p>
+                    <p>Régua de tempo automática calculada pela Inteligência Artificial</p>
                 </div>
             </div>
 
             <div id="lead-marcos" class="lead-profile-card hot-border">
                 <div class="lead-profile-header">
-                    <div>
-                        <h2>Marcos da Silva</h2>
-                        <span class="status-badge status-novo" style="margin-top: 6px;">Novo Lead</span>
-                    </div>
-                    <span style="background: #0f172a; color: #f2b705; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-brain"></i> IA PRIORIDADE: ELITE (10/10)</span>
+                    <div><h2>Marcos da Silva</h2><span class="status-badge status-novo" style="margin-top: 6px; background:#fef2f2; color:#ef4444;">Prioridade Máxima</span></div>
+                    <span style="background: #ef4444; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-fire"></i> QUENTE (10/10)</span>
                 </div>
                 <div class="lead-profile-info-grid">
                     <span><strong>WhatsApp:</strong> (11) 99999-1234</span>
-                    <span><strong>Origem:</strong> Facebook Anúncios</span>
-                    <span><strong>Orçamento Máximo:</strong> R$ 400.000</span>
-                    <span><strong>Preferência:</strong> Imóvel 3 Dormitórios (Guarulhos)</span>
+                    <span><strong>Budget:</strong> R$ 400.000</span>
+                    <span><strong>Preferência:</strong> 3 Dorms (Guarulhos)</span>
                 </div>
-                <div style="margin-top: 20px; background: #f8fafc; padding: 14px; border-radius: 6px; font-size: 13px; border: 1px dashed #cbd5e1;">
-                    <strong>Último Alerta da IA:</strong> Cliente demonstrou urgência crítica por ter vendido o carro corporativo. Foco total em fechar proposta esta semana.
+                <div class="ia-smart-alert alert-urgent">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span><strong>Alerta Alavancado IA:</strong> Cliente super quente. Alerta de ligação ativo na agenda para <strong>HOJE</strong>. Não deixe esfriar!</span>
                 </div>
             </div>
 
-            <div id="lead-ana" class="lead-profile-card">
+            <div id="lead-ana" class="lead-profile-card medium-border">
                 <div class="lead-profile-header">
-                    <div>
-                        <h2>Ana Júlia Ramos</h2>
-                        <span class="status-badge status-atendimento" style="margin-top: 6px;">Em Atendimento</span>
-                    </div>
-                    <span style="background: #e2e8f0; color: #475569; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-brain"></i> IA PRIORIDADE: MÉDIA (6/10)</span>
+                    <div><h2>Ana Júlia Ramos</h2><span class="status-badge status-atendimento" style="margin-top: 6px; background:#fffbeb; color:#d97706;">Acompanhamento Semanal</span></div>
+                    <span style="background: #f59e0b; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-bolt"></i> MÉDIO (6/10)</span>
                 </div>
                 <div class="lead-profile-info-grid">
                     <span><strong>WhatsApp:</strong> (11) 98888-5678</span>
-                    <span><strong>Origem:</strong> Google Pesquisa</span>
-                    <span><strong>Orçamento Máximo:</strong> R$ 280.000</span>
+                    <span><strong>Budget:</strong> R$ 280.000</span>
                     <span><strong>Preferência:</strong> Apartamento Centro</span>
+                </div>
+                <div class="ia-smart-alert alert-medium">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    <span><strong>Alerta Alavancado IA:</strong> Interesse moderado. Alerta programado automaticamente para daqui a <strong>5 dias</strong> para manter o relacionamento.</span>
                 </div>
             </div>
 
-            <div id="lead-roberto" class="lead-profile-card">
+            <div id="lead-roberto" class="lead-profile-card cold-border">
                 <div class="lead-profile-header">
-                    <div>
-                        <h2>Roberto Ávila</h2>
-                        <span class="status-badge status-novo" style="margin-top: 6px;">Novo Lead</span>
-                    </div>
-                    <span style="background: #e2e8f0; color: #475569; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-brain"></i> IA PRIORIDADE: PENDENTE</span>
+                    <div><h2>Roberto Alencar</h2><span class="status-badge status-frio" style="margin-top: 6px;">Nutrição Distante</span></div>
+                    <span style="background: #3b82f6; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-snowflake"></i> FRIO (3/10)</span>
                 </div>
                 <div class="lead-profile-info-grid">
                     <span><strong>WhatsApp:</strong> (11) 97777-4321</span>
-                    <span><strong>Origem:</strong> VivaReal</span>
-                    <span><strong>Orçamento Máximo:</strong> Não Informado</span>
-                    <span><strong>Preferência:</strong> Sobrado</span>
+                    <span><strong>Budget:</strong> R$ 190.000</span>
+                    <span><strong>Preferência:</strong> Minha Casa Minha Vida</span>
+                </div>
+                <div class="ia-smart-alert alert-cold">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span><strong>Alerta Alavancado IA:</strong> Lead curioso/frio. Alerta programado para daqui a <strong>20 dias</strong> na agenda para envio de conteúdo de mercado genérico.</span>
                 </div>
             </div>
         </div>
@@ -300,35 +298,33 @@
             <div class="dash-header">
                 <div class="dash-title">
                     <h1>Central de Inteligência Artificial</h1>
-                    <p>Análise de conversas e detecção automática de intenções de compra</p>
+                    <p>Cole o chat e deixe a IA calcular a temperatura e os gatilhos da agenda automaticamente</p>
                 </div>
             </div>
 
             <div class="dashboard-workspace">
                 <div class="left-col" style="grid-column: span 2;">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Analisador de Conversas do WhatsApp</div>
+                        <div class="box-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Analisador Preditivo de WhatsApp</div>
                         <div class="ia-analyzer">
                             <div class="ia-input-group">
-                                <label>Vincular ao Lead</label>
-                                <select class="ia-select">
-                                    <option>Marcos da Silva</option>
-                                    <option>Ana Júlia Ramos</option>
-                                    <option>Roberto Ávila</option>
+                                <label>Selecione o Cliente para Analisar</label>
+                                <select id="ia-select-lead" class="ia-select">
+                                    <option value="Marcos">Marcos da Silva (Conversa Urgente)</option>
+                                    <option value="Ana">Ana Júlia Ramos (Simulação Devagar)</option>
+                                    <option value="Roberto">Roberto Alencar (Apenas Curioso)</option>
                                 </select>
                             </div>
                             <div class="ia-input-group">
-                                <label>Cole o histórico de mensagens ou observações do cliente</label>
-                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: Cliente disse que vendeu o carro, tem 400 mil na mão liberados e quer assinar contrato essa semana sem falta..."></textarea>
+                                <label>Histórico Bruto da Conversa</label>
+                                <textarea id="chat-input" class="ia-textarea" placeholder="Cole os balões de texto do WhatsApp aqui..."></textarea>
                             </div>
-                            <button class="btn-ai" onclick="runAIAnalysis()"><i class="fa-solid fa-brain"></i> EXTRAIR INTENÇÃO E SALVAR PRIORIDADE</button>
+                            <button class="btn-ai" onclick="runSmartAIAnalysis()"><i class="fa-solid fa-brain"></i> PROCESSAR INTENÇÃO E PROGRAMAR RÉGUA DE ALERTAS</button>
                         </div>
 
                         <div id="ai-result-box">
-                            <div class="priority-high"><i class="fa-solid fa-circle-check"></i> ANÁLISE SALVA E ADICIONADA À FICHA DO LEAD</div>
-                            <p style="margin-top: 10px; font-size: 14px; color: #1e293b;">
-                                <strong>Inteligência do CorretorPro:</strong> Identificado gatilho de urgência crítica e capital disponível imediato. Os dados de prioridade foram sincronizados com as fichas de leads com sucesso.
-                            </p>
+                            <h3 id="ai-result-title" style="display:flex; align-items:center; gap:6px; font-size:16px;"></h3>
+                            <p id="ai-result-desc" style="margin-top: 10px; font-size: 14px; color: #1e293b; line-height: 1.5;"></p>
                         </div>
                     </section>
                 </div>
@@ -338,7 +334,7 @@
     </main>
 
     <script>
-        // SISTEMA DE TROCA DE ABAS NATIVO CORRIGIDO
+        // CRONOGRAMA DE NAVEGAÇÃO
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
@@ -347,31 +343,56 @@
             document.getElementById('menu-' + tabId).classList.add('active');
         }
 
-        // FUNÇÃO DE CONEXÃO: CLICA NO RESUMO -> ABRE EM LEADS FOCADO NO CARTÃO
         function goToLeadProfile(leadElementId) {
             switchTab('leads');
-            
             setTimeout(() => {
                 const element = document.getElementById(leadElementId);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    element.style.backgroundColor = '#fef3c7';
-                    setTimeout(() => { element.style.backgroundColor = '#ffffff'; }, 1000);
+                    element.style.transform = 'scale(1.02)';
+                    element.style.transition = '0.3s';
+                    setTimeout(() => { element.style.transform = 'scale(1)'; }, 800);
                 }
             }, 100);
         }
 
-        // SIMULAÇÃO DA API
-        function runAIAnalysis() {
+        // MOTOR DE SIMULAÇÃO DE REGRAS DE IA (O QUE VOCÊ PEDIU)
+        function runSmartAIAnalysis() {
             const btn = document.querySelector('.btn-ai');
             const resultBox = document.getElementById('ai-result-box');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Computando e Salvando Dados...';
+            const selectedLead = document.getElementById('ia-select-lead').value;
+            
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Calculando Régua de Relacionamento...';
             
             setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-brain"></i> INTENÇÃO INTEGRADA';
+                btn.innerHTML = '<i class="fa-solid fa-brain"></i> ANÁLISE INTEGRADA COM SUCESSO';
                 resultBox.style.display = 'block';
                 resultBox.style.animation = 'fadeIn 0.5s ease';
-            }, 1800);
+                
+                let title = "";
+                let desc = "";
+                
+                if(selectedLead === "Marcos") {
+                    resultBox.style.background = "#fef2f2";
+                    resultBox.style.border = "1px solid #fca5a5";
+                    title = '<span style="color:#ef4444; font-weight:800;"><i class="fa-solid fa-fire"></i> LEAD DIAGNOSTICADO COMO QUENTE (10/10)</span>';
+                    desc = '<strong>Gatilho de Urgência Detectado:</strong> O cliente informou capital à vista imediato e precisa mudar rápido. <br><br><span style="background:#ef4444; color:white; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;"><i class="fa-solid fa-calendar-check"></i> AÇÃO DA IA:</span> Alerta disparado na Agenda para <strong>HOJE - IMEDIATO</strong> com nome e telefone em destaque.';
+                } else if(selectedLead === "Ana") {
+                    resultBox.style.background = "#fffbeb";
+                    resultBox.style.border = "1px solid #fde68a";
+                    title = '<span style="color:#d97706; font-weight:800;"><i class="fa-solid fa-bolt"></i> LEAD DIAGNOSTICADO COMO MÉDIO (6/10)</span>';
+                    desc = '<strong>Gatilho de Ritmo Detectado:</strong> O cliente depende de aprovação bancária e está enviando documentos devagar. <br><br><span style="background:#f59e0b; color:white; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;"><i class="fa-solid fa-calendar-check"></i> AÇÃO DA IA:</span> Evitando importunação. Alerta de retorno agendado automaticamente na régua para daqui a <strong>5 DIAS</strong>.';
+                } else {
+                    resultBox.style.background = "#eff6ff";
+                    resultBox.style.border = "1px solid #bfdbfe";
+                    title = '<span style="color:#1e40af; font-weight:800;"><i class="fa-solid fa-snowflake"></i> LEAD DIAGNOSTICADO COMO FRIO (3/10)</span>';
+                    desc = '<strong>Gatilho de Curiosidade Detectado:</strong> Histórico mostra respostas curtas, sem definição de prazo ou orçamento claro. <br><br><span style="background:#3b82f6; color:white; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold;"><i class="fa-solid fa-calendar-check"></i> AÇÃO DA IA:</span> Protegendo sua agenda. Afastamos o acompanhamento. Alerta programado de forma espaçada para daqui a <strong>20 DIAS</strong>.';
+                }
+                
+                document.getElementById('ai-result-title').innerHTML = title;
+                document.getElementById('ai-result-desc').innerHTML = desc;
+                
+            }, 1500);
         }
     </script>
 </body>
