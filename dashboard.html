@@ -54,15 +54,26 @@
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
         .box-title i { color: #f2b705; }
 
-        /* TABELA DE LEADS ALINHADA E REORGANIZADA */
+        /* TABELA DE LEADS */
         .leads-table-wrapper { width: 100%; overflow-x: auto; }
         .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
         .leads-table th { background: #f8fafc; padding: 12px 14px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
-        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
+        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
         
+        /* Links clicáveis de leads */
+        .lead-click-link { color: #0f172a; text-decoration: none; font-weight: 700; cursor: pointer; transition: color 0.15s; }
+        .lead-click-link:hover { color: #d9a304; text-decoration: underline; }
+
         .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .status-novo { background: rgba(242, 183, 5, 0.1); color: #d9a304; }
         .status-atendimento { background: #e0f2fe; color: #0369a1; }
+
+        /* FICHAS DETALHADAS NA ABA LEADS */
+        .lead-profile-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 5px solid #cbd5e1; }
+        .lead-profile-card.hot-border { border-left-color: #f2b705; }
+        .lead-profile-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
+        .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 14px; color: #475569; }
+        .lead-profile-info-grid span strong { color: #0f172a; }
 
         /* AGENDA INTELIGENTE */
         .agenda-list { display: flex; flex-direction: column; gap: 12px; }
@@ -72,7 +83,7 @@
         .agenda-info p { font-size: 13px; color: #64748b; margin-top: 2px; }
         .alarm-indicator { margin-left: auto; color: #f2b705; font-size: 14px; animation: pulse 2s infinite; }
 
-        /* NOTÍCIAS RADAR DO MERCADO */
+        /* RADAR DO MERCADO */
         .news-list { display: flex; flex-direction: column; gap: 16px; }
         .news-item { text-decoration: none; display: block; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
         .news-item:last-child { border-bottom: none; padding-bottom: 0; }
@@ -80,7 +91,7 @@
         .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; line-height: 1.4; }
         .news-time { font-size: 12px; color: #94a3b8; margin-top: 4px; display: block; }
 
-        /* CENTRAL IA CONFIGS */
+        /* CENTRAL IA */
         .ia-analyzer { display: flex; flex-direction: column; gap: 20px; }
         .ia-input-group { display: flex; flex-direction: column; gap: 8px; }
         .ia-input-group label { font-size: 14px; font-weight: 700; color: #475569; }
@@ -104,7 +115,6 @@
             .sidebar-menu li { flex: 1; text-align: center; }
             .sidebar-menu li a { flex-direction: column; gap: 4px; padding: 8px 0; font-size: 11px; justify-content: center; }
             .sidebar-menu li a i { font-size: 18px; }
-            .badge-premium { display: none; }
             .main-content { margin-left: 0; padding: 20px 16px; }
             .dash-header { flex-direction: column; align-items: flex-start; gap: 14px; }
             .user-profile { width: 100%; justify-content: center; }
@@ -119,6 +129,7 @@
         <div class="sidebar-brand">Corretor<span>Pro AI</span></div>
         <ul class="sidebar-menu">
             <li id="menu-resumo" class="active" onclick="switchTab('resumo')"><a href="#"><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
+            <li id="menu-leads" onclick="switchTab('leads')"><a href="#"><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
             <li id="menu-central-ia" onclick="switchTab('central-ia')"><a href="#"><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
             <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
         </ul>
@@ -145,9 +156,7 @@
             </section>
 
             <div class="dashboard-workspace">
-                
                 <div class="left-workspace-column">
-                    
                     <section class="content-box">
                         <div class="box-title">
                             <i class="fa-solid fa-address-book"></i> Todos os Leads Recebidos
@@ -164,22 +173,16 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>Marcos da Silva</strong></td>
+                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-marcos')">Marcos da Silva</span></td>
                                         <td><i class="fa-brands fa-facebook" style="color: #1877f2; margin-right: 4px;"></i> Facebook Ads</td>
                                         <td>(11) 99999-1234</td>
                                         <td><span class="status-badge status-novo">Novo</span></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Ana Júlia Ramos</strong></td>
+                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-ana')">Ana Júlia Ramos</span></td>
                                         <td><i class="fa-brands fa-google" style="color: #ea4335; margin-right: 4px;"></i> Google Ads</td>
                                         <td>(11) 98888-5678</td>
                                         <td><span class="status-badge status-atendimento">Atendimento</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Roberto Ávila</strong></td>
-                                        <td><i class="fa-solid fa-house-laptop" style="color: #f2b705; margin-right: 4px;"></i> VivaReal</td>
-                                        <td>(11) 97777-4321</td>
-                                        <td><span class="status-badge status-novo">Novo</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -194,7 +197,7 @@
                             <tr style="border-bottom: 1px solid #f1f5f9;">
                                 <td style="padding: 12px 0;">
                                     <strong>Marcos da Silva</strong><br>
-                                    <small style="color: #64748b;">Budget: R$ 400 Mil • Perfil: Prontidão À Vista (Facebook)</small>
+                                    <small style="color: #64748b;">Budget: R$ 400 Mil • Perfil: Prontidão À Vista</small>
                                 </td>
                                 <td style="text-align: right;">
                                     <span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 4px; font-weight: 800; font-size: 11px;">ELITE 10/10</span>
@@ -227,7 +230,50 @@
                         </div>
                     </section>
                 </div>
+            </div>
+        </div>
 
+        <div id="leads" class="tab-content">
+            <div class="dash-header">
+                <div class="dash-title">
+                    <h1>Gerenciador de Leads</h1>
+                    <p>Fichas detalhadas, intenções salvas e histórico do cliente</p>
+                </div>
+            </div>
+
+            <div id="lead-marcos" class="lead-profile-card hot-border">
+                <div class="lead-profile-header">
+                    <div>
+                        <h2>Marcos da Silva</h2>
+                        <span class="status-badge status-novo" style="margin-top: 6px;">Novo Lead</span>
+                    </div>
+                    <span style="background: #0f172a; color: #f2b705; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-brain"></i> IA PRIORIDADE: ELITE (10/10)</span>
+                </div>
+                <div class="lead-profile-info-grid">
+                    <span><strong>WhatsApp:</strong> (11) 99999-1234</span>
+                    <span><strong>Origem:</strong> Facebook Anúncios</span>
+                    <span><strong>Budget Máximo:</strong> R$ 400.000</span>
+                    <span><strong>Preferência:</strong> Imóvel 3 Dorms (Guarulhos)</span>
+                </div>
+                <div style="margin-top: 20px; background: #f8fafc; padding: 14px; border-radius: 6px; font-size: 13px; border: 1px dashed #cbd5e1;">
+                    <strong>Último Alerta da IA:</strong> Cliente demonstrou urgência crítica por ter vendido o carro corporativo. Foco total em fechar proposta esta semana.
+                </div>
+            </div>
+
+            <div id="lead-ana" class="lead-profile-card">
+                <div class="lead-profile-header">
+                    <div>
+                        <h2>Ana Júlia Ramos</h2>
+                        <span class="status-badge status-atendimento" style="margin-top: 6px;">Em Atendimento</span>
+                    </div>
+                    <span style="background: #e2e8f0; color: #475569; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-brain"></i> IA PRIORIDADE: MÉDIA (6/10)</span>
+                </div>
+                <div class="lead-profile-info-grid">
+                    <span><strong>WhatsApp:</strong> (11) 98888-5678</span>
+                    <span><strong>Origem:</strong> Google Pesquisa</span>
+                    <span><strong>Budget Máximo:</strong> R$ 280.000</span>
+                    <span><strong>Preferência:</strong> Apartamento Centro</span>
+                </div>
             </div>
         </div>
 
@@ -235,7 +281,7 @@
             <div class="dash-header">
                 <div class="dash-title">
                     <h1>Central de Inteligência Artificial</h1>
-                    <p>Análise preditiva de conversas e detecção de gatilhos de venda</p>
+                    <p>Análise preditiva de mensagens e arquivamento estratégico</p>
                 </div>
             </div>
 
@@ -245,24 +291,23 @@
                         <div class="box-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Analisador de Conversas do WhatsApp</div>
                         <div class="ia-analyzer">
                             <div class="ia-input-group">
-                                <label>Vincular ao Lead</label>
+                                <label>Vincular a qual Lead?</label>
                                 <select class="ia-select">
                                     <option>Marcos da Silva</option>
                                     <option>Ana Júlia Ramos</option>
-                                    <option>Roberto Ávila</option>
                                 </select>
                             </div>
                             <div class="ia-input-group">
-                                <label>Cole o histórico de conversas para extrair prioridade</label>
-                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: Cliente tem 400 mil liberados em mãos e quer fechar o negócio ainda essa semana..."></textarea>
+                                <label>Cole o histórico de texto ou observações brutas do cliente</label>
+                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: Ele disse que tem 400 mil na mão liberados e quer assinar contrato essa semana sem falta..."></textarea>
                             </div>
-                            <button class="btn-ai" onclick="runAIAnalysis()"><i class="fa-solid fa-brain"></i> EXTRAIR INTENÇÃO E CALCULAR PRIORIDADE</button>
+                            <button class="btn-ai" onclick="runAIAnalysis()"><i class="fa-solid fa-brain"></i> EXTRAIR INTENÇÃO E SALVAR PRIORIDADE</button>
                         </div>
 
                         <div id="ai-result-box">
-                            <div class="priority-high"><i class="fa-solid fa-circle-check"></i> LEAD COPIADO E MAPEADO COMO ELITE</div>
+                            <div class="priority-high"><i class="fa-solid fa-circle-check"></i> ANÁLISE SALVA E ADICIONADA À FICHA DO LEAD</div>
                             <p style="margin-top: 10px; font-size: 14px; color: #1e293b;">
-                                <strong>Inteligência do Lead:</strong> Detectada alta liquidez e urgência imediata. O funil foi atualizado de forma segura.
+                                <strong>Inteligência do CorretorPro:</strong> Detetada alta prontidão financeira (R$ 400.000). Os dados visuais de prioridade foram sincronizados com as fichas de leads com sucesso.
                             </p>
                         </div>
                     </section>
@@ -273,7 +318,7 @@
     </main>
 
     <script>
-        // Alternador de Abas
+        // SISTEMA DE TROCA DE ABAS NATIVO
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
@@ -282,17 +327,34 @@
             document.getElementById('menu-' + tabId).classList.add('active');
         }
 
-        // Simulação do Botão IA
+        // FUNÇÃO DE CONEXÃO: CLICA NO RESUMO -> ABRE EM LEADS FOCADO NO CARDT
+        function goToLeadProfile(leadElementId) {
+            // 1. Muda para a aba de leads
+            switchTab('leads');
+            
+            // 2. Espera um milissegundo para a tela carregar e rola até a ficha do cliente
+            setTimeout(() => {
+                const element = document.getElementById(leadElementId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Adiciona um efeito rápido de piscar para destacar a ficha clicada
+                    element.style.backgroundColor = '#fef3c7';
+                    setTimeout(() => { element.style.backgroundColor = '#ffffff'; }, 1000);
+                }
+            }, 100);
+        }
+
+        // SIMULAÇÃO DO COMPORTAMENTO DA API
         function runAIAnalysis() {
             const btn = document.querySelector('.btn-ai');
             const resultBox = document.getElementById('ai-result-box');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analisando Perfil...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Computando e Salvando Dados...';
             
             setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-brain"></i> INTENÇÃO SALVA COM SUCESSO';
+                btn.innerHTML = '<i class="fa-solid fa-brain"></i> INTENÇÃO INTEGRADA';
                 resultBox.style.display = 'block';
                 resultBox.style.animation = 'fadeIn 0.5s ease';
-            }, 1500);
+            }, 1800);
         }
     </script>
 </body>
