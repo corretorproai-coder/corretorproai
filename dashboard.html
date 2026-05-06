@@ -13,7 +13,11 @@
         html { scroll-behavior: smooth; }
         body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; overflow-x: hidden; }
 
+        .container { max-width: 1140px; margin: 0 auto; width: 100%; }
+
+        /* ================================================================= */
         /* MENU LATERAL COMPACTO */
+        /* ================================================================= */
         .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
         .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: #f2b705; letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
         .sidebar-brand span { color: #0f172a; }
@@ -50,11 +54,11 @@
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
         .box-title i { color: #f2b705; }
 
-        /* TABELA DE LEADS COMPLETA ORIGINAL */
+        /* TABELA DE LEADS ALINHADA E REORGANIZADA */
         .leads-table-wrapper { width: 100%; overflow-x: auto; }
         .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
         .leads-table th { background: #f8fafc; padding: 12px 14px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
-        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
         
         .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .status-novo { background: rgba(242, 183, 5, 0.1); color: #d9a304; }
@@ -76,7 +80,7 @@
         .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; line-height: 1.4; }
         .news-time { font-size: 12px; color: #94a3b8; margin-top: 4px; display: block; }
 
-        /* CONFIGURAÇÃO DA CENTRAL IA */
+        /* CENTRAL IA CONFIGS */
         .ia-analyzer { display: flex; flex-direction: column; gap: 20px; }
         .ia-input-group { display: flex; flex-direction: column; gap: 8px; }
         .ia-input-group label { font-size: 14px; font-weight: 700; color: #475569; }
@@ -141,6 +145,7 @@
             </section>
 
             <div class="dashboard-workspace">
+                
                 <div class="left-workspace-column">
                     
                     <section class="content-box">
@@ -170,6 +175,12 @@
                                         <td>(11) 98888-5678</td>
                                         <td><span class="status-badge status-atendimento">Atendimento</span></td>
                                     </tr>
+                                    <tr>
+                                        <td><strong>Roberto Ávila</strong></td>
+                                        <td><i class="fa-solid fa-house-laptop" style="color: #f2b705; margin-right: 4px;"></i> VivaReal</td>
+                                        <td>(11) 97777-4321</td>
+                                        <td><span class="status-badge status-novo">Novo</span></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -183,7 +194,7 @@
                             <tr style="border-bottom: 1px solid #f1f5f9;">
                                 <td style="padding: 12px 0;">
                                     <strong>Marcos da Silva</strong><br>
-                                    <small style="color: #64748b;">Budget: R$ 400 Mil • Perfil: Prontidão À Vista</small>
+                                    <small style="color: #64748b;">Budget: R$ 400 Mil • Perfil: Prontidão À Vista (Facebook)</small>
                                 </td>
                                 <td style="text-align: right;">
                                     <span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 4px; font-weight: 800; font-size: 11px;">ELITE 10/10</span>
@@ -216,6 +227,7 @@
                         </div>
                     </section>
                 </div>
+
             </div>
         </div>
 
@@ -223,7 +235,7 @@
             <div class="dash-header">
                 <div class="dash-title">
                     <h1>Central de Inteligência Artificial</h1>
-                    <p>Análise de conversas e detecção automática de intenções de compra</p>
+                    <p>Análise preditiva de conversas e detecção de gatilhos de venda</p>
                 </div>
             </div>
 
@@ -237,20 +249,20 @@
                                 <select class="ia-select">
                                     <option>Marcos da Silva</option>
                                     <option>Ana Júlia Ramos</option>
+                                    <option>Roberto Ávila</option>
                                 </select>
                             </div>
                             <div class="ia-input-group">
-                                <label>Cole o histórico de mensagens ou observações do cliente</label>
-                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: Cliente disse que vendeu o carro, tem 400 mil na mão liberados e quer assinar contrato essa semana sem falta..."></textarea>
+                                <label>Cole o histórico de conversas para extrair prioridade</label>
+                                <textarea id="chat-input" class="ia-textarea" placeholder="Ex: Cliente tem 400 mil liberados em mãos e quer fechar o negócio ainda essa semana..."></textarea>
                             </div>
-                            <button class="btn-ai" onclick="runAIAnalysis()"><i class="fa-solid fa-brain"></i> EXTRAIR INTENÇÃO E SALVAR PRIORIDADE</button>
+                            <button class="btn-ai" onclick="runAIAnalysis()"><i class="fa-solid fa-brain"></i> EXTRAIR INTENÇÃO E CALCULAR PRIORIDADE</button>
                         </div>
 
                         <div id="ai-result-box">
                             <div class="priority-high"><i class="fa-solid fa-circle-check"></i> LEAD COPIADO E MAPEADO COMO ELITE</div>
                             <p style="margin-top: 10px; font-size: 14px; color: #1e293b;">
-                                <strong>Inteligência de Vendas:</strong> Identificado gatilho de urgência crítica e capital disponível imediato (R$ 400.000). <br><br>
-                                <strong>Ação Recomendada:</strong> Parar outras atividades secundárias e enviar portfólio de fechamento.
+                                <strong>Inteligência do Lead:</strong> Detectada alta liquidez e urgência imediata. O funil foi atualizado de forma segura.
                             </p>
                         </div>
                     </section>
@@ -261,7 +273,7 @@
     </main>
 
     <script>
-        // Lógica de Troca de Abas Remodelada
+        // Alternador de Abas
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
@@ -270,17 +282,17 @@
             document.getElementById('menu-' + tabId).classList.add('active');
         }
 
-        // Análise Simulação IA
+        // Simulação do Botão IA
         function runAIAnalysis() {
             const btn = document.querySelector('.btn-ai');
             const resultBox = document.getElementById('ai-result-box');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Computando Prioridades...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analisando Perfil...';
             
             setTimeout(() => {
                 btn.innerHTML = '<i class="fa-solid fa-brain"></i> INTENÇÃO SALVA COM SUCESSO';
                 resultBox.style.display = 'block';
                 resultBox.style.animation = 'fadeIn 0.5s ease';
-            }, 1800);
+            }, 1500);
         }
     </script>
 </body>
