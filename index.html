@@ -7,7 +7,132 @@
     <title>CorretorPro AI | Plataforma Unificada de Vendas com Inteligência Artificial</title>
     <meta name="description" content="Aumente suas vendas com o CorretorPro AI. Plataforma unificada que conecta anúncios, gestão de leads e WhatsApp com Inteligência Artificial.">
     <meta name="robots" content="index, follow">
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CorretorPro AI | Inteligência Artificial para Vendas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #ffffff; color: #0f172a; overflow-x: hidden; }
+        .container { max-width: 1140px; margin: 0 auto; width: 100%; padding: 0 4%; }
+        .hub-utility-bar { width: 100%; height: 38px; background: #f6f9fc; border-bottom: 1px solid #cbd5e1; display: flex; align-items: center; position: fixed; top: 0; left: 0; z-index: 10001; }
+        .hub-utility-bar .utility-wrapper { display: flex; justify-content: flex-end; align-items: center; gap: 20px; width: 100%; }
+        .hub-utility-bar a { color: #475569; text-decoration: none; font-size: 13px; font-weight: 600; }
+        header { width: 100%; height: 75px; background: #ffffff; border-bottom: 1px solid #e2e8f0; position: fixed; top: 38px; left: 0; z-index: 10000; display: flex; align-items: center; }
+        .header-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 26px; font-weight: 900; color: #f2b705; text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: #0f172a; }
+        .nav-menu { display: flex; list-style: none; gap: 30px; font-size: 16px; font-weight: 700; }
+        .nav-menu li a { color: #334155; text-decoration: none; }
+        .nav-menu li a:hover { color: #f2b705; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .btn-login { font-size: 16px; font-weight: 700; color: #334155; text-decoration: none; }
+        .btn-orange-filled { background: #f2b705; color: #0f172a; padding: 12px 24px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; border: 2px solid #f2b705; display: inline-block; text-align: center; box-shadow: 0 3px 10px rgba(242, 183, 5, 0.2); }
+        .btn-orange-filled:hover { background: #d9a304; border-color: #d9a304; }
+        .btn-orange-stroke { background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 12px 24px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; border: 2px solid #ffffff; display: inline-block; text-align: center; }
+        .btn-orange-stroke:hover { background: #ffffff; color: #0f172a; }
+        .hero-section { min-height: 75vh; padding-top: 140px; padding-bottom: 60px; background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover; background-attachment: fixed; display: flex; align-items: center; justify-content: center; }
+        .hero-content { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .hero-tagline { font-size: 13px; font-weight: 800; color: #f2b705; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .hero-title { font-family: 'Georgia', serif; font-size: 46px; font-weight: 700; color: #ffffff; line-height: 1.25; max-width: 850px; letter-spacing: -1px; }
+        .hero-title span { color: #f2b705; }
+        .hero-description { font-size: 18px; color: #ffffff; max-width: 700px; line-height: 1.5; margin-top: 20px; margin-bottom: 35px; opacity: 0.9; }
+        .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .hero-footer-text { font-size: 13px; color: #cbd5e1; margin-top: 18px; font-weight: 600; }
+        .pricing-section { padding: 80px 0; background: #f6f9fc; border-top: 1px solid #e2e8f0; width: 100%; }
+        .pricing-section-title { text-align: center; margin-bottom: 40px; }
+        .pricing-section-title h2 { font-family: 'Georgia', serif; font-size: 38px; color: #0f172a; font-weight: 400; }
+        .pricing-section-title p { font-size: 19px; color: #475569; margin-top: 12px; }
+        .pricing-grid { display: flex; gap: 24px; justify-content: space-between; align-items: stretch; margin-top: 40px; width: 100%; flex-wrap: wrap; }
+        .pricing-card { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 35px 30px; display: flex; flex-direction: column; gap: 20px; flex: 1; min-width: 300px; position: relative; }
+        .pricing-card.featured { border-color: #f2b705; border-width: 2px; box-shadow: 0 15px 30px rgba(242, 183, 5, 0.1); }
+        .featured-badge { position: absolute; top: 12px; right: -30px; background: #f2b705; color: #0f172a; font-size: 11px; font-weight: 800; padding: 6px 35px; transform: rotate(45deg); text-transform: uppercase; }
+        .plan-name { font-size: 22px; font-weight: 800; color: #0f172a; }
+        .plan-desc { font-size: 14px; color: #475569; min-height: 42px; line-height: 1.4; }
+        .plan-price { font-size: 42px; font-weight: 800; color: #0f172a; letter-spacing: -1px; }
+        .plan-price span { font-size: 15px; color: #64748b; font-weight: 600; }
+        .plan-features-list { list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: #334155; border-top: 1px solid #e2e8f0; padding-top: 20px; }
+        .plan-features-list li { display: flex; align-items: center; gap: 10px; }
+        .plan-features-list li i { color: #22c55e; font-size: 16px; }
+        @media (max-width: 768px) { .hub-utility-bar { display: none; } header { top: 0; height: 70px; } .nav-menu { display: none; } .logo { font-size: 24px; } .hero-title { font-size: 32px; } .pricing-grid { flex-direction: column; } .pricing-card { min-width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="hub-utility-bar">
+        <div class="container">
+            <div class="utility-wrapper">
+                <a href="https://wa.me/5511919912900?text=Olá!%20Preciso%20de%20suporte%20com%20a%20plataforma%20CorretorPro%20AI." target="_blank">Suporte</a>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container header-wrapper">
+            <a href="#" class="logo">Corretor<span>Pro AI</span></a>
+            <ul class="nav-menu">
+                <li><a href="#precos">Preços</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="btn-login">Log in</a>
+                <a href="login.html" class="btn-orange-filled">Começar grátis</a>
+            </div>
+        </div>
+    </header>
+    <section class="hero-section">
+        <div class="container hero-content">
+            <span class="hero-tagline">Plataforma Unificada de Gestão Comercial</span>
+            <h1 class="hero-title">O lugar onde as equipes comerciais vão para <span>reter e vender mais.</span></h1>
+            <p class="hero-description">Conecte a captura de leads em tempo real e o atendimento inteligente por WhatsApp em um único ecossistema focado em faturamento.</p>
+            <div class="hero-buttons">
+                <a href="login.html" class="btn-orange-filled" style="padding: 15px 32px; font-size: 17px;">Começar gratuitamente</a>
+            </div>
+        </div>
+    </section>
+    <div id="precos" class="pricing-section">
+        <div class="container">
+            <div class="pricing-section-title">
+                <h2>Preços transparentes para escalar sua operação</h2>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Teste Grátis</div>
+                    <p class="plan-desc">Experimente todos os recursos visuais e ferramentas por uma semana sem compromisso.</p>
+                    <div class="plan-price">R$ 0 <span>/7 dias</span></div>
+                    <a href="login.html" class="btn-orange-stroke" style="width: 100%; text-align: center; border-color: #cbd5e1; color: #0f172a; text-decoration: none;">Iniciar Teste</a>
+                    <ul class="plan-features-list">
+                        <li><i class="fa-solid fa-check"></i> 1 Usuário Operacional</li>
+                        <li><i class="fa-solid fa-check"></i> Acesso Total à Plataforma</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-name">Básico</div>
+                    <p class="plan-desc">Acesso individual completo para corretores independentes acelerarem suas conversões.</p>
+                    <div class="plan-price">R$ 59 <span>/mês</span></div>
+                    <a href="login.html" class="btn-orange-stroke" style="width: 100%; text-align: center; border-color: #f2b705; color: #0f172a; text-decoration: none;">Assinar Plano</a>
+                    <ul class="plan-features-list">
+                        <li><i class="fa-solid fa-check"></i> 1 Usuário Ativo</li>
+                        <li><i class="fa-solid fa-check"></i> Captura Ativa de Leads</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Mais Popular</div>
+                    <div class="plan-name">Professional</div>
+                    <p class="plan-desc">Para imobiliárias e times estruturados que precisam de inteligência, copiloto e escala.</p>
+                    <div class="plan-price">R$ 99 <span>/mês</span></div>
+                    <a href="https://wa.me/5511919912900?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20plano%20Professional%20do%20CorretorPro%20AI%20e%20como%20implementar%20na%20minha%20operação." target="_blank" class="btn-orange-filled" style="width: 100%; text-align: center; text-decoration: none;">Falar com Consultor</a>
+                    <ul class="plan-features-list">
+                        <li><i class="fa-solid fa-check"></i> Múltiplos Usuários Ativos</li>
+                        <li><i class="fa-solid fa-check"></i> Copiloto de IA no WhatsApp</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
