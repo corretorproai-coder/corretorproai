@@ -3,78 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CorretorPro AI | Inteligência Artificial para Vendas</title>
+    <title>CorretorPro AI | Plataforma Unificada de Vendas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
         html { scroll-behavior: smooth; }
         body { background-color: #ffffff; color: #0f172a; overflow-x: hidden; }
         .container { max-width: 1140px; margin: 0 auto; width: 100%; padding: 0 4%; }
-        
-        /* Barra de Utilidade Topo */
-        .hub-utility-bar { width: 100%; height: 38px; background: #f6f9fc; border-bottom: 1px solid #cbd5e1; display: flex; align-items: center; position: fixed; top: 0; left: 0; z-index: 10001; }
-        .hub-utility-bar .utility-wrapper { display: flex; justify-content: flex-end; align-items: center; gap: 20px; width: 100%; }
+
+        /* HEADER E UTILITY BAR */
+        .hub-utility-bar { width: 100%; height: 38px; background: #f6f9fc; border-bottom: 1px solid #cbd5e1; display: flex; align-items: center; position: fixed; top: 0; z-index: 10001; }
+        .utility-wrapper { display: flex; justify-content: flex-end; align-items: center; gap: 20px; width: 100%; }
         .hub-utility-bar a { color: #475569; text-decoration: none; font-size: 13px; font-weight: 600; }
         
-        /* Header */
-        header { width: 100%; height: 75px; background: #ffffff; border-bottom: 1px solid #e2e8f0; position: fixed; top: 38px; left: 0; z-index: 10000; display: flex; align-items: center; }
+        header { width: 100%; height: 75px; background: #ffffff; border-bottom: 1px solid #e2e8f0; position: fixed; top: 38px; z-index: 10000; display: flex; align-items: center; }
         .header-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .logo { font-size: 26px; font-weight: 900; color: #f2b705; text-decoration: none; letter-spacing: -1px; }
         .logo span { color: #0f172a; }
-        .nav-menu { display: flex; list-style: none; gap: 30px; font-size: 16px; font-weight: 700; }
-        .nav-menu li a { color: #334155; text-decoration: none; }
-        .nav-menu li a:hover { color: #f2b705; }
-        
-        .btn-orange-filled { background: #f2b705; color: #0f172a; padding: 12px 24px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; border: 2px solid #f2b705; display: inline-block; text-align: center; }
-        .btn-orange-filled:hover { background: #d9a304; border-color: #d9a304; }
 
-        /* Hero Section */
-        .hero-section { min-height: 80vh; padding-top: 140px; padding-bottom: 60px; background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .hero-title { font-size: 48px; font-weight: 800; color: #ffffff; max-width: 900px; line-height: 1.2; }
+        /* BOTÕES */
+        .btn-orange-filled { background: #f2b705; color: #0f172a; padding: 12px 24px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; border: 2px solid #f2b705; transition: 0.2s; display: inline-block; text-align: center; }
+        .btn-orange-filled:hover { background: #d9a304; border-color: #d9a304; transform: translateY(-1px); }
+        .btn-orange-stroke { background: transparent; color: #0f172a; padding: 12px 24px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; border: 2px solid #cbd5e1; transition: 0.2s; display: inline-block; text-align: center; }
+
+        /* HERO SECTION */
+        .hero-section { min-height: 75vh; padding-top: 140px; padding-bottom: 60px; background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover; background-attachment: fixed; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+        .hero-title { font-family: 'Georgia', serif; font-size: 46px; font-weight: 700; max-width: 850px; line-height: 1.25; }
         .hero-title span { color: #f2b705; }
-        .hero-description { font-size: 19px; color: #cbd5e1; max-width: 700px; margin: 25px auto 40px; }
+        .hero-description { font-size: 18px; max-width: 700px; margin: 20px auto 35px; opacity: 0.9; }
 
-        /* Preços */
-        .pricing-section { padding: 100px 0; background: #f8fafc; }
-        .pricing-grid { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
-        .pricing-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 40px; flex: 1; min-width: 300px; max-width: 380px; transition: transform 0.3s ease; position: relative; overflow: hidden; }
-        .pricing-card:hover { transform: translateY(-10px); }
-        .pricing-card.featured { border: 2px solid #f2b705; box-shadow: 0 20px 40px rgba(242, 183, 5, 0.1); }
-        .plan-price { font-size: 44px; font-weight: 800; margin: 20px 0; }
-        .plan-price span { font-size: 16px; color: #64748b; }
-        .plan-features { list-style: none; text-align: left; margin: 30px 0; }
-        .plan-features li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-size: 15px; }
+        /* PROVA SOCIAL */
+        .social-proof-bar { padding: 40px 0; border-bottom: 1px solid #e2e8f0; text-align: center; }
+        .social-proof-title { font-size: 18px; font-weight: 700; color: #334155; margin-bottom: 25px; }
+        .logos-flex { display: flex; justify-content: center; align-items: center; gap: 60px; flex-wrap: wrap; opacity: 0.6; font-size: 24px; font-weight: 900; color: #64748b; }
+
+        /* SEÇÕES DE CONTEÚDO */
+        .body-row { padding: 80px 0; display: flex; gap: 60px; align-items: center; }
+        .row-text { flex: 1; }
+        .row-visual { flex: 1; height: 380px; border-radius: 8px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid #cbd5e1; }
+        .visual-img { width: 100%; height: 100%; object-fit: cover; }
+        .row-badge { background: rgba(242, 183, 5, 0.1); color: #d9a304; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; display: inline-block; }
+        .row-title { font-family: 'Georgia', serif; font-size: 34px; margin-bottom: 20px; }
+
+        /* PREÇOS */
+        .pricing-section { padding: 100px 0; background: #f6f9fc; border-top: 1px solid #e2e8f0; }
+        .pricing-grid { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
+        .pricing-card { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 35px; flex: 1; min-width: 300px; max-width: 350px; position: relative; }
+        .pricing-card.featured { border: 2px solid #f2b705; box-shadow: 0 15px 30px rgba(242, 183, 5, 0.1); }
+        .plan-price { font-size: 42px; font-weight: 800; margin: 15px 0; }
+        .plan-price span { font-size: 15px; color: #64748b; }
+        .plan-features { list-style: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+        .plan-features li { margin-bottom: 12px; font-size: 14px; display: flex; align-items: center; gap: 10px; }
         .plan-features li i { color: #22c55e; }
 
-        /* BOTÃO FLUTUANTE DISCRETO */
+        /* BALÃO FLUTUANTE DISCRETO */
         .btn-suporte-flutuante {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            z-index: 99999;
-            transition: all 0.3s ease;
+            position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white;
+            padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px;
+            text-decoration: none; font-weight: 700; font-size: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            z-index: 99999; transition: 0.3s;
         }
-        .btn-suporte-flutuante:hover {
-            transform: scale(1.05);
-            background-color: #1ebd59;
-        }
-        .btn-suporte-flutuante i { font-size: 20px; }
+        .btn-suporte-flutuante:hover { transform: scale(1.05); background-color: #1ebd59; }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 32px; }
             .hub-utility-bar { display: none; }
             header { top: 0; }
+            .body-row { flex-direction: column; text-align: center; }
+            .hero-title { font-size: 32px; }
+            .pricing-grid { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -88,8 +85,7 @@
     <div class="hub-utility-bar">
         <div class="container">
             <div class="utility-wrapper">
-                <a href="#precos">Planos</a>
-                <a href="https://wa.me/5511919912900" target="_blank">Ajuda</a>
+                <a href="https://wa.me/5511919912900" target="_blank">Suporte</a>
             </div>
         </div>
     </div>
@@ -98,49 +94,99 @@
         <div class="container header-wrapper">
             <a href="#" class="logo">Corretor<span>Pro AI</span></a>
             <div class="nav-right">
-                <a href="login.html" class="btn-orange-filled">Acessar Painel</a>
+                <a href="login.html" class="btn-login" style="margin-right:20px; text-decoration:none; color:#334155; font-weight:700;">Log in</a>
+                <a href="login.html" class="btn-orange-filled">Começar grátis</a>
             </div>
         </div>
     </header>
 
     <section class="hero-section">
         <div class="container">
-            <h1 class="hero-title">A inteligência que transforma seus <span>Leads em Comissões.</span></h1>
-            <p class="hero-description">Pare de perder vendas por demora no atendimento. O CorretorPro AI organiza sua rotina e usa IA para priorizar quem realmente vai comprar.</p>
-            <a href="#precos" class="btn-orange-filled" style="padding: 18px 40px; font-size: 18px;">Ver Planos e Preços</a>
+            <span style="color:#f2b705; font-weight:800; text-transform:uppercase; letter-spacing:2px;">Plataforma Unificada</span>
+            <h1 class="hero-title">O lugar onde as equipes comerciais vão para <span>reter e vender mais.</span></h1>
+            <p class="hero-description">Conecte a captura de leads em tempo real dos seus anúncios e o atendimento inteligente por WhatsApp em um único ecossistema focado em faturamento.</p>
+            <a href="#precos" class="btn-orange-filled" style="padding:15px 35px;">Ver Planos e Preços</a>
         </div>
     </section>
 
+    <section class="social-proof-bar">
+        <div class="container">
+            <h3 class="social-proof-title">Mais de 280.000 empresas em todo o mundo aceleram com esta arquitetura de dados.</h3>
+            <div class="logos-flex">
+                <div><i class="fa-brands fa-ebay"></i> ebay</div>
+                <div><i class="fa-solid fa-bolt"></i> DOORDASH</div>
+                <div><i class="fa-brands fa-reddit"></i> reddit</div>
+                <div><i class="fa-brands fa-tripadvisor"></i> Tripadvisor</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="body-row">
+            <div class="row-text">
+                <span class="row-badge">Captação Ativa</span>
+                <h2 class="row-title">Sincronização imediata com Facebook e Google Ads</h2>
+                <p style="color:#475569; line-height:1.6; margin-bottom:20px;">No exato segundo em que o lead preenche o formulário ou clica no seu anúncio, os dados entram limpos e organizados dentro do seu painel operacional.</p>
+                <a href="login.html" class="btn-orange-filled">Conhecer Automação →</a>
+            </div>
+            <div class="row-visual">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" class="visual-img">
+            </div>
+        </section>
+
+        <section class="body-row" style="flex-direction: row-reverse;">
+            <div class="row-text">
+                <span class="row-badge">Atendimento IA</span>
+                <h2 class="row-title">Central do WhatsApp com leitura de intenção por IA</h2>
+                <p style="color:#475569; line-height:1.6; margin-bottom:20px;">A Inteligência Artificial monitora o chat, identifica o nível de interesse real do comprador e monta sugestões de respostas perfeitas para o seu time usar instantaneamente.</p>
+                <a href="login.html" class="btn-orange-filled">Ver Demonstração →</a>
+            </div>
+            <div class="row-visual">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop" class="visual-img">
+            </div>
+        </section>
+    </div>
+
     <section id="precos" class="pricing-section">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 50px;">
-                <h2 style="font-size: 36px;">Escolha o plano ideal para você</h2>
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2 style="font-size:36px; font-family:'Georgia', serif;">Preços transparentes para escalar</h2>
             </div>
-            
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Plano Básico</h3>
-                    <p style="color: #64748b; font-size: 14px; margin-top: 10px;">Ideal para corretores autônomos.</p>
-                    <div class="plan-price">R$ 59 <span>/mês</span></div>
+                    <h3>Teste Grátis</h3>
+                    <div class="plan-price">R$ 0 <span>/7 dias</span></div>
+                    <p style="font-size:14px; color:#64748b;">Experimente todos os recursos sem compromisso.</p>
                     <ul class="plan-features">
-                        <li><i class="fa-solid fa-check"></i> Gestão de até 50 leads</li>
-                        <li><i class="fa-solid fa-check"></i> Painel de controle Web</li>
-                        <li><i class="fa-solid fa-check"></i> Alertas de retorno</li>
+                        <li><i class="fa-solid fa-check"></i> 1 Usuário Operacional</li>
+                        <li><i class="fa-solid fa-check"></i> Funil Kanban</li>
                     </ul>
-                    <a href="login.html" class="btn-orange-filled" style="width: 100%; background: transparent; border-color: #cbd5e1; color: #0f172a;">Assinar Básico</a>
+                    <a href="login.html" class="btn-orange-stroke" style="width:100%; margin-top:20px;">Iniciar Teste</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Plano Básico</h3>
+                    <div class="plan-price">R$ 59 <span>/mês</span></div>
+                    <p style="font-size:14px; color:#64748b;">Para corretores independentes.</p>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> 1 Usuário Ativo</li>
+                        <li><i class="fa-solid fa-check"></i> Captura de Leads</li>
+                        <li><i class="fa-solid fa-check"></i> Histórico Completo</li>
+                    </ul>
+                    <a href="login.html" class="btn-orange-stroke" style="width:100%; margin-top:20px; border-color:#f2b705;">Assinar Agora</a>
                 </div>
 
                 <div class="pricing-card featured">
-                    <div style="position: absolute; top: 15px; right: 15px; background: #f2b705; font-size: 10px; font-weight: 900; padding: 4px 8px; border-radius: 4px;">RECOMENDADO</div>
-                    <h3>Plano Profissional</h3>
-                    <p style="color: #64748b; font-size: 14px; margin-top: 10px;">Para quem quer o poder da IA.</p>
+                    <div style="position:absolute; top:10px; right:10px; background:#f2b705; font-size:10px; font-weight:900; padding:4px 8px; border-radius:4px;">POPULAR</div>
+                    <h3>Professional</h3>
                     <div class="plan-price">R$ 99 <span>/mês</span></div>
+                    <p style="font-size:14px; color:#64748b;">O poder total da IA para seu time.</p>
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-check"></i> Leads Ilimitados</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Análise de Intenção por IA</strong></li>
-                        <li><i class="fa-solid fa-check"></i> Copiloto de Vendas</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Copiloto de IA no WhatsApp</strong></li>
+                        <li><i class="fa-solid fa-check"></i> Distribuição Automática</li>
                     </ul>
-                    <a href="https://wa.me/5511919912900" target="_blank" class="btn-orange-filled" style="width: 100%;">Falar com Consultor</a>
+                    <a href="https://wa.me/5511919912900?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Professional." target="_blank" class="btn-orange-filled" style="width:100%; margin-top:20px;">Falar com Consultor</a>
                 </div>
             </div>
         </div>
