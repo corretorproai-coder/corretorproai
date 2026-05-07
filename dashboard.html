@@ -4,220 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel | CorretorPro AI</title>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* RESET E CORES ULTRA CLEAN */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
         html { scroll-behavior: smooth; }
         body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; overflow-x: hidden; }
-
-        /* MENU LATERAL COMPACTO */
-        .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: all 0.3s; }
+        .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; }
         .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: #f2b705; letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
         .sidebar-brand span { color: #0f172a; }
-        
         .sidebar-menu { list-style: none; padding: 24px 16px; display: flex; flex-direction: column; gap: 8px; }
-        .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: #475569; font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; transition: 0.15s; }
+        .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: #475569; font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; }
         .sidebar-menu li.active a, .sidebar-menu li a:hover { background-color: rgba(242, 183, 5, 0.08); color: #d9a304; }
-        
         .badge-premium { background: #0f172a; color: #f2b705; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 800; margin-left: auto; }
-
-        /* ÁREA CONTEÚDO PRINCIPAL */
         .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; }
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-        
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
-        .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
-        .dash-title p { font-size: 15px; color: #64748b; margin-top: 4px; }
-        
+        .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
         .user-profile { display: flex; align-items: center; gap: 12px; background: #ffffff; padding: 8px 16px; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 14px; font-weight: 600; }
-        .user-profile i { color: #f2b705; font-size: 18px; }
-
-        /* QUADRADOS DE MÉTRICAS */
+        .user-profile i { color: #f2b705; }
         .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 35px; }
-        .metric-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01); display: flex; align-items: center; justify-content: space-between; }
-        .metric-info h3 { font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; letter-spacing: -1px; }
+        .metric-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: space-between; }
+        .metric-info h3 { font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; }
+        .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
         .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-
-        /* LAYOUT EM DUAS COLUNAS */
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
-
-        .content-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01); margin-bottom: 24px; }
+        .content-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin-bottom: 24px; }
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
         .box-title i { color: #f2b705; }
-
-        /* TABELA DE LEADS */
         .leads-table-wrapper { width: 100%; overflow-x: auto; }
         .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
         .leads-table th { background: #f8fafc; padding: 12px 14px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
         .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
-        
-        .lead-click-link { color: #0f172a; text-decoration: none; font-weight: 700; cursor: pointer; transition: color 0.15s; }
+        .lead-click-link { color: #0f172a; text-decoration: none; font-weight: 700; cursor: pointer; }
         .lead-click-link:hover { color: #d9a304; text-decoration: underline; }
-
         .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .status-novo { background: rgba(242, 183, 5, 0.1); color: #d9a304; }
         .status-atendimento { background: #e0f2fe; color: #0369a1; }
         .status-frio { background: #f1f5f9; color: #64748b; }
-
         .action-buttons-flex { display: flex; gap: 8px; }
-        .btn-action-click { border: none; padding: 6px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; cursor: pointer; transition: 0.15s; }
+        .btn-action-click { border: none; padding: 6px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
         .btn-whatsapp { background-color: #25d366; color: white; }
-        .btn-whatsapp:hover { background-color: #1ebd59; transform: translateY(-1px); }
         .btn-call { background-color: #0ea5e9; color: white; }
-        .btn-call:hover { background-color: #0284c7; transform: translateY(-1px); }
-
-        /* FICHAS DETALHADAS */
         .lead-profile-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 5px solid #cbd5e1; }
         .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .lead-profile-card.medium-border { border-left-color: #f59e0b; }
         .lead-profile-card.cold-border { border-left-color: #3b82f6; }
         .lead-profile-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
-        .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 14px; color: #475569; }
-        .lead-profile-info-grid span strong { color: #0f172a; }
-
-        .ia-smart-alert { margin-top: 15px; background: rgba(15, 23, 42, 0.02); padding: 12px 16px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; gap: 10px; border: 1px solid #e2e8f0; }
+        .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 14px; }
+        .ia-smart-alert { margin-top: 15px; padding: 12px 16px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; gap: 10px; border: 1px solid #e2e8f0; }
         .ia-smart-alert.alert-urgent { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
         .ia-smart-alert.alert-medium { background: #fffbeb; border-color: #fde68a; color: #92400e; }
         .ia-smart-alert.alert-cold { background: #eff6ff; border-color: #bfdbfe; color: #1e40af; }
-
-        /* AGENDA INTELIGENTE */
         .agenda-list { display: flex; flex-direction: column; gap: 12px; }
         .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; border: 1px solid #e2e8f0; }
-        .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; line-height: 1.2; }
+        .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; }
         .agenda-info h4 { font-size: 14px; font-weight: 700; color: #0f172a; }
-        .agenda-info p { font-size: 13px; color: #64748b; margin-top: 2px; }
-        .alarm-indicator { margin-left: auto; color: #f2b705; font-size: 14px; animation: pulse 2s infinite; }
-
-        /* RADAR DO MERCADO */
+        .alarm-indicator { margin-left: auto; color: #f2b705; }
         .news-list { display: flex; flex-direction: column; gap: 16px; }
         .news-item { text-decoration: none; display: block; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-        .news-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .news-source { font-size: 11px; font-weight: 800; color: #d9a304; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
-        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; line-height: 1.4; }
-        .news-time { font-size: 12px; color: #94a3b8; margin-top: 4px; display: block; }
-
-        /* CENTRAL IA */
+        .news-source { font-size: 11px; font-weight: 800; color: #d9a304; text-transform: uppercase; }
+        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; }
         .ia-analyzer { display: flex; flex-direction: column; gap: 20px; }
         .ia-input-group { display: flex; flex-direction: column; gap: 8px; }
         .ia-input-group label { font-size: 14px; font-weight: 700; color: #475569; }
         .ia-select, .ia-textarea { width: 100%; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; }
         .ia-textarea { height: 120px; resize: none; }
-        .btn-ai { background: #0f172a; color: #f2b705; border: none; padding: 14px; border-radius: 6px; font-weight: 800; cursor: pointer; transition: 0.2s; }
-        .btn-ai:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        
+        .btn-ai { background: #0f172a; color: #f2b705; border: none; padding: 14px; border-radius: 6px; font-weight: 800; cursor: pointer; }
         #ai-result-box { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; }
-        
-        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* RESPONSIVIDADE MOBILE */
-        @media (max-width: 768px) {
-            body { flex-direction: column; padding-bottom: 70px; }
-            .sidebar { width: 100%; height: 65px; flex-direction: row; position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-right: none; border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); }
-            .sidebar-brand { display: none; }
-            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; align-items: center; gap: 0; }
-            .sidebar-menu li { flex: 1; text-align: center; }
-            .sidebar-menu li a { flex-direction: column; gap: 4px; padding: 8px 0; font-size: 11px; justify-content: center; }
-            .sidebar-menu li a i { font-size: 18px; }
-            .main-content { margin-left: 0; padding: 20px 16px; }
-            .dash-header { flex-direction: column; align-items: flex-start; gap: 14px; }
-            .dashboard-workspace { grid-template-columns: 1fr; gap: 20px; }
-            .action-buttons-flex { flex-direction: column; gap: 4px; }
-        }
+        @media (max-width: 768px) { body { flex-direction: column; padding-bottom: 70px; } .sidebar { width: 100%; height: 65px; flex-direction: row; position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-right: none; border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); } .sidebar-brand { display: none; } .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; align-items: center; } .sidebar-menu li a { flex-direction: column; gap: 4px; font-size: 11px; } .badge-premium { display: none; } .main-content { margin-left: 0; padding: 20px 16px; } .dashboard-workspace { grid-template-columns: 1fr; } .action-buttons-flex { flex-direction: column; gap: 4px; } }
     </style>
 </head>
 <body>
-
     <nav class="sidebar">
         <div class="sidebar-brand">Corretor<span>Pro AI</span></div>
         <ul class="sidebar-menu">
-            <li id="menu-resumo" class="active" onclick="switchTab('resumo')"><a href="#"><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
-            <li id="menu-leads" onclick="switchTab('leads')"><a href="#"><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
-            <li id="menu-central-ia" onclick="switchTab('central-ia')"><a href="#"><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
-            <li><a href="https://wa.me/5511919912900?text=Olá!%20Sou%20assinante%20do%20CorretorPro%20AI%20e%20preciso de suporte no meu painel." target="_blank"><i class="fa-solid fa-circle-question"></i><span>Suporte</span></a></li>
+            <li id="menu-resumo" class="active" onclick="switchTab('resumo')"><a><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
+            <li id="menu-leads" onclick="switchTab('leads')"><a><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
+            <li id="menu-central-ia" onclick="switchTab('central-ia')"><a><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
+            <li><a href="https://wa.me/5511919912900?text=Olá!%20Sou%20assinante%20do%20CorretorPro%20AI%20e%20preciso%20de%20suporte%20no%20meu%20painel." target="_blank"><i class="fa-solid fa-circle-question"></i><span>Suporte</span></a></li>
             <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
         </ul>
     </nav>
-
     <main class="main-content">
-        
         <div id="resumo" class="tab-content active">
             <div class="dash-header">
-                <div class="dash-title">
-                    <h1>Painel de Controle</h1>
-                    <p>Bem-vindo de volta, Víctor Ávila</p>
-                </div>
+                <div class="dash-title"><h1>Painel de Controle</h1><p>Bem-vindo de volta, Víctor Ávila</p></div>
                 <div class="user-profile"><i class="fa-solid fa-circle-user"></i> <span>Plano Professional</span></div>
             </div>
-
             <section class="metrics-grid">
                 <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p>42</p></div><div class="metric-icon"><i class="fa-solid fa-users"></i></div></div>
                 <div class="metric-card"><div class="metric-info"><h3>Leads Elite</h3><p>12</p></div><div class="metric-icon"><i class="fa-solid fa-crown"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Alertas Ativos</h3><p>3</p></div><div class="metric-icon"><i class="fa-solid fa-bell"></i></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Alertas</h3><p>3</p></div><div class="metric-icon"><i class="fa-solid fa-bell"></i></div></div>
             </section>
-
             <div class="dashboard-workspace">
                 <div class="left-workspace-column">
                     <section class="content-box">
                         <div class="box-title"><i class="fa-solid fa-address-book"></i> Todos os Leads Recebidos</div>
                         <div class="leads-table-wrapper">
                             <table class="leads-table">
-                                <thead>
-                                    <tr>
-                                        <th>Nome do Lead</th>
-                                        <th>Origem</th>
-                                        <th>Status</th>
-                                        <th>Conectar Direto</th>
-                                    </tr>
-                                </thead>
+                                <thead><tr><th>Nome do Lead</th><th>Origem</th><th>Status</th><th>Conectar</th></tr></thead>
                                 <tbody>
                                     <tr>
                                         <td><span class="lead-click-link" onclick="goToLeadProfile('lead-marcos')">Marcos da Silva</span></td>
-                                        <td><i class="fa-brands fa-facebook" style="color: #1877f2; margin-right: 4px;"></i> Facebook Ads</td>
+                                        <td><i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook</td>
                                         <td><span class="status-badge status-novo">Novo</span></td>
                                         <td>
                                             <div class="action-buttons-flex">
-                                                <a href="https://wa.me/5511999991234?text=Olá%20Marcos,%20aqui%20é%20o%20Víctor%20da%20CorretorPro%20AI.%20Recebi%20seu%20contato%20sobre%20o%20imóvel%20em%20Guarulhos%20e%20separei%20as%20melhores%20opções%20para%20você!" target="_blank" class="btn-action-click btn-whatsapp">
-                                                    <i class="fa-brands fa-whatsapp"></i> Zap
-                                                </a>
-                                                <a href="tel:+5511999991234" class="btn-action-click btn-call">
-                                                    <i class="fa-solid fa-phone"></i> Ligar
-                                                </a>
+                                                <a href="https://wa.me/5511999991234?text=Olá%20Marcos,%20aqui%20é%20o%20Víctor%20da%20CorretorPro%20AI.%20Recebi%20seu%20contato%20sobre%20o%20imóvel!" target="_blank" class="btn-action-click btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Zap</a>
+                                                <a href="tel:+5511999991234" class="btn-action-click btn-call"><i class="fa-solid fa-phone"></i> Ligar</a>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><span class="lead-click-link" onclick="goToLeadProfile('lead-ana')">Ana Júlia Ramos</span></td>
-                                        <td><i class="fa-brands fa-google" style="color: #ea4335; margin-right: 4px;"></i> Google Ads</td>
+                                        <td><i class="fa-brands fa-google" style="color: #ea4335;"></i> Google</td>
                                         <td><span class="status-badge status-atendimento">Médio</span></td>
                                         <td>
                                             <div class="action-buttons-flex">
-                                                <a href="https://wa.me/5511988885678?text=Olá%20Ana%20Júlia,%20tudo%20bem?%20Aqui%20é%20o%20Víctor.%20Conseguiu%20avançar%20com%20aquela%20documentação%20da%20simulação%20bancária%20do%20apartamento?" target="_blank" class="btn-action-click btn-whatsapp">
-                                                    <i class="fa-brands fa-whatsapp"></i> Zap
-                                                </a>
-                                                <a href="tel:+5511988885678" class="btn-action-click btn-call">
-                                                    <i class="fa-solid fa-phone"></i> Ligar
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-roberto')">Roberto Alencar</span></td>
-                                        <td><i class="fa-brands fa-instagram" style="color: #e1306c; margin-right: 4px;"></i> Instagram</td>
-                                        <td><span class="status-badge status-frio">Frio</span></td>
-                                        <td>
-                                            <div class="action-buttons-flex">
-                                                <a href="https://wa.me/5511977774321?text=Olá%20Roberto,%20Víctor%20da%20CorretorPro.%20Estou%20te%20enviando%20o%20catálogo%20dos%20novos%20lançamentos%20do%20Minha%20Casa%20Minha%20Vida." target="_blank" class="btn-action-click btn-whatsapp">
-                                                    <i class="fa-brands fa-whatsapp"></i> Zap
-                                                </a>
-                                                <a href="tel:+5511977774321" class="btn-action-click btn-call">
-                                                    <i class="fa-solid fa-phone"></i> Ligar
-                                                </a>
+                                                <a href="https://wa.me/5511988885678?text=Olá%20Ana%20Júlia,%20tudo%20bem?%20Aqui%20é%20o%20Víctor." target="_blank" class="btn-action-click btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Zap</a>
+                                                <a href="tel:+5511988885678" class="btn-action-click btn-call"><i class="fa-solid fa-phone"></i> Ligar</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -225,86 +132,85 @@
                             </table>
                         </div>
                     </section>
-
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-fire"></i> Mapeamento de Leads Quentes (Prioridades IA)</div>
-                        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                            <tr style="border-bottom: 1px solid #f1f5f9;">
-                                <td style="padding: 12px 0;">
-                                    <strong>Marcos da Silva</strong><br>
-                                    <small style="color: #64748b;">Budget: R$ 400 Mil • Perfil: Prontidão À Vista</small>
-                                </td>
-                                <td style="text-align: right;">
-                                    <span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 4px; font-weight: 800; font-size: 11px;">ELITE 10/10</span>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="box-title"><i class="fa-solid fa-fire"></i> Mapeamento Quente (IA)</div>
+                        <table style="width: 100%; font-size: 14px;"><tr><td><strong>Marcos da Silva</strong><br><small>Budget: R$ 400 Mil • À Vista</small></td><td style="text-align: right;"><span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 4px; font-weight: 800;">ELITE 10/10</span></td></tr></table>
                     </section>
                 </div>
-
                 <div class="right-workspace-column">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-clock"></i> Alertas de Retorno (Agenda IA)</div>
+                        <div class="box-title"><i class="fa-solid fa-clock"></i> Alertas (Agenda IA)</div>
                         <div class="agenda-list">
-                            <div class="agenda-item" style="border-left: 4px solid #ef4444;">
+                            <div class="agenda-item" style="border-left-color: #ef4444;">
                                 <div class="agenda-time">HOJE<br>Agora</div>
-                                <div class="agenda-info">
-                                    <h4>Ligar: Marcos da Silva</h4>
-                                    <p style="margin-top: 4px;">
-                                        <a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366; text-decoration:none; font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp</a>
-                                    </p>
-                                </div>
+                                <div class="agenda-info"><h4>Ligar: Marcos da Silva</h4><p><a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366; text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></p></div>
                                 <div class="alarm-indicator"><i class="fa-solid fa-bell"></i></div>
-                            </div>
-                            <div class="agenda-item" style="border-left: 4px solid #f59e0b;">
-                                <div class="agenda-time">Em 5<br>Dias</div>
-                                <div class="agenda-info"><h4>Retorno: Ana Júlia Ramos</h4><p>Cobrar simulação de crédito bancário</p></div>
                             </div>
                         </div>
                     </section>
-
                     <section class="content-box">
                         <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado</div>
-                        <div class="news-list">
-                            <a href="#" class="news-item" onclick="event.preventDefault();">
-                                <span class="news-source">Exame Imobiliário</span>
-                                <h4 class="news-title">Procura por imóveis de médio padrão cresce 14% em SP</h4>
-                                <span class="news-time">Há 45 minutos</span>
-                            </a>
-                        </div>
+                        <div class="news-list"><a href="#" class="news-item" onclick="event.preventDefault();"><span class="news-source">Exame</span><h4 class="news-title">Procura por imóveis cresce 14% em SP</h4></a></div>
                     </section>
                 </div>
             </div>
         </div>
-
         <div id="leads" class="tab-content">
-            <div class="dash-header">
-                <div class="dash-title">
-                    <h1>Gerenciador de Leads</h1>
-                    <p>Régua de tempo automática calculada pela Inteligência Artificial</p>
-                </div>
-            </div>
-
+            <div class="dash-header"><div class="dash-title"><h1>Gerenciador de Leads</h1><p>Régua automática por temperatura</p></div></div>
             <div id="lead-marcos" class="lead-profile-card hot-border">
-                <div class="lead-profile-header">
-                    <div><h2>Marcos da Silva</h2><span class="status-badge status-novo" style="margin-top: 6px; background:#fef2f2; color:#ef4444;">Prioridade Máxima</span></div>
-                    <span style="background: #ef4444; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-fire"></i> QUENTE (10/10)</span>
-                </div>
-                <div class="lead-profile-info-grid">
-                    <span><strong>WhatsApp:</strong> <a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366; font-weight:bold; text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> (11) 99999-1234 (Chamar)</a></span>
-                    <span><strong>Budget:</strong> R$ 400.000</span>
-                    <span><strong>Preferência:</strong> 3 Dorms (Guarulhos)</span>
-                </div>
-                <div class="ia-smart-alert alert-urgent">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <span><strong>Alerta Alavancado IA:</strong> Cliente super quente. Alerta de ligação ativo na agenda para <strong>HOJE</strong>. Não deixe esfriar!</span>
-                </div>
+                <div class="lead-profile-header"><div><h2>Marcos da Silva</h2></div><span style="background: #ef4444; color: white; padding: 6px 12px; border-radius: 4px;">QUENTE</span></div>
+                <div class="lead-profile-info-grid"><span><strong>WhatsApp:</strong> <a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366; text-decoration:none;">(11) 99999-1234</a></span><span><strong>Budget:</strong> R$ 400.000</span></div>
+                <div class="ia-smart-alert alert-urgent"><i class="fa-solid fa-triangle-exclamation"></i><span>Alerta ativo para <strong>HOJE</strong>.</span></div>
             </div>
-
             <div id="lead-ana" class="lead-profile-card medium-border">
-                <div class="lead-profile-header">
-                    <div><h2>Ana Júlia Ramos</h2><span class="status-badge status-atendimento" style="margin-top: 6px; background:#fffbeb; color:#d97706;">Acompanhamento Semanal</span></div>
-                    <span style="background: #f59e0b; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 4px;"><i class="fa-solid fa-bolt"></i> MÉDIO (6/10)</span>
+                <div class="lead-profile-header"><div><h2>Ana Júlia Ramos</h2></div><span style="background: #f59e0b; color: white; padding: 6px 12px; border-radius: 4px;">MÉDIO</span></div>
+                <div class="lead-profile-info-grid"><span><strong>WhatsApp:</strong> <a href="https://wa.me/5511988885678" target="_blank" style="color:#25d366; text-decoration:none;">(11) 98888-5678</a></span><span><strong>Budget:</strong> R$ 280.000</span></div>
+                <div class="ia-smart-alert alert-medium"><i class="fa-solid fa-hourglass-half"></i><span>Alerta programado para <strong>5 dias</strong>.</span></div>
+            </div>
+        </div>
+        <div id="central-ia" class="tab-content">
+            <div class="dash-header"><div class="dash-title"><h1>Central de IA</h1><p>Cole o chat e a IA calcula o tempo dos alertas</p></div></div>
+            <section class="content-box">
+                <div class="ia-analyzer">
+                    <div class="ia-input-group"><label>Cliente</label><select id="ia-select-lead" class="ia-select"><option value="Marcos">Marcos (Urgente)</option><option value="Ana">Ana (Devagar)</option></select></div>
+                    <div class="ia-input-group"><label>Conversa WhatsApp</label><textarea id="chat-input" class="ia-textarea"></textarea></div>
+                    <button class="btn-ai" onclick="runSmartAIAnalysis()"><i class="fa-solid fa-brain"></i> PROCESSAR INTENÇÃO</button>
                 </div>
-                <div class="lead-profile-info-grid">
-                    <span><strong>WhatsApp:</strong> <a href="https://wa.me/5511988885678" target="_blank
+                <div id="ai-result-box"><h3 id="ai-result-title"></h3><p id="ai-result-desc" style="margin-top:10px;"></p></div>
+            </section>
+        </div>
+    </main>
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('menu-' + tabId).classList.add('active');
+        }
+        function goToLeadProfile(leadElementId) {
+            switchTab('leads');
+            setTimeout(() => {
+                const element = document.getElementById(leadElementId);
+                if (element) { element.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+            }, 100);
+        }
+        function runSmartAIAnalysis() {
+            const btn = document.querySelector('.btn-ai');
+            const resultBox = document.getElementById('ai-result-box');
+            const selectedLead = document.getElementById('ia-select-lead').value;
+            btn.innerHTML = 'Processando...';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-brain"></i> PROCESSAR INTENÇÃO';
+                resultBox.style.display = 'block';
+                if(selectedLead === "Marcos") {
+                    resultBox.style.background = "#fef2f2"; title = '<span style="color:#ef4444;">QUENTE (10/10)</span>'; desc = 'Alerta disparado para <strong>HOJE - IMEDIATO</strong>.';
+                } else {
+                    resultBox.style.background = "#fffbeb"; title = '<span style="color:#d97706;">MÉDIO (6/10)</span>'; desc = 'Alerta programado para daqui a <strong>5 DIAS</strong>.';
+                }
+                document.getElementById('ai-result-title').innerHTML = title;
+                document.getElementById('ai-result-desc').innerHTML = desc;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
