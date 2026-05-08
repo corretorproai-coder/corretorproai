@@ -3,168 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel CorretorPro AI | Gestão de Leads</title>
+    <title>Dashboard Pro | CorretorPro AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #f2b705; --dark: #0f172a; --slate: #1e293b; --white: #ffffff; --bg: #f1f5f9; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg); display: flex; height: 100vh; overflow: hidden; }
+        /* ESTILOS ORIGINAIS E ROBUSTOS */
+        :root { --primary: #f2b705; --dark: #0f172a; --slate: #1e293b; --white: #ffffff; --bg: #f8fafc; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg); color: var(--dark); display: flex; min-height: 100vh; }
 
-        /* Sidebar Estilizada */
-        .sidebar { width: 260px; background-color: var(--dark); color: white; display: flex; flex-direction: column; transition: all 0.3s; }
-        .sidebar-header { padding: 30px; text-align: center; border-bottom: 1px solid #1e293b; }
-        .sidebar-header h1 { font-size: 22px; font-weight: 900; color: var(--primary); }
-        .sidebar-header h1 span { color: white; }
+        /* SIDEBAR RESPONSIVA */
+        .sidebar { width: 260px; background: var(--dark); color: white; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000; transition: 0.3s; }
+        .sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid #1e293b; }
+        .logo { font-size: 22px; font-weight: 900; color: var(--primary); text-decoration: none; }
+        .logo span { color: white; }
         
-        .sidebar-menu { list-style: none; padding: 20px 0; flex: 1; }
-        .sidebar-menu li { padding: 15px 30px; cursor: pointer; display: flex; align-items: center; gap: 12px; color: #94a3b8; font-weight: 600; transition: 0.2s; }
-        .sidebar-menu li:hover, .sidebar-menu li.active { background-color: #1e293b; color: var(--primary); }
-        .sidebar-menu li i { width: 20px; text-align: center; }
+        .menu { list-style: none; padding: 20px 0; flex: 1; }
+        .menu-item { padding: 15px 25px; cursor: pointer; display: flex; align-items: center; gap: 12px; color: #94a3b8; font-weight: 600; transition: 0.2s; border-left: 4px solid transparent; }
+        .menu-item:hover, .menu-item.active { background: #1e293b; color: var(--primary); border-left-color: var(--primary); }
 
-        /* Área Principal */
-        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
-        .top-bar { height: 70px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
-        .user-profile { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--dark); }
+        /* CONTEÚDO PRINCIPAL */
+        .main { flex: 1; margin-left: 260px; display: flex; flex-direction: column; min-width: 0; }
+        header { height: 70px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; position: sticky; top: 0; z-index: 999; }
         
-        /* Seções de Conteúdo */
-        .content-section { padding: 40px; display: none; animation: fadeIn 0.4s ease; }
-        .content-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .content { padding: 30px; max-width: 1200px; margin: 0 auto; width: 100%; }
 
-        /* Cards e Tabelas */
-        .card { background: white; border-radius: 10px; padding: 25px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        .card h2 { margin-bottom: 20px; font-size: 20px; color: var(--dark); }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { text-align: left; padding: 12px; border-bottom: 2px solid #f1f5f9; color: #64748b; font-size: 13px; text-transform: uppercase; }
-        td { padding: 15px 12px; border-bottom: 1px solid #f1f5f9; font-size: 14px; color: #334155; }
-        
-        .status-badge { padding: 5px 10px; border-radius: 4px; font-size: 11px; font-weight: 800; }
-        .status-novo { background: #dcfce7; color: #15803d; }
-        
-        /* Módulo de IA */
-        .ia-box { background: var(--dark); color: white; padding: 30px; border-radius: 12px; border-left: 5px solid var(--primary); }
-        .ia-box h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-        textarea { width: 100%; height: 150px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 15px; color: white; font-size: 14px; margin-bottom: 15px; resize: none; outline: none; }
-        .btn-analisar { background: var(--primary); color: var(--dark); border: none; padding: 12px 25px; border-radius: 6px; font-weight: 800; cursor: pointer; transition: 0.2s; }
-        .btn-analisar:hover { transform: scale(1.03); background: #d9a304; }
-        #resultado-ia { margin-top: 20px; padding: 20px; background: #1e293b; border-radius: 8px; display: none; line-height: 1.6; border: 1px dashed #475569; }
+        /* ABAS/SEÇÕES */
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .btn-whatsapp { color: #22c55e; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+        /* CARDS E TABELAS */
+        .card { background: white; border-radius: 12px; padding: 25px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { text-align: left; padding: 12px; background: #f8fafc; color: #64748b; font-size: 12px; text-transform: uppercase; border-bottom: 2px solid #edf2f7; }
+        td { padding: 16px 12px; border-bottom: 1px solid #edf2f7; font-size: 14px; }
+
+        /* MÓDULO DE IA INTEGRADO */
+        .ia-panel { background: var(--dark); border-radius: 12px; padding: 30px; color: white; }
+        .ia-panel h3 { color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        textarea { width: 100%; height: 120px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 15px; color: white; font-size: 14px; margin-bottom: 15px; outline: none; }
+        .btn-ai { background: var(--primary); color: var(--dark); border: none; padding: 12px 25px; border-radius: 6px; font-weight: 800; cursor: pointer; }
+        #ia-result { margin-top: 20px; padding: 20px; background: #1e293b; border-radius: 8px; border-left: 4px solid var(--primary); display: none; }
+
+        /* RESPONSIVIDADE PARA CELULAR */
+        @media (max-width: 768px) {
+            .sidebar { width: 70px; }
+            .sidebar-header, .menu-item span { display: none; }
+            .menu-item { justify-content: center; padding: 20px 0; }
+            .main { margin-left: 70px; }
+            header { padding: 0 15px; }
+            .content { padding: 15px; }
+            .card { padding: 15px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
         <div class="sidebar-header">
-            <h1>Corretor<span>Pro AI</span></h1>
+            <a href="#" class="logo">Corretor<span>Pro AI</span></a>
         </div>
-        <ul class="sidebar-menu">
-            <li class="active" onclick="mudarTela('resumo', this)"><i class="fa-solid fa-house"></i> Resumo</li>
-            <li onclick="mudarTela('leads', this)"><i class="fa-solid fa-users"></i> Meus Leads</li>
-            <li onclick="mudarTela('ia', this)"><i class="fa-solid fa-robot"></i> Central de IA</li>
-            <li style="margin-top: auto;" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</li>
+        <ul class="menu">
+            <li class="menu-item active" onclick="switchTab('dashboard', this)">
+                <i class="fa-solid fa-gauge"></i> <span>Dashboard</span>
+            </li>
+            <li class="menu-item" onclick="switchTab('leads', this)">
+                <i class="fa-solid fa-users"></i> <span>Meus Leads</span>
+            </li>
+            <li class="menu-item" onclick="switchTab('ia', this)">
+                <i class="fa-solid fa-robot"></i> <span>Central IA</span>
+            </li>
+            <li class="menu-item" style="margin-top: auto;" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-sign-out"></i> <span>Sair</span>
+            </li>
         </ul>
     </div>
 
-    <div class="main-content">
-        <div class="top-bar">
-            <div class="user-profile">
-                <i class="fa-solid fa-circle-user" style="font-size: 24px;"></i>
-                Olá, Víctor Trivinho
+    <div class="main">
+        <header>
+            <div style="font-weight: 700; font-size: 18px;">Olá, Víctor Trivinho</div>
+            <div style="color: #22c55e; font-size: 13px; font-weight: 700;">
+                <i class="fa-solid fa-circle"></i> WHATSAPP ATIVO
             </div>
-            <div style="color: #22c55e; font-weight: 700; font-size: 14px;">
-                <i class="fa-solid fa-circle" style="font-size: 10px;"></i> WHATSAPP CONECTADO
+        </header>
+
+        <div class="content">
+            
+            <div id="dashboard" class="tab-content active">
+                <div class="card">
+                    <h2>Visão Geral</h2>
+                    <p style="color: #64748b;">Você capturou 12 novos leads nas últimas 24h através de suas campanhas.</p>
+                </div>
             </div>
+
+            <div id="leads" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Gestão de Contatos</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Origem</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Ricardo Silva</strong></td>
+                                    <td>Facebook Ads</td>
+                                    <td><span style="color:#d9a304; font-weight:700;">Novo</span></td>
+                                    <td><a href="#" style="color:#22c55e; text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maria Fernandes</strong></td>
+                                    <td>Google Search</td>
+                                    <td><span style="color:#d9a304; font-weight:700;">Novo</span></td>
+                                    <td><a href="#" style="color:#22c55e; text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ia" class="tab-content">
+                <div class="ia-panel">
+                    <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Analista Digital</h3>
+                    <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">Cole a conversa do WhatsApp abaixo para analisar a intenção de compra do lead.</p>
+                    <textarea id="ia-input" placeholder="Corretor: Olá... Cliente: Tenho interesse..."></textarea>
+                    <button class="btn-ai" onclick="runAnalysis()">ANALISAR CONVERSA</button>
+                    
+                    <div id="ia-result"></div>
+                </div>
+            </div>
+
         </div>
-
-        <section id="resumo" class="content-section active">
-            <div class="card">
-                <h2>Performance Recente</h2>
-                <p style="color: #64748b;">Você capturou <strong>12 novos leads</strong> vindos do Facebook Ads hoje.</p>
-            </div>
-        </section>
-
-        <section id="leads" class="content-section">
-            <div class="card">
-                <h2>Gerenciador de Contatos</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Origem</th>
-                            <th>Status</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lista-leads">
-                        <tr>
-                            <td><strong>Marcos Souza</strong></td>
-                            <td><i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook</td>
-                            <td><span class="status-badge status-novo">NOVO LEAD</span></td>
-                            <td><a href="https://wa.me/5511999990000" class="btn-whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chamar</a></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Ana Beatriz</strong></td>
-                            <td><i class="fa-brands fa-google" style="color: #ea4335;"></i> Google</td>
-                            <td><span class="status-badge status-novo">NOVO LEAD</span></td>
-                            <td><a href="https://wa.me/5511999990000" class="btn-whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chamar</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="ia" class="content-section">
-            <div class="ia-box">
-                <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Analista de Conversas</h3>
-                <p style="opacity: 0.8; font-size: 14px; margin-bottom: 15px;">Cole o histórico do WhatsApp abaixo para que a IA identifique a intenção de compra.</p>
-                
-                <textarea id="texto-conversa" placeholder="Exemplo:
-Corretor: Olá, o imóvel ainda está disponível.
-Cliente: Tenho interesse, aceita financiamento?"></textarea>
-                
-                <button class="btn-analisar" onclick="analisarConversa()">ANALISAR COM INTELIGÊNCIA ARTIFICIAL</button>
-                
-                <div id="resultado-ia"></div>
-            </div>
-        </section>
     </div>
 
     <script>
-        // Função para trocar de tela no menu lateral
-        function mudarTela(idTela, elemento) {
-            // Remove 'active' de todas as telas e itens de menu
-            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
+        // FUNÇÃO PARA TROCAR ABAS (MANTER O FORMATO DO CELULAR)
+        function switchTab(tabId, element) {
+            // Esconder todas
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
             
-            // Ativa a tela e o menu selecionado
-            document.getElementById(idTela).classList.add('active');
-            elemento.classList.add('active');
+            // Mostrar a selecionada
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
         }
 
-        // Função da Inteligência Artificial
-        function analisarConversa() {
-            const texto = document.getElementById('texto-conversa').value;
-            const feedback = document.getElementById('resultado-ia');
+        // FUNÇÃO DA IA
+        function runAnalysis() {
+            const input = document.getElementById('ia-input').value;
+            const result = document.getElementById('ia-result');
+            
+            if(!input) return alert("Por favor, cole uma conversa.");
 
-            if (!texto) {
-                alert("Por favor, cole uma conversa para analisar.");
-                return;
-            }
+            result.style.display = "block";
+            result.innerHTML = "<em>IA processando dados do lead...</em>";
 
-            feedback.style.display = "block";
-            feedback.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> A IA está processando o contexto da negociação...";
-
-            // Simulação de resposta da IA
             setTimeout(() => {
-                feedback.innerHTML = `
-                    <h4 style="color: var(--primary); margin-bottom: 10px;"><i class="fa-solid fa-check-double"></i> Análise Concluída</h4>
-                    <p><strong>Temperatura:</strong> <span style="color: #f87171;">QUENTE (85% de chance)</span></p>
-                    <p><strong>Resumo:</strong> O cliente demonstrou interesse real ao perguntar sobre financiamento. Ele está na fase de decisão.</p>
-                    <p style="margin-top: 10px;"><strong>Sugestão do Copiloto:</strong> Ofereça agora mesmo uma simulação de crédito bancário para prender a atenção dele.</p>
+                result.innerHTML = `
+                    <h4 style="color: var(--primary); margin-bottom: 8px;">Análise Completa:</h4>
+                    <p>O lead apresenta <strong>alta intenção de compra</strong>. O foco principal é financiamento. Sugestão: Oferecer simulação imediata.</p>
                 `;
-            }, 1800);
+            }, 1500);
         }
     </script>
 </body>
