@@ -122,6 +122,31 @@
         .final-cta-title { font-family: 'Georgia', serif; font-size: 42px; font-weight: 400; max-width: 800px; line-height: 1.2; }
         .final-cta-desc { font-size: 19px; color: #cbd5e1; max-width: 650px; line-height: 1.5; }
 
+        /* BOTÃO WHATSAPP FLUTUANTE */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: #FFF;
+        }
+
         /* RESPONSIVIDADE CELULAR */
         @media (max-width: 768px) {
             .hub-utility-bar { display: none; }
@@ -148,10 +173,22 @@
             
             .final-cta-title { font-size: 26px; }
             .final-cta-desc { font-size: 14px; }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <a href="https://wa.me/5511919912900?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20CorretorPro%20AI." class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <div class="hub-utility-bar">
         <div class="container">
