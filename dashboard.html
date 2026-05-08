@@ -3,208 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel | CorretorPro AI</title>
+    <title>Painel CorretorPro AI | Gestão de Leads</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* RESET E ESTILO BASE */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
-        html { scroll-behavior: smooth; }
-        body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; overflow-x: hidden; }
+        :root { --primary: #f2b705; --dark: #0f172a; --slate: #1e293b; --white: #ffffff; --bg: #f1f5f9; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); display: flex; height: 100vh; overflow: hidden; }
 
-        /* SIDEBAR */
-        .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; }
-        .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: #f2b705; letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
-        .sidebar-brand span { color: #0f172a; }
-        .sidebar-menu { list-style: none; padding: 24px 16px; display: flex; flex-direction: column; gap: 8px; }
-        .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: #475569; font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; }
-        .sidebar-menu li.active a, .sidebar-menu li a:hover { background-color: rgba(242, 183, 5, 0.08); color: #d9a304; }
-        .badge-premium { background: #0f172a; color: #f2b705; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 800; margin-left: auto; }
-
-        /* LAYOUT PRINCIPAL */
-        .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        /* Sidebar Estilizada */
+        .sidebar { width: 260px; background-color: var(--dark); color: white; display: flex; flex-direction: column; transition: all 0.3s; }
+        .sidebar-header { padding: 30px; text-align: center; border-bottom: 1px solid #1e293b; }
+        .sidebar-header h1 { font-size: 22px; font-weight: 900; color: var(--primary); }
+        .sidebar-header h1 span { color: white; }
         
-        .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
-        .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
-        .user-profile { display: flex; align-items: center; gap: 12px; background: #ffffff; padding: 8px 16px; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 14px; font-weight: 600; }
-        .user-profile i { color: #f2b705; }
+        .sidebar-menu { list-style: none; padding: 20px 0; flex: 1; }
+        .sidebar-menu li { padding: 15px 30px; cursor: pointer; display: flex; align-items: center; gap: 12px; color: #94a3b8; font-weight: 600; transition: 0.2s; }
+        .sidebar-menu li:hover, .sidebar-menu li.active { background-color: #1e293b; color: var(--primary); }
+        .sidebar-menu li i { width: 20px; text-align: center; }
 
-        /* GRID DE MÉTRICAS */
-        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 35px; }
-        .metric-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: space-between; }
-        .metric-info h3 { font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; }
-        .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
-        .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-
-        /* DASHBOARD WORKSPACE (DUAS COLUNAS) */
-        .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
-        .content-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin-bottom: 24px; }
-        .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-        .box-title i { color: #f2b705; }
-
-        /* TABELA DE LEADS */
-        .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
-        .leads-table th { background: #f8fafc; padding: 12px 14px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
-        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
-        .lead-click-link { color: #0f172a; text-decoration: none; font-weight: 700; cursor: pointer; }
-        .lead-click-link:hover { color: #d9a304; text-decoration: underline; }
-
-        /* FICHAS DETALHADAS DE LEADS */
-        .lead-profile-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #cbd5e1; }
-        .lead-profile-card.hot-border { border-left-color: #ef4444; }
-        .lead-profile-card.medium-border { border-left-color: #f59e0b; }
-        .lead-profile-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; font-size: 14px; }
-        .info-item { display: flex; flex-direction: column; gap: 4px; }
-        .info-label { color: #64748b; font-weight: 600; font-size: 12px; text-transform: uppercase; }
-        .info-value { color: #0f172a; font-weight: 700; }
-
-        /* AGENDA E NOTÍCIAS */
-        .agenda-list { display: flex; flex-direction: column; gap: 12px; }
-        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; border: 1px solid #e2e8f0; }
-        .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; }
-        .alarm-indicator { margin-left: auto; color: #f2b705; animation: pulse 2s infinite; }
+        /* Área Principal */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .top-bar { height: 70px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
+        .user-profile { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--dark); }
         
-        .news-list { display: flex; flex-direction: column; gap: 16px; }
-        .news-item { text-decoration: none; display: block; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-        .news-source { font-size: 11px; font-weight: 800; color: #d9a304; text-transform: uppercase; }
-        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; }
-
-        /* BOTÕES DE AÇÃO */
-        .btn-action-group { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid #f1f5f9; padding-top: 15px; }
-        .btn-whatsapp { background: #25d366; color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-
-        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+        /* Seções de Conteúdo */
+        .content-section { padding: 40px; display: none; animation: fadeIn 0.4s ease; }
+        .content-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        @media (max-width: 768px) {
-            body { flex-direction: column; padding-bottom: 70px; }
-            .sidebar { width: 100%; height: 65px; flex-direction: row; position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-right: none; border-top: 1px solid #e2e8f0; }
-            .sidebar-brand { display: none; }
-            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; }
-            .main-content { margin-left: 0; padding: 20px 16px; }
-            .dashboard-workspace { grid-template-columns: 1fr; }
-        }
+        /* Cards e Tabelas */
+        .card { background: white; border-radius: 10px; padding: 25px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .card h2 { margin-bottom: 20px; font-size: 20px; color: var(--dark); }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { text-align: left; padding: 12px; border-bottom: 2px solid #f1f5f9; color: #64748b; font-size: 13px; text-transform: uppercase; }
+        td { padding: 15px 12px; border-bottom: 1px solid #f1f5f9; font-size: 14px; color: #334155; }
+        
+        .status-badge { padding: 5px 10px; border-radius: 4px; font-size: 11px; font-weight: 800; }
+        .status-novo { background: #dcfce7; color: #15803d; }
+        
+        /* Módulo de IA */
+        .ia-box { background: var(--dark); color: white; padding: 30px; border-radius: 12px; border-left: 5px solid var(--primary); }
+        .ia-box h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        textarea { width: 100%; height: 150px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 15px; color: white; font-size: 14px; margin-bottom: 15px; resize: none; outline: none; }
+        .btn-analisar { background: var(--primary); color: var(--dark); border: none; padding: 12px 25px; border-radius: 6px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+        .btn-analisar:hover { transform: scale(1.03); background: #d9a304; }
+        #resultado-ia { margin-top: 20px; padding: 20px; background: #1e293b; border-radius: 8px; display: none; line-height: 1.6; border: 1px dashed #475569; }
+
+        .btn-whatsapp { color: #22c55e; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 5px; }
     </style>
 </head>
 <body>
 
-    <nav class="sidebar">
-        <div class="sidebar-brand">Corretor<span>Pro AI</span></div>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1>Corretor<span>Pro AI</span></h1>
+        </div>
         <ul class="sidebar-menu">
-            <li id="menu-resumo" class="active" onclick="switchTab('resumo')"><a><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
-            <li id="menu-leads" onclick="switchTab('leads')"><a><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
-            <li id="menu-central-ia" onclick="switchTab('central-ia')"><a><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
-            <li><a href="https://wa.me/5511919912900" target="_blank"><i class="fa-solid fa-circle-question"></i><span>Suporte</span></a></li>
-            <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
+            <li class="active" onclick="mudarTela('resumo', this)"><i class="fa-solid fa-house"></i> Resumo</li>
+            <li onclick="mudarTela('leads', this)"><i class="fa-solid fa-users"></i> Meus Leads</li>
+            <li onclick="mudarTela('ia', this)"><i class="fa-solid fa-robot"></i> Central de IA</li>
+            <li style="margin-top: auto;" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</li>
         </ul>
-    </nav>
+    </div>
 
-    <main class="main-content">
-        
-        <div id="resumo" class="tab-content active">
-            <div class="dash-header">
-                <div class="dash-title"><h1>Painel de Controle</h1><p>Bem-vindo de volta, Víctor Ávila</p></div>
-                <div class="user-profile"><i class="fa-solid fa-circle-user"></i> <span>Plano Professional</span></div>
+    <div class="main-content">
+        <div class="top-bar">
+            <div class="user-profile">
+                <i class="fa-solid fa-circle-user" style="font-size: 24px;"></i>
+                Olá, Víctor Trivinho
             </div>
-
-            <section class="metrics-grid">
-                <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p>42</p></div><div class="metric-icon"><i class="fa-solid fa-users"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Leads Elite</h3><p>12</p></div><div class="metric-icon"><i class="fa-solid fa-crown"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Alertas</h3><p>3</p></div><div class="metric-icon"><i class="fa-solid fa-bell"></i></div></div>
-            </section>
-
-            <div class="dashboard-workspace">
-                <div class="left-workspace-column">
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-address-book"></i> Últimos Leads Recebidos</div>
-                        <div style="overflow-x: auto;">
-                            <table class="leads-table">
-                                <thead><tr><th>Nome</th><th>Origem</th><th>Status</th><th>Ação</th></tr></thead>
-                                <tbody>
-                                    <tr>
-                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-marcos')">Marcos da Silva</span></td>
-                                        <td><i class="fa-brands fa-facebook" style="color:#1877f2"></i> Facebook</td>
-                                        <td><span style="color:#d9a304; font-weight:700">Novo</span></td>
-                                        <td><a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366"><i class="fa-brands fa-whatsapp"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-fire"></i> Mapeamento de Leads Quentes (IA)</div>
-                        <p style="font-size: 14px;"><strong>Marcos da Silva</strong> - R$ 400 Mil • Perfil: Elite 10/10</p>
-                    </section>
-                </div>
-
-                <div class="right-workspace-column">
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-clock"></i> Agenda do Dia</div>
-                        <div class="agenda-list">
-                            <div class="agenda-item">
-                                <div class="agenda-time">10:00</div>
-                                <div class="agenda-info"><h4>Reunião João</h4><p>Proposta</p></div>
-                                <div class="alarm-indicator"><i class="fa-solid fa-bell"></i></div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado</div>
-                        <div class="news-list">
-                            <a href="#" class="news-item"><span class="news-source">Exame</span><h4 class="news-title">Procura por imóveis cresce 14% em SP</h4></a>
-                        </div>
-                    </section>
-                </div>
+            <div style="color: #22c55e; font-weight: 700; font-size: 14px;">
+                <i class="fa-solid fa-circle" style="font-size: 10px;"></i> WHATSAPP CONECTADO
             </div>
         </div>
 
-        <div id="leads" class="tab-content">
-            <div class="dash-header"><h1>Gerenciador de Leads</h1></div>
-            
-            <div id="lead-marcos" class="lead-profile-card hot-border">
-                <div class="lead-profile-header">
-                    <h2>Marcos da Silva</h2>
-                    <span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span>
-                </div>
-                <div class="lead-profile-info-grid">
-                    <div class="info-item"><span class="info-label">Origem</span><span class="info-value"><i class="fa-brands fa-facebook"></i> Facebook Ads</span></div>
-                    <div class="info-item"><span class="info-label">WhatsApp</span><span class="info-value">(11) 99999-1234</span></div>
-                    <div class="info-item"><span class="info-label">Budget</span><span class="info-value">R$ 400.000</span></div>
-                    <div class="info-item"><span class="info-label">Interesse</span><span class="info-value">Casa 3 Dorms</span></div>
-                </div>
-                <div class="btn-action-group">
-                    <a href="https://wa.me/5511999991234" target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
-                </div>
+        <section id="resumo" class="content-section active">
+            <div class="card">
+                <h2>Performance Recente</h2>
+                <p style="color: #64748b;">Você capturou <strong>12 novos leads</strong> vindos do Facebook Ads hoje.</p>
             </div>
-        </div>
+        </section>
 
-        <div id="central-ia" class="tab-content">
-            <div class="dash-header"><h1>Central de Inteligência</h1></div>
-            <section class="content-box">
-                <div class="ia-analyzer">
-                    <div class="ia-input-group"><label>Cliente</label><select id="ia-select-lead" class="ia-select"><option value="Marcos">Marcos da Silva</option></select></div>
-                    <div class="ia-input-group"><label>Histórico da Conversa</label><textarea id="chat-input" class="ia-textarea"></textarea></div>
-                    <button class="btn-ai" style="padding:15px; width:100%" onclick="alert('Analisando...')">ANALISAR INTENÇÃO</button>
-                </div>
-            </section>
-        </div>
+        <section id="leads" class="content-section">
+            <div class="card">
+                <h2>Gerenciador de Contatos</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Origem</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-leads">
+                        <tr>
+                            <td><strong>Marcos Souza</strong></td>
+                            <td><i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook</td>
+                            <td><span class="status-badge status-novo">NOVO LEAD</span></td>
+                            <td><a href="https://wa.me/5511999990000" class="btn-whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chamar</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ana Beatriz</strong></td>
+                            <td><i class="fa-brands fa-google" style="color: #ea4335;"></i> Google</td>
+                            <td><span class="status-badge status-novo">NOVO LEAD</span></td>
+                            <td><a href="https://wa.me/5511999990000" class="btn-whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chamar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-    </main>
+        <section id="ia" class="content-section">
+            <div class="ia-box">
+                <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Analista de Conversas</h3>
+                <p style="opacity: 0.8; font-size: 14px; margin-bottom: 15px;">Cole o histórico do WhatsApp abaixo para que a IA identifique a intenção de compra.</p>
+                
+                <textarea id="texto-conversa" placeholder="Exemplo:
+Corretor: Olá, o imóvel ainda está disponível.
+Cliente: Tenho interesse, aceita financiamento?"></textarea>
+                
+                <button class="btn-analisar" onclick="analisarConversa()">ANALISAR COM INTELIGÊNCIA ARTIFICIAL</button>
+                
+                <div id="resultado-ia"></div>
+            </div>
+        </section>
+    </div>
 
     <script>
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        // Função para trocar de tela no menu lateral
+        function mudarTela(idTela, elemento) {
+            // Remove 'active' de todas as telas e itens de menu
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById('menu-' + tabId).classList.add('active');
+            
+            // Ativa a tela e o menu selecionado
+            document.getElementById(idTela).classList.add('active');
+            elemento.classList.add('active');
         }
-        function goToLeadProfile(leadId) {
-            switchTab('leads');
-            setTimeout(() => { document.getElementById(leadId).scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
+
+        // Função da Inteligência Artificial
+        function analisarConversa() {
+            const texto = document.getElementById('texto-conversa').value;
+            const feedback = document.getElementById('resultado-ia');
+
+            if (!texto) {
+                alert("Por favor, cole uma conversa para analisar.");
+                return;
+            }
+
+            feedback.style.display = "block";
+            feedback.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> A IA está processando o contexto da negociação...";
+
+            // Simulação de resposta da IA
+            setTimeout(() => {
+                feedback.innerHTML = `
+                    <h4 style="color: var(--primary); margin-bottom: 10px;"><i class="fa-solid fa-check-double"></i> Análise Concluída</h4>
+                    <p><strong>Temperatura:</strong> <span style="color: #f87171;">QUENTE (85% de chance)</span></p>
+                    <p><strong>Resumo:</strong> O cliente demonstrou interesse real ao perguntar sobre financiamento. Ele está na fase de decisão.</p>
+                    <p style="margin-top: 10px;"><strong>Sugestão do Copiloto:</strong> Ofereça agora mesmo uma simulação de crédito bancário para prender a atenção dele.</p>
+                `;
+            }, 1800);
         }
     </script>
 </body>
