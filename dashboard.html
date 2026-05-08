@@ -21,59 +21,43 @@
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
         .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
-        .user-profile { display: flex; align-items: center; gap: 12px; background: #ffffff; padding: 8px 16px; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 14px; font-weight: 600; }
-        .user-profile i { color: #f2b705; }
         .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 35px; }
         .metric-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: space-between; }
         .metric-info h3 { font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; }
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
-        .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
         .content-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin-bottom: 24px; }
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
         .box-title i { color: #f2b705; }
-        .leads-table-wrapper { width: 100%; overflow-x: auto; }
+        
+        /* TABELA E LEADS */
         .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
         .leads-table th { background: #f8fafc; padding: 12px 14px; color: #475569; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
         .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
         .lead-click-link { color: #0f172a; text-decoration: none; font-weight: 700; cursor: pointer; }
         .lead-click-link:hover { color: #d9a304; text-decoration: underline; }
-        .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
-        .status-novo { background: rgba(242, 183, 5, 0.1); color: #d9a304; }
-        .status-atendimento { background: #e0f2fe; color: #0369a1; }
-        .status-frio { background: #f1f5f9; color: #64748b; }
-        .action-buttons-flex { display: flex; gap: 8px; }
-        .btn-action-click { border: none; padding: 6px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
-        .btn-whatsapp { background-color: #25d366; color: white; }
-        .btn-call { background-color: #0ea5e9; color: white; }
-        .lead-profile-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 5px solid #cbd5e1; }
+        
+        /* FICHA DETALHADA ATUALIZADA */
+        .lead-profile-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #cbd5e1; position: relative; }
         .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .lead-profile-card.medium-border { border-left-color: #f59e0b; }
-        .lead-profile-card.cold-border { border-left-color: #3b82f6; }
-        .lead-profile-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
-        .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 14px; }
-        .ia-smart-alert { margin-top: 15px; padding: 12px 16px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; gap: 10px; border: 1px solid #e2e8f0; }
+        .lead-profile-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; font-size: 14px; margin-bottom: 20px; }
+        .info-item { display: flex; flex-direction: column; gap: 4px; }
+        .info-label { color: #64748b; font-weight: 600; font-size: 12px; text-transform: uppercase; }
+        .info-value { color: #0f172a; font-weight: 700; }
+        
+        .ia-smart-alert { margin-top: 15px; padding: 15px; border-radius: 8px; font-size: 13px; display: flex; align-items: center; gap: 10px; border: 1px solid #e2e8f0; }
         .ia-smart-alert.alert-urgent { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
         .ia-smart-alert.alert-medium { background: #fffbeb; border-color: #fde68a; color: #92400e; }
-        .ia-smart-alert.alert-cold { background: #eff6ff; border-color: #bfdbfe; color: #1e40af; }
-        .agenda-list { display: flex; flex-direction: column; gap: 12px; }
-        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; border: 1px solid #e2e8f0; }
-        .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; min-width: 65px; }
-        .agenda-info h4 { font-size: 14px; font-weight: 700; color: #0f172a; }
-        .alarm-indicator { margin-left: auto; color: #f2b705; }
-        .news-list { display: flex; flex-direction: column; gap: 16px; }
-        .news-item { text-decoration: none; display: block; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-        .news-source { font-size: 11px; font-weight: 800; color: #d9a304; text-transform: uppercase; }
-        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; }
-        .ia-analyzer { display: flex; flex-direction: column; gap: 20px; }
-        .ia-input-group { display: flex; flex-direction: column; gap: 8px; }
-        .ia-input-group label { font-size: 14px; font-weight: 700; color: #475569; }
-        .ia-select, .ia-textarea { width: 100%; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; }
-        .ia-textarea { height: 120px; resize: none; }
-        .btn-ai { background: #0f172a; color: #f2b705; border: none; padding: 14px; border-radius: 6px; font-weight: 800; cursor: pointer; }
-        #ai-result-box { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; }
+
+        .btn-action-group { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid #f1f5f9; padding-top: 15px; }
+        .btn-action { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .btn-whatsapp { background: #25d366; color: white; }
+        .btn-call { background: #0ea5e9; color: white; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) { body { flex-direction: column; padding-bottom: 70px; } .sidebar { width: 100%; height: 65px; flex-direction: row; position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-right: none; border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); } .sidebar-brand { display: none; } .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; align-items: center; } .sidebar-menu li a { flex-direction: column; gap: 4px; font-size: 11px; } .badge-premium { display: none; } .main-content { margin-left: 0; padding: 20px 16px; } .dashboard-workspace { grid-template-columns: 1fr; } .action-buttons-flex { flex-direction: column; gap: 4px; } }
+        @media (max-width: 768px) { .sidebar { width: 100%; height: 65px; flex-direction: row; position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-right: none; border-top: 1px solid #e2e8f0; } .sidebar-brand { display: none; } .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; } .main-content { margin-left: 0; padding: 20px 16px; padding-bottom: 80px; } .dashboard-workspace { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -83,103 +67,82 @@
             <li id="menu-resumo" class="active" onclick="switchTab('resumo')"><a><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
             <li id="menu-leads" onclick="switchTab('leads')"><a><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
             <li id="menu-central-ia" onclick="switchTab('central-ia')"><a><i class="fa-solid fa-robot"></i><span>Central IA</span><span class="badge-premium">PRO</span></a></li>
-            <li><a href="https://wa.me/5511919912900?text=Olá!%20Sou%20assinante%20do%20CorretorPro%20AI%20e%20preciso%20de%20suporte%20no%20meu%20painel." target="_blank"><i class="fa-solid fa-circle-question"></i><span>Suporte</span></a></li>
-            <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
+            <li><a href="https://wa.me/5511919912900" target="_blank"><i class="fa-solid fa-circle-question"></i><span>Suporte</span></a></li>
         </ul>
     </nav>
+
     <main class="main-content">
         <div id="resumo" class="tab-content active">
-            <div class="dash-header">
-                <div class="dash-title"><h1>Painel de Controle</h1><p>Bem-vindo de volta, Víctor Ávila</p></div>
-                <div class="user-profile"><i class="fa-solid fa-circle-user"></i> <span>Plano Professional</span></div>
-            </div>
+            <div class="dash-header"><h1>Painel de Controle</h1></div>
             <section class="metrics-grid">
-                <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p>42</p></div><div class="metric-icon"><i class="fa-solid fa-users"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Leads Elite</h3><p>12</p></div><div class="metric-icon"><i class="fa-solid fa-crown"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Alertas</h3><p>3</p></div><div class="metric-icon"><i class="fa-solid fa-bell"></i></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p>42</p></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Elite (IA)</h3><p>12</p></div></div>
             </section>
             <div class="dashboard-workspace">
                 <div class="left-workspace-column">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-address-book"></i> Todos os Leads Recebidos</div>
-                        <div class="leads-table-wrapper">
-                            <table class="leads-table">
-                                <thead><tr><th>Nome do Lead</th><th>Origem</th><th>Status</th><th>Conectar</th></tr></thead>
-                                <tbody>
-                                    <tr>
-                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-marcos')">Marcos da Silva</span></td>
-                                        <td><i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook</td>
-                                        <td><span class="status-badge status-novo">Novo</span></td>
-                                        <td>
-                                            <div class="action-buttons-flex">
-                                                <a href="https://wa.me/5511999991234?text=Olá%20Marcos,%20aqui%20é%20o%20Víctor%20da%20CorretorPro%20AI.%20Recebi%20seu%20contato%20sobre%20o%20imóvel!" target="_blank" class="btn-action-click btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Zap</a>
-                                                <a href="tel:+5511999991234" class="btn-action-click btn-call"><i class="fa-solid fa-phone"></i> Ligar</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="lead-click-link" onclick="goToLeadProfile('lead-ana')">Ana Júlia Ramos</span></td>
-                                        <td><i class="fa-brands fa-google" style="color: #ea4335;"></i> Google</td>
-                                        <td><span class="status-badge status-atendimento">Médio</span></td>
-                                        <td>
-                                            <div class="action-buttons-flex">
-                                                <a href="https://wa.me/5511988885678?text=Olá%20Ana%20Júlia,%20tudo%20bem?%20Aqui%20é%20o%20Víctor." target="_blank" class="btn-action-click btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Zap</a>
-                                                <a href="tel:+5511988885678" class="btn-action-click btn-call"><i class="fa-solid fa-phone"></i> Ligar</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-fire"></i> Mapeamento Quente (IA)</div>
-                        <table style="width: 100%; font-size: 14px;"><tr><td><strong>Marcos da Silva</strong><br><small>Budget: R$ 400 Mil • À Vista</small></td><td style="text-align: right;"><span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 4px; font-weight: 800;">ELITE 10/10</span></td></tr></table>
-                    </section>
-                </div>
-                <div class="right-workspace-column">
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-clock"></i> Alertas (Agenda IA)</div>
-                        <div class="agenda-list">
-                            <div class="agenda-item" style="border-left-color: #ef4444;">
-                                <div class="agenda-time">HOJE<br>Agora</div>
-                                <div class="agenda-info"><h4>Ligar: Marcos da Silva</h4><p><a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366; text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></p></div>
-                                <div class="alarm-indicator"><i class="fa-solid fa-bell"></i></div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado</div>
-                        <div class="news-list"><a href="#" class="news-item" onclick="event.preventDefault();"><span class="news-source">Exame</span><h4 class="news-title">Procura por imóveis cresce 14% em SP</h4></a></div>
+                        <div class="box-title"><i class="fa-solid fa-list"></i> Leads Recebidos</div>
+                        <table class="leads-table">
+                            <thead><tr><th>Nome</th><th>Origem</th><th>Ações</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="lead-click-link" onclick="goToLeadProfile('lead-marcos')">Marcos da Silva</span></td>
+                                    <td><i class="fa-brands fa-facebook" style="color:#1877f2"></i> Facebook</td>
+                                    <td><a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366"><i class="fa-brands fa-whatsapp"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </section>
                 </div>
             </div>
         </div>
+
         <div id="leads" class="tab-content">
-            <div class="dash-header"><div class="dash-title"><h1>Gerenciador de Leads</h1><p>Régua automática por temperatura</p></div></div>
+            <div class="dash-header"><h1>Gerenciador de Leads</h1></div>
+            
             <div id="lead-marcos" class="lead-profile-card hot-border">
-                <div class="lead-profile-header"><div><h2>Marcos da Silva</h2></div><span style="background: #ef4444; color: white; padding: 6px 12px; border-radius: 4px;">QUENTE</span></div>
-                <div class="lead-profile-info-grid"><span><strong>WhatsApp:</strong> <a href="https://wa.me/5511999991234" target="_blank" style="color:#25d366; text-decoration:none;">(11) 99999-1234</a></span><span><strong>Budget:</strong> R$ 400.000</span></div>
-                <div class="ia-smart-alert alert-urgent"><i class="fa-solid fa-triangle-exclamation"></i><span>Alerta ativo para <strong>HOJE</strong>.</span></div>
-            </div>
-            <div id="lead-ana" class="lead-profile-card medium-border">
-                <div class="lead-profile-header"><div><h2>Ana Júlia Ramos</h2></div><span style="background: #f59e0b; color: white; padding: 6px 12px; border-radius: 4px;">MÉDIO</span></div>
-                <div class="lead-profile-info-grid"><span><strong>WhatsApp:</strong> <a href="https://wa.me/5511988885678" target="_blank" style="color:#25d366; text-decoration:none;">(11) 98888-5678</a></span><span><strong>Budget:</strong> R$ 280.000</span></div>
-                <div class="ia-smart-alert alert-medium"><i class="fa-solid fa-hourglass-half"></i><span>Alerta programado para <strong>5 dias</strong>.</span></div>
-            </div>
-        </div>
-        <div id="central-ia" class="tab-content">
-            <div class="dash-header"><div class="dash-title"><h1>Central de IA</h1><p>Cole o chat e a IA calcula o tempo dos alertas</p></div></div>
-            <section class="content-box">
-                <div class="ia-analyzer">
-                    <div class="ia-input-group"><label>Cliente</label><select id="ia-select-lead" class="ia-select"><option value="Marcos">Marcos (Urgente)</option><option value="Ana">Ana (Devagar)</option></select></div>
-                    <div class="ia-input-group"><label>Conversa WhatsApp</label><textarea id="chat-input" class="ia-textarea"></textarea></div>
-                    <button class="btn-ai" onclick="runSmartAIAnalysis()"><i class="fa-solid fa-brain"></i> PROCESSAR INTENÇÃO</button>
+                <div class="lead-profile-header">
+                    <h2>Marcos da Silva</h2>
+                    <span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span>
                 </div>
-                <div id="ai-result-box"><h3 id="ai-result-title"></h3><p id="ai-result-desc" style="margin-top:10px;"></p></div>
-            </section>
+                <div class="lead-profile-info-grid">
+                    <div class="info-item"><span class="info-label">Origem</span><span class="info-value"><i class="fa-brands fa-facebook"></i> Facebook Ads</span></div>
+                    <div class="info-item"><span class="info-label">WhatsApp</span><span class="info-value">(11) 99999-1234</span></div>
+                    <div class="info-item"><span class="info-label">Budget</span><span class="info-value">R$ 400.000</span></div>
+                    <div class="info-item"><span class="info-label">Interesse</span><span class="info-value">Casa 3 Dorms</span></div>
+                </div>
+                <div class="ia-smart-alert alert-urgent">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span><strong>Alerta IA:</strong> Cliente com urgência de fechamento detectada. Ligar hoje!</span>
+                </div>
+                <div class="btn-action-group">
+                    <a href="https://wa.me/5511999991234" target="_blank" class="btn-action btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no Zap</a>
+                    <a href="tel:+5511999991234" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> Ligar Agora</a>
+                </div>
+            </div>
+
+            <div id="lead-ana" class="lead-profile-card medium-border">
+                <div class="lead-profile-header">
+                    <h2>Ana Júlia Ramos</h2>
+                    <span style="background:#f59e0b; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">MÉDIO</span>
+                </div>
+                <div class="lead-profile-info-grid">
+                    <div class="info-item"><span class="info-label">Origem</span><span class="info-value"><i class="fa-brands fa-google"></i> Google Ads</span></div>
+                    <div class="info-item"><span class="info-label">WhatsApp</span><span class="info-value">(11) 98888-5678</span></div>
+                    <div class="info-item"><span class="info-label">Budget</span><span class="info-value">R$ 280.000</span></div>
+                    <div class="info-item"><span class="info-label">Interesse</span><span class="info-value">Apto Centro</span></div>
+                </div>
+                <div class="ia-smart-alert alert-medium">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    <span><strong>Alerta IA:</strong> Aguardando simulação bancária. Retorno em 5 dias.</span>
+                </div>
+                <div class="btn-action-group">
+                    <a href="https://wa.me/5511988885678" target="_blank" class="btn-action btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chamar no Zap</a>
+                </div>
+            </div>
         </div>
     </main>
+
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -187,29 +150,9 @@
             document.getElementById(tabId).classList.add('active');
             document.getElementById('menu-' + tabId).classList.add('active');
         }
-        function goToLeadProfile(leadElementId) {
+        function goToLeadProfile(leadId) {
             switchTab('leads');
-            setTimeout(() => {
-                const element = document.getElementById(leadElementId);
-                if (element) { element.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-            }, 100);
-        }
-        function runSmartAIAnalysis() {
-            const btn = document.querySelector('.btn-ai');
-            const resultBox = document.getElementById('ai-result-box');
-            const selectedLead = document.getElementById('ia-select-lead').value;
-            btn.innerHTML = 'Processando...';
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-brain"></i> PROCESSAR INTENÇÃO';
-                resultBox.style.display = 'block';
-                if(selectedLead === "Marcos") {
-                    resultBox.style.background = "#fef2f2"; title = '<span style="color:#ef4444;">QUENTE (10/10)</span>'; desc = 'Alerta disparado para <strong>HOJE - IMEDIATO</strong>.';
-                } else {
-                    resultBox.style.background = "#fffbeb"; title = '<span style="color:#d97706;">MÉDIO (6/10)</span>'; desc = 'Alerta programado para daqui a <strong>5 DIAS</strong>.';
-                }
-                document.getElementById('ai-result-title').innerHTML = title;
-                document.getElementById('ai-result-desc').innerHTML = desc;
-            }, 1000);
+            setTimeout(() => { document.getElementById(leadId).scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
         }
     </script>
 </body>
