@@ -192,13 +192,108 @@
             </div>
         </div>
 
-        <div id="central-ia" class="tab-content">
-            <div class="dash-header"><h1>Central de Inteligência</h1></div>
-            <section class="content-box">
-                <div class="ia-analyzer">
-                    <div class="ia-input-group"><label>Cliente</label><select id="ia-select-lead" class="ia-select"><option value="Marcos">Marcos da Silva</option></select></div>
-                    <div class="ia-input-group"><label>Histórico da Conversa</label><textarea id="chat-input" class="ia-textarea" placeholder="Cole o texto aqui..."></textarea></div>
-                    <button class="btn-ai" style="padding:15px; width:100%" onclick="alert('Analisando...')">ANALISAR INTENÇÃO</button>
+ <div id="central-ia" class="tab-content">
+            <div class="dash-header">
+                <div class="dash-title">
+                    <h1>Central de Inteligência Artificial</h1>
+                    <p>Cole o histórico da conversa para obter insights e sugestões da IA.</p>
+                </div>
+            </div>
+
+            <section class="content-box" style="padding: 30px;">
+                <div class="ia-analyzer" style="max-width: 800px; margin: 0 auto;">
+                    
+                    <style>
+                        /* Estilos específicos para a área de IA para não dar conflito */
+                        .ia-form-group {
+                            margin-bottom: 25px;
+                        }
+                        
+                        .ia-label {
+                            display: block;
+                            font-size: 14px;
+                            font-weight: 700;
+                            color: #0f172a;
+                            margin-bottom: 10px;
+                        }
+                        
+                        .ia-select-custom, .ia-textarea-custom {
+                            width: 100%;
+                            padding: 15px;
+                            border: 2px solid #e2e8f0;
+                            border-radius: 8px;
+                            font-size: 15px;
+                            color: #0f172a;
+                            background-color: #ffffff;
+                            transition: border-color 0.2s;
+                        }
+                        
+                        .ia-select-custom:focus, .ia-textarea-custom:focus {
+                            border-color: #f2b705;
+                            outline: none;
+                        }
+                        
+                        .ia-textarea-custom {
+                            height: 250px;
+                            resize: vertical;
+                            line-height: 1.5;
+                        }
+
+                        /* O BOTÃO COLORIDO E MODERNO */
+                        .btn-ai-grande {
+                            background: #f2b705;
+                            color: #0f172a;
+                            border: none;
+                            padding: 16px 30px;
+                            border-radius: 8px;
+                            font-weight: 800;
+                            font-size: 16px;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                            cursor: pointer;
+                            width: 100%;
+                            transition: all 0.2s ease;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 10px;
+                            box-shadow: 0 4px 12px rgba(242, 183, 5, 0.2);
+                        }
+
+                        .btn-ai-grande:hover {
+                            background: #d9a304;
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 15px rgba(242, 183, 5, 0.3);
+                        }
+                        
+                        .btn-ai-grande:active {
+                            transform: translateY(0);
+                        }
+                        
+                        .btn-ai-grande i {
+                            font-size: 18px;
+                        }
+                    </style>
+
+                    <div class="ia-form-group">
+                        <label for="ia-select-lead" class="ia-label">1. Selecione o Cliente</label>
+                        <select id="ia-select-lead" class="ia-select-custom">
+                            <option value="">Selecione um lead...</option>
+                            <option value="Marcos">Marcos da Silva (id: 102)</option>
+                            <option value="Ana">Ana Júlia Ramos (id: 105)</option>
+                        </select>
+                    </div>
+
+                    <div class="ia-form-group">
+                        <label for="chat-input" class="ia-label">2. Cole o histórico da conversa (WhatsApp, Email, etc.)</label>
+                        <textarea id="chat-input" class="ia-textarea-custom" placeholder="Cole aqui o texto da conversa... Ex: [10:30] Cliente: Gostaria de saber o preço..."></textarea>
+                    </div>
+
+                    <button class="btn-ai-grande" onclick="alert('Iniciando análise da IA... Aguarde.')">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Analisar Intenção com IA
+                    </button>
+                    
                 </div>
             </section>
         </div>
