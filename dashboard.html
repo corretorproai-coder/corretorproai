@@ -8,23 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
-            --primary: #f2b705;
-            --secondary: #0f172a;
-            --bg: #f8fafc;
-            --white: #ffffff;
-            --border: #e2e8f0;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --danger: #ef4444;
+            --primary: #f2b705; --secondary: #0f172a; --bg: #f8fafc; --white: #ffffff;
+            --border: #e2e8f0; --text-main: #1e293b; --text-muted: #64748b; --danger: #ef4444;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
         body { background-color: var(--bg); color: var(--secondary); display: flex; min-height: 100vh; overflow-x: hidden; }
 
-        /* TELA DE LOGIN */
-        #login-screen { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        /* TELA DE LOGIN BLOQUEADA */
+        #login-screen { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.98); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
         .login-box { background: white; padding: 40px; border-radius: 16px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
-        .login-input { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; }
 
         /* SIDEBAR */
         .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; }
@@ -35,7 +27,7 @@
         .sidebar-menu li.active a, .sidebar-menu li a:hover { background-color: rgba(242, 183, 5, 0.08); color: #d9a304; }
 
         /* MAIN CONTENT */
-        .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; visibility: hidden; }
+        .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; display: none; }
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
         
@@ -50,25 +42,35 @@
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
         .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 
-        /* WORKSPACE */
+        /* WORKSPACE & AGENDA */
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
         .content-box { background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
 
-        /* TABELA E CARDS */
         .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
         .leads-table th { background: #f8fafc; padding: 12px 14px; color: var(--text-muted); border-bottom: 1px solid var(--border); }
-        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
-        .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 14px; border-radius: 4px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 11px; text-transform: uppercase; }
-        .lead-profile-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #cbd5e1; }
+        .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; }
+
+        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid var(--primary); border-radius: 4px; border: 1px solid var(--border); }
+        .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; }
+
+        /* CARDS QUENTES */
+        .lead-profile-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #cbd5e1; position: relative; }
         .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .badge-demo { background: #64748b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 8px; font-weight: 800; }
-        .btn-delete { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 18px; }
-
+        
         /* BOTÕES */
-        .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; width: fit-content; }
+        .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 14px; border-radius: 4px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 11px; text-transform: uppercase; }
         .btn-wa-action { background: #25d366; color: white; padding: 10px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; }
         .btn-black-action { background: var(--secondary); color: white; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer; border: none; font-size: 14px; }
+        .btn-delete { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 18px; position: absolute; top: 25px; right: 25px; }
+
+        /* DETALHES */
+        .client-detail-view { display: none; animation: fadeIn 0.4s ease; }
+        .client-header { background: var(--secondary); color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .edit-input { width: 100%; padding: 8px; border: 1px solid var(--primary); border-radius: 4px; font-weight: 700; font-size: 14px; color: var(--secondary); display: none; margin-top: 5px; }
+        .note-area { width: 100%; height: 200px; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-top: 10px; resize: none; font-size: 14px; }
 
         /* MODAL */
         .form-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
@@ -82,7 +84,7 @@
         @media (max-width: 768px) {
             .sidebar { width: 100%; height: 65px; flex-direction: row; top: auto; bottom: 0; border-right: none; border-top: 1px solid var(--border); }
             .sidebar-brand { display: none; }
-            .sidebar-menu { flex-direction: row; padding: 0; justify-content: space-around; }
+            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; }
             .sidebar-menu li a span { display: none; }
             .main-content { margin-left: 0; padding: 20px 15px 100px; }
             .metrics-grid, .dashboard-workspace { grid-template-columns: 1fr; }
@@ -94,12 +96,12 @@
     <div id="login-screen">
         <div class="login-box">
             <div class="sidebar-brand" style="justify-content:center; border:none; margin-bottom:20px;">Corretor<span>Pro AI</span></div>
-            <h2 style="margin-bottom:10px;">Acesse seu Painel</h2>
-            <p style="color:var(--text-muted); margin-bottom:25px; font-size:14px;">Inovação para corretores profissionais</p>
-            <input type="email" id="login-email" class="login-input" placeholder="Seu e-mail">
-            <button class="btn-add-lead" style="width:100%; justify-content:center; padding:14px;" onclick="realizarLogin()">Entrar com E-mail</button>
-            <div style="margin: 20px 0; color: #cbd5e1; display:flex; align-items:center; gap:10px;"><hr style="flex:1; border:0; border-top:1px solid #eee;"> ou <hr style="flex:1; border:0; border-top:1px solid #eee;"></div>
-            <button class="btn-black-action" style="width:100%; background:white; color:#0f172a; border:1px solid #ddd; display:flex; align-items:center; justify-content:center; gap:10px;" onclick="realizarLogin()">
+            <h2 style="margin-bottom:10px;">Acesso Profissional</h2>
+            <p style="color:var(--text-muted); margin-bottom:25px; font-size:14px;">Olá Víctor, acesse seu painel master</p>
+            <input type="email" id="login-email" style="width:100%; padding:14px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px;" placeholder="Seu e-mail">
+            <button class="btn-add-lead" style="width:100%; justify-content:center; padding:14px;" onclick="realizarLogin()">Entrar</button>
+            <div style="margin: 20px 0; color: #cbd5e1;">OU</div>
+            <button class="btn-black-action" style="width:100%; background:white; color:#0f172a; border:1px solid #ddd; display:flex; align-items:center; justify-content:center; gap:10px;" onclick="realizarLoginGoogle()">
                 <img src="https://www.google.com/favicon.ico" width="18"> Continuar com Google
             </button>
         </div>
@@ -124,14 +126,26 @@
             </div>
             <section class="metrics-grid">
                 <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p id="count-total">0</p></div><div class="metric-icon"><i class="fa-solid fa-users"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Leads Elite</h3><p id="count-elite">0</p></div><div class="metric-icon"><i class="fa-solid fa-gem"></i></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Leads Elite</h3><p id="count-elite">0</p></div><div class="metric-icon"><i class="fa-solid fa-crown"></i></div></div>
                 <div class="metric-card"><div class="metric-info"><h3>Alertas</h3><p>3</p></div><div class="metric-icon" style="color:#ef4444; background:rgba(239,68,68,0.1)"><i class="fa-solid fa-bell"></i></div></div>
             </section>
             <div class="dashboard-workspace">
-                <div class="left-col"><section class="content-box"><div class="box-title">Últimos Leads</div><table class="leads-table"><thead><tr><th>Nome</th><th>Origem</th><th>Status</th><th>Ação</th></tr></thead><tbody id="resumo-table-body"></tbody></table></section></div>
+                <div class="left-col">
+                    <section class="content-box">
+                        <div class="box-title"><i class="fa-solid fa-address-book"></i> Últimos Leads Recebidos</div>
+                        <table class="leads-table"><thead><tr><th>Nome</th><th>Origem</th><th>Status</th><th>Ação</th></tr></thead><tbody id="resumo-table-body"></tbody></table>
+                    </section>
+                </div>
                 <div class="right-col">
-                    <section class="content-box"><div class="box-title">Agenda</div><p>10:00 - Reunião João</p></section>
-                    <section class="content-box"><div class="box-title">Radar EXAME</div><span class="news-tag">EXAME</span><p class="news-title">Procura por imóveis cresce 14% em SP</p></section>
+                    <section class="content-box">
+                        <div class="box-title"><i class="fa-solid fa-calendar-day"></i> Agenda do Dia</div>
+                        <div class="agenda-item"><div class="agenda-time">10:00</div><div><strong>Reunião João</strong><p style="font-size:11px; color:gray">Proposta</p></div></div>
+                    </section>
+                    <section class="content-box">
+                        <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado</div>
+                        <span style="color:var(--primary); font-size:11px; font-weight:800;">EXAME</span>
+                        <p style="font-weight:700; margin-top:5px;">Procura por imóveis cresce 14% em SP</p>
+                    </section>
                 </div>
             </div>
         </div>
@@ -141,14 +155,30 @@
             <div id="leads-list"></div>
         </div>
 
+        <div id="lead-detail-view" class="client-detail-view">
+            <button onclick="switchTab('leads')" style="background:none; border:none; color:var(--text-muted); cursor:pointer; margin-bottom:20px; font-weight:bold;"><i class="fa-solid fa-arrow-left"></i> Voltar para lista</button>
+            <div class="client-header">
+                <div><h1 id="det-name">Nome</h1><input type="text" id="edit-name" class="edit-input" style="font-size:24px; color:black;"><p id="det-origin" style="opacity:0.8">Origem</p></div>
+                <button class="btn-gerenciar" id="btn-edit-mode" onclick="toggleEditMode()">Editar Dados</button>
+            </div>
+            <div class="dashboard-workspace">
+                <div class="left-col"><div class="content-box"><div class="box-title">Bloco de Notas</div><textarea id="det-notes" class="note-area"></textarea></div></div>
+                <div class="right-col"><div class="content-box">
+                    <p class="info-label">WhatsApp</p><p id="det-phone">--</p><input type="text" id="edit-phone" class="edit-input">
+                    <p class="info-label" style="margin-top:10px">Budget</p><p id="det-budget">--</p><input type="text" id="edit-budget" class="edit-input">
+                    <p class="info-label" style="margin-top:10px">Interesse</p><p id="det-interest">--</p><input type="text" id="edit-interest" class="edit-input">
+                </div></div>
+            </div>
+        </div>
+
         <div id="central-ia" class="tab-content">
-            <div class="dash-header"><h1>Central de Inteligência Artificial</h1></div>
+            <div class="dash-header"><h1>Central AI</h1></div>
             <section class="content-box" style="max-width:800px; margin: 0 auto; padding:30px;">
-                <label style="font-weight:700; display:block; margin-bottom:10px;">1. Selecione o Cliente</label>
-                <select id="ia-select-lead" class="form-control" style="margin-bottom:20px;"><option value="">Selecione um cliente...</option></select>
-                <label style="font-weight:700; display:block; margin-bottom:10px;">2. Cole a Conversa</label>
-                <textarea id="ia-textarea" class="form-control" style="height: 200px; margin-bottom:20px;" placeholder="Cole o texto do WhatsApp aqui..."></textarea>
-                <button class="btn-add-lead" style="width:100%; justify-content:center;"><i class="fa-solid fa-wand-magic-sparkles"></i> ANALISAR INTENÇÃO COM IA</button>
+                <label style="font-weight:700;">Selecione o Cliente</label>
+                <select id="ia-select-lead" class="form-control" style="margin-bottom:20px;"></select>
+                <label style="font-weight:700;">Cole a Conversa do WhatsApp</label>
+                <textarea id="ia-textarea" class="note-area" style="height:200px;" placeholder="Texto aqui..."></textarea>
+                <button class="btn-add-lead" style="width:100%; justify-content:center; margin-top:20px;"><i class="fa-solid fa-wand-magic-sparkles"></i> ANALISAR INTENÇÃO COM IA</button>
             </section>
         </div>
     </main>
@@ -169,47 +199,87 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRjd2FnenFqemVxZ3F2cGdtbmx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwMjYzOTcsImV4cCI6MjA5MzYwMjM5N30.YikhYyG7_0Tgx7A6M3g05swwvGRK42x9xIJ0INa52yw';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        const LEAD_DEMO = { id: 'demo-1', nome: 'Marcos da Silva', telefone: '(11) 99999-1234', budget: 'R$ 400.000', interesse: 'Casa 3 Dorms', origem: 'Facebook Ads', isDemo: true };
+        const LEAD_DEMO = { id: 'demo-1', nome: 'Marcos da Silva', telefone: '(11) 99999-1234', budget: 'R$ 400.000', interesse: 'Casa 3 Dorms', origem: 'Facebook Ads', anotacoes: 'Demo...', isDemo: true };
+        let currentLeadId = null; let isEditMode = false;
 
-        function realizarLogin() {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('main-content').style.visibility = 'visible';
-            carregarLeads();
+        async function verificarSessao() {
+            const { data: { session } } = await _supabase.auth.getSession();
+            if (session) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                carregarLeads();
+            }
         }
 
-        function deslogar() { location.reload(); }
+        async function realizarLogin() {
+            const email = document.getElementById('login-email').value;
+            if(!email) return alert("E-mail necessário.");
+            const { error } = await _supabase.auth.signInWithOtp({ email });
+            if(error) alert(error.message); else alert("Link enviado ao e-mail!");
+        }
+
+        async function realizarLoginGoogle() { await _supabase.auth.signInWithOAuth({ provider: 'google' }); }
+        async function deslogar() { await _supabase.auth.signOut(); location.reload(); }
 
         async function carregarLeads() {
             const { data } = await _supabase.from('leads').select('*').order('created_at', { ascending: false });
-            let leadsReais = data || [];
-            let listaCompleta = [LEAD_DEMO, ...leadsReais];
-            document.getElementById('count-total').innerText = leadsReais.length;
+            let leads = [LEAD_DEMO, ...(data || [])];
+            document.getElementById('count-total').innerText = (data || []).length;
             const table = document.getElementById('resumo-table-body');
             const list = document.getElementById('leads-list');
             const iaSelect = document.getElementById('ia-select-lead');
-            table.innerHTML = ''; list.innerHTML = ''; iaSelect.innerHTML = '<option value="">Selecione um cliente...</option>';
+            table.innerHTML = ''; list.innerHTML = ''; iaSelect.innerHTML = '<option value="">Selecione...</option>';
 
-            listaCompleta.forEach(l => {
+            leads.forEach(l => {
                 const badge = l.isDemo ? '<span class="badge-demo">DEMO</span>' : '';
-                table.innerHTML += `<tr><td><strong>${l.nome}</strong> ${badge}</td><td>${l.origem || 'Manual'}</td><td>Novo</td><td><button class="btn-gerenciar">Gerenciar</button></td></tr>`;
+                table.innerHTML += `<tr><td><strong>${l.nome}</strong> ${badge}</td><td>${l.origem || 'Manual'}</td><td>Novo</td><td><button class="btn-gerenciar" onclick="abrirPeloId('${l.id}')">Gerenciar</button></td></tr>`;
                 list.innerHTML += `
                     <div class="lead-profile-card hot-border">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <h2>${l.nome} ${badge}</h2>
-                            <div style="display:flex; gap:10px; align-items:center;">
-                                <span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span>
-                                ${!l.isDemo ? `<button class="btn-delete" onclick="deletarLead('${l.id}')"><i class="fa-solid fa-trash-can"></i></button>` : ''}
-                            </div>
-                        </div>
+                        <h2>${l.nome} ${badge}</h2>
+                        ${!l.isDemo ? `<button class="btn-delete" onclick="deletarLead('${l.id}')"><i class="fa-solid fa-trash-can"></i></button>` : ''}
                         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:15px; margin-top:15px; font-size:14px;">
                             <div><p style="color:gray; font-size:11px; font-weight:800;">ORIGEM</p><strong>${l.origem || 'Manual'}</strong></div>
                             <div><p style="color:gray; font-size:11px; font-weight:800;">WHATSAPP</p><strong>${l.telefone || '-'}</strong></div>
                             <div><p style="color:gray; font-size:11px; font-weight:800;">BUDGET</p><strong>${l.budget || '-'}</strong></div>
                             <div><p style="color:gray; font-size:11px; font-weight:800;">INTERESSE</p><strong>${l.interesse || '-'}</strong></div>
                         </div>
+                        <button class="btn-black-action" style="margin-top:15px" onclick="abrirPeloId('${l.id}')">Ver Tudo</button>
                     </div>`;
                 iaSelect.innerHTML += `<option value="${l.id}">${l.nome}</option>`;
             });
+        }
+
+        async function abrirPeloId(id) {
+            let data = id === 'demo-1' ? LEAD_DEMO : (await _supabase.from('leads').select('*').eq('id', id).single()).data;
+            if(data) {
+                currentLeadId = id; switchTab('lead-detail-view');
+                document.getElementById('det-name').innerText = data.nome;
+                document.getElementById('det-phone').innerText = data.telefone || '-';
+                document.getElementById('det-budget').innerText = data.budget || '-';
+                document.getElementById('det-interest').innerText = data.interesse || '-';
+                document.getElementById('det-notes').value = data.anotacoes || '';
+                ['name','phone','budget','interest'].forEach(f => document.getElementById('edit-'+f).value = data[f==='name'?'nome':f==='phone'?'telefone':f] || '');
+            }
+        }
+
+        async function toggleEditMode() {
+            if(currentLeadId === 'demo-1') return alert("O demo não pode ser editado.");
+            isEditMode = !isEditMode;
+            const btn = document.getElementById('btn-edit-mode');
+            const d = ['det-name', 'det-phone', 'det-budget', 'det-interest'];
+            const i = document.querySelectorAll('.edit-input');
+            if(isEditMode) {
+                btn.innerText = "Salvar"; btn.style.background = "#22c55e";
+                d.forEach(id => document.getElementById(id).style.display = 'none');
+                i.forEach(el => el.style.display = 'block');
+            } else {
+                const up = { nome: document.getElementById('edit-name').value, telefone: document.getElementById('edit-phone').value, budget: document.getElementById('edit-budget').value, interesse: document.getElementById('edit-interest').value, anotacoes: document.getElementById('det-notes').value };
+                await _supabase.from('leads').update(up).eq('id', currentLeadId);
+                btn.innerText = "Editar Dados"; btn.style.background = "var(--secondary)";
+                d.forEach(id => document.getElementById(id).style.display = 'block');
+                i.forEach(el => el.style.display = 'none');
+                carregarLeads();
+            }
         }
 
         async function salvarLead() {
@@ -218,20 +288,16 @@
             toggleModal(false); carregarLeads();
         }
 
-        async function deletarLead(id) {
-            if(confirm("Excluir lead permanentemente?")) {
-                await _supabase.from('leads').delete().eq('id', id);
-                carregarLeads();
-            }
-        }
-
+        async function deletarLead(id) { if(confirm("Excluir?")) { await _supabase.from('leads').delete().eq('id', id); carregarLeads(); } }
         function toggleModal(s) { document.getElementById('modal-add-lead').style.display = s ? 'flex' : 'none'; }
         function switchTab(t) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.getElementById(t).classList.add('active');
+            document.getElementById('lead-detail-view').style.display = t === 'lead-detail-view' ? 'block' : 'none';
+            if(document.getElementById(t)) document.getElementById(t).classList.add('active');
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
             if(document.getElementById('menu-'+t)) document.getElementById('menu-'+t).classList.add('active');
         }
+        window.onload = verificarSessao;
     </script>
 </body>
 </html>
