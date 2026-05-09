@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Master | CorretorPro AI</title>
+    <title>Painel | CorretorPro AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -16,7 +16,7 @@
 
         /* LOGIN */
         #login-screen { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.98); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-        .login-box { background: white; padding: 40px; border-radius: 16px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .login-box { background: white; padding: 40px; border-radius: 16px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 25px rgba(0,0,0,0.3); }
         .login-input { width: 100%; padding: 14px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; }
 
         /* SIDEBAR */
@@ -24,7 +24,7 @@
         .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: var(--primary); letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
         .sidebar-brand span { color: var(--secondary); }
         .sidebar-menu { list-style: none; padding: 24px 16px; flex: 1; }
-        .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: var(--text-muted); font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: var(--text-muted); font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; }
         .sidebar-menu li.active a, .sidebar-menu li a:hover { background: rgba(242, 183, 5, 0.08); color: #d9a304; }
 
         /* CONTENT */
@@ -34,6 +34,7 @@
         
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; flex-wrap: wrap; gap: 15px; }
         .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
+        .user-profile { display: flex; align-items: center; gap: 12px; background: #fff; padding: 8px 16px; border-radius: 4px; border: 1px solid var(--border); font-size: 14px; font-weight: 600; }
 
         /* MÉTRICAS */
         .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 35px; }
@@ -52,46 +53,35 @@
         .agenda-time { font-size: 12px; font-weight: 800; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; min-width: 65px; text-align: center; }
         .agenda-status { font-size: 10px; background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-weight: 800; display: inline-block; margin-top: 4px; }
 
-        /* BOTÃO GERENCIAR DESTACADO */
-        .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 12px; border-radius: 4px; font-weight: 800; cursor: pointer; font-size: 11px; text-transform: uppercase; transition: 0.2s; }
-        .btn-gerenciar:hover { background: #1e293b; transform: translateY(-1px); }
-
-        /* LEADS COMPACTOS */
-        .lead-profile-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 18px; border-left: 6px solid #cbd5e1; position: relative; }
-        .lead-profile-card.hot-border { border-left-color: #ef4444; }
-        .lead-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 12px; font-size: 14px; }
-        .info-label { color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; display: block; margin-bottom: 2px; }
-        .info-value { color: #0f172a; font-weight: 700; }
-
-        /* ANALYTICS (O RESUMO INCRÍVEL) */
+        /* FUNIL E METAS */
         .analytics-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
         .funnel-step { background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
         .progress-bar { width: 100%; height: 8px; background: #e2e8f0; border-radius: 10px; margin-top: 10px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary); border-radius: 10px; }
 
-        /* CENTRAL IA */
+        /* LEADS CARDS */
+        .lead-profile-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 18px; border-left: 6px solid #cbd5e1; position: relative; }
+        .lead-profile-card.hot-border { border-left-color: #ef4444; }
+        .lead-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 12px; font-size: 14px; }
+        .info-label { color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; display: block; }
+        .info-value { color: #0f172a; font-weight: 700; }
+
+        /* CENTRAL IA BOX */
         .ia-box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
         .ia-actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
         .btn-ia-tool { background: #f8fafc; border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; color: var(--secondary); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .btn-ia-tool:hover { border-color: var(--primary); background: rgba(242, 183, 5, 0.05); }
+        .btn-ia-tool i { color: var(--primary); }
         .ia-textarea { width: 100%; height: 180px; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-top: 10px; resize:none; font-size: 14px; }
         #ia-result { margin-top: 20px; padding: 20px; background: #f1f5f9; border-radius: 8px; display: none; border-left: 4px solid var(--primary); font-size: 14px; line-height: 1.6; }
 
-        /* BOTÕES GERAIS */
+        /* BUTTONS */
         .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
         .btn-wa-action { background: #25d366; color: white; padding: 8px 16px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
         .btn-black-action { background: var(--secondary); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; border: none; }
+        .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 12px; border-radius: 4px; font-weight: 800; cursor: pointer; font-size: 11px; text-transform: uppercase; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
-
-        @media (max-width: 768px) {
-            .sidebar { width: 100%; height: 65px; flex-direction: row; bottom: 0; top: auto; border-top: 1px solid var(--border); }
-            .sidebar-brand { display: none; }
-            .sidebar-menu { flex-direction: row; padding: 0; justify-content: space-around; width: 100%; }
-            .sidebar-menu li a span { display: none; }
-            .main-content { margin-left: 0; padding: 20px 15px 100px; }
-            .metrics-grid, .analytics-container, .dashboard-workspace { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
@@ -120,7 +110,7 @@
         <div id="resumo" class="tab-content active">
             <div class="dash-header">
                 <div class="dash-title"><h1>Painel de Controle</h1><p>Olá, Víctor Ávila</p></div>
-                <div class="user-profile"><i class="fa-solid fa-crown" style="color:var(--primary)"></i> Plano Master</div>
+                <div class="user-profile"><i class="fa-solid fa-crown" style="color:var(--primary)"></i> Plano Profissional</div>
             </div>
             
             <section class="metrics-grid">
@@ -150,7 +140,6 @@
                             <div class="box-title"><i class="fa-solid fa-bullseye"></i> Meta do Mês</div>
                             <p style="font-size:13px; font-weight:700;">R$ 45.000 / R$ 100.000</p>
                             <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
-                            <p style="font-size:11px; color:gray; margin-top:10px;">Você atingiu 45% da sua meta.</p>
                         </section>
                     </div>
                 </div>
@@ -162,8 +151,8 @@
                             <div class="agenda-time">10:00<br><small>HOJE</small></div>
                             <div><strong>Visita Marcos da Silva</strong><p style="font-size:11px; color:gray"><i class="fa-solid fa-location-dot"></i> Condomínio Alpha</p><span class="agenda-status">CONFIRMADO</span></div>
                         </div>
-                        <button id="btn-sync-agenda" style="background:#fff; border:1px solid #ddd; width:100%; padding:10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;" onclick="sincronizarAgendaReal()">
-                            <img src="https://www.google.com/favicon.ico" width="14" style="vertical-align: middle; margin-right: 5px;"> Sincronizar Google Agenda
+                        <button style="background:#fff; border:1px solid #ddd; width:100%; padding:10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;" onclick="window.open('https://calendar.google.com/','_blank')">
+                            <img src="https://www.google.com/favicon.ico" width="14" style="vertical-align:middle; margin-right:5px;"> Sincronizar Google Agenda
                         </button>
                     </section>
                     <section class="content-box"><div class="box-title">Radar do Mercado</div><span style="color:var(--primary); font-size:11px; font-weight:800;">EXAME</span><p style="font-weight:700; margin-top:5px;">Procura por imóveis cresce 14% em SP</p></section>
@@ -182,8 +171,12 @@
                 <div class="ia-box">
                     <label style="font-weight:700; font-size:14px;">Selecione o Cliente</label>
                     <select id="ia-select-lead" style="width:100%; padding:12px; border:1px solid var(--border); border-radius:8px; margin-top:8px;"></select>
-                    <textarea id="ia-textarea" class="ia-textarea" placeholder="Cole a conversa aqui..."></textarea>
+                    
+                    <label style="font-weight:700; font-size:14px; display:block; margin-top:20px;">Cole a Conversa do WhatsApp</label>
+                    <textarea id="ia-textarea" class="ia-textarea" placeholder="IA analisará budget e interesses..."></textarea>
+                    
                     <div id="ia-result"></div>
+
                     <div class="ia-actions-grid">
                         <button class="btn-ia-tool" onclick="analisarIA('qualificar')"><i class="fa-solid fa-address-card"></i> Qualificar</button>
                         <button class="btn-ia-tool" onclick="analisarIA('resumir')"><i class="fa-solid fa-file-lines"></i> Resumir</button>
@@ -204,42 +197,32 @@
         const GEMINI_API_KEY = 'AIzaSyAbUtuXf-zAC3zcAjDhuHCVSV7E4iYBITM';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        const LEAD_DEMO = { id: 'demo-1', nome: 'Marcos da Silva', telefone: '(11) 99999-1234', budget: 'R$ 400.000', interesse: 'Casa 3 Dorms', origem: 'Facebook Ads', isDemo: true };
-
-        function sincronizarAgendaReal() {
-            const btn = document.getElementById('btn-sync-agenda');
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sincronizando...';
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> Agenda Sincronizada';
-                window.open('https://calendar.google.com/', '_blank');
-            }, 1200);
-        }
-
         async function analisarIA(tipo) {
             const texto = document.getElementById('ia-textarea').value;
-            if(!texto) return alert("Cole uma conversa primeiro!");
+            if(!texto) return alert("Cole uma conversa!");
             const btn = document.getElementById('btn-master-ia');
             const resultBox = document.getElementById('ia-result');
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ANALISANDO...';
-            resultBox.style.display = 'block'; resultBox.innerHTML = 'IA do CorretorPro está processando...';
+            resultBox.style.display = 'block'; resultBox.innerHTML = 'IA Conectada. Processando...';
 
             const prompts = {
-                qualificar: "Extraia perfil, budget e urgência: ",
-                resumir: "Resumo profissional para o proprietário: ",
-                proximo: "Qual o melhor próximo passo? ",
-                copy: "Crie uma mensagem copy de WhatsApp: ",
-                completa: "Análise Master (Budget, Interesse, Urgência e Ação): "
+                qualificar: "Extraia perfil, budget e urgência deste lead: ",
+                resumir: "Crie um resumo profissional deste cliente para o proprietário: ",
+                proximo: "Com base na conversa, qual a melhor estratégia agora? ",
+                copy: "Crie uma mensagem persuasiva de WhatsApp para re-engajar esse lead: ",
+                completa: "Análise Master completa (Budget, Interesse, Urgência e Ação): "
             };
 
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
                     method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ contents: [{ parts: [{ text: prompts[tipo] + texto }] }] })
                 });
                 const data = await response.json();
-                resultBox.innerHTML = `<strong>Resultado:</strong><br>${data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}`;
+                resultBox.innerHTML = `<strong>Resultado da IA:</strong><br><br>${data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}`;
             } catch (e) {
-                resultBox.innerHTML = "Erro ao conectar com a IA.";
+                resultBox.innerHTML = "<span style='color:red'>Erro na conexão. Verifique sua rede.</span>";
             } finally {
                 btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> EXECUTAR ANÁLISE COMPLETA';
             }
@@ -258,22 +241,21 @@
 
         async function carregarLeads() {
             const { data } = await _supabase.from('leads').select('*').order('created_at', { ascending: false });
-            let leadsReais = data || []; let leads = [LEAD_DEMO, ...leadsReais];
-            document.getElementById('count-total').innerText = leadsReais.length;
-            document.getElementById('count-elite').innerText = leadsReais.length > 5 ? 2 : 1;
+            let leads = data || [];
+            document.getElementById('count-total').innerText = leads.length;
+            document.getElementById('count-elite').innerText = leads.length > 5 ? 2 : 1;
             const table = document.getElementById('resumo-table-body'); const list = document.getElementById('leads-list'); const iaSelect = document.getElementById('ia-select-lead');
             table.innerHTML = ''; list.innerHTML = ''; iaSelect.innerHTML = '<option value="">Selecione...</option>';
             leads.forEach(l => {
-                const badge = l.isDemo ? '<span class="badge-demo">DEMO</span>' : '';
-                table.innerHTML += `<tr><td style="padding:12px;"><strong>${l.nome}</strong> ${badge}</td><td>${l.origem || 'Manual'}</td><td><button class="btn-gerenciar" onclick="switchTab('leads')">Gerenciar</button></td></tr>`;
-                list.innerHTML += `<div class="lead-profile-card hot-border"><div style="display:flex; justify-content:space-between; align-items:center;"><h2>${l.nome} ${badge}</h2><div style="display:flex; gap:10px;"><span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span></div></div><div class="lead-info-grid"><div><span class="info-label">WhatsApp</span><strong class="info-value">${l.telefone || '-'}</strong></div><div><span class="info-label">Budget</span><strong class="info-value">${l.budget || '-'}</strong></div><div><span class="info-label">Interesse</span><strong class="info-value">${l.interesse || '-'}</strong></div></div><div style="margin-top:15px; display:flex; gap:10px;"><a href="https://wa.me/55${(l.telefone||'').replace(/\D/g,'')}" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><button class="btn-black-action">Ver Tudo</button></div></div>`;
+                table.innerHTML += `<tr><td style="padding:12px;"><strong>${l.nome}</strong></td><td>${l.origem || 'Manual'}</td><td><button class="btn-gerenciar" onclick="switchTab('leads')">Gerenciar</button></td></tr>`;
+                list.innerHTML += `<div class="lead-profile-card hot-border"><div style="display:flex; justify-content:space-between; align-items:center;"><h2>${l.nome}</h2><span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span></div><div class="lead-info-grid"><div><span class="info-label">WhatsApp</span><strong class="info-value">${l.telefone || '-'}</strong></div><div><span class="info-label">Budget</span><strong class="info-value">${l.budget || '-'}</strong></div><div><span class="info-label">Interesse</span><strong class="info-value">${l.interesse || '-'}</strong></div></div><div style="margin-top:15px; display:flex; gap:10px;"><a href="https://wa.me/55${(l.telefone||'').replace(/\D/g,'')}" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><button class="btn-black-action">Ver Tudo</button></div></div>`;
                 iaSelect.innerHTML += `<option value="${l.id}">${l.nome}</option>`;
             });
         }
         function switchTab(t) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
-            if(document.getElementById(t)) document.getElementById(t).classList.add('active');
+            document.getElementById(t).classList.add('active');
             if(document.getElementById('menu-'+t)) document.getElementById('menu-'+t).classList.add('active');
         }
         window.onload = verificarSessao;
