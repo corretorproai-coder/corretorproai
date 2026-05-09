@@ -17,6 +17,7 @@
         /* TELA DE LOGIN BLOQUEADA */
         #login-screen { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.98); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
         .login-box { background: white; padding: 40px; border-radius: 16px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .login-input { width: 100%; padding: 14px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; }
 
         /* SIDEBAR */
         .sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; }
@@ -54,22 +55,26 @@
         .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid var(--primary); border-radius: 4px; border: 1px solid var(--border); }
         .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; }
 
-        /* CARDS QUENTES */
+        /* CARDS QUENTES (Visual Completo Restaurado) */
         .lead-profile-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #cbd5e1; position: relative; }
         .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .badge-demo { background: #64748b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 8px; font-weight: 800; }
-        
+        .btn-delete { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 18px; position: absolute; top: 25px; right: 25px; }
+
+        .lead-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 15px; font-size: 14px; }
+        .info-label { color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .info-value { color: #0f172a; font-weight: 700; }
+
         /* BOTÕES */
-        .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; width: fit-content; }
         .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 14px; border-radius: 4px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 11px; text-transform: uppercase; }
         .btn-wa-action { background: #25d366; color: white; padding: 10px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; }
         .btn-black-action { background: var(--secondary); color: white; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer; border: none; font-size: 14px; }
-        .btn-delete { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 18px; position: absolute; top: 25px; right: 25px; }
 
         /* DETALHES */
         .client-detail-view { display: none; animation: fadeIn 0.4s ease; }
         .client-header { background: var(--secondary); color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .edit-input { width: 100%; padding: 8px; border: 1px solid var(--primary); border-radius: 4px; font-weight: 700; font-size: 14px; color: var(--secondary); display: none; margin-top: 5px; }
+        .edit-input { width: 100%; padding: 8px; border: 1px solid var(--primary); border-radius: 4px; font-weight: 700; font-size: 14px; color: var(--secondary); display: none; margin-top: 5px; background: white; }
         .note-area { width: 100%; height: 200px; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-top: 10px; resize: none; font-size: 14px; }
 
         /* MODAL */
@@ -84,7 +89,7 @@
         @media (max-width: 768px) {
             .sidebar { width: 100%; height: 65px; flex-direction: row; top: auto; bottom: 0; border-right: none; border-top: 1px solid var(--border); }
             .sidebar-brand { display: none; }
-            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; }
+            .sidebar-menu { flex-direction: row; padding: 0; justify-content: space-around; }
             .sidebar-menu li a span { display: none; }
             .main-content { margin-left: 0; padding: 20px 15px 100px; }
             .metrics-grid, .dashboard-workspace { grid-template-columns: 1fr; }
@@ -96,14 +101,11 @@
     <div id="login-screen">
         <div class="login-box">
             <div class="sidebar-brand" style="justify-content:center; border:none; margin-bottom:20px;">Corretor<span>Pro AI</span></div>
-            <h2 style="margin-bottom:10px;">Acesso Profissional</h2>
-            <p style="color:var(--text-muted); margin-bottom:25px; font-size:14px;">Olá Víctor, acesse seu painel master</p>
-            <input type="email" id="login-email" style="width:100%; padding:14px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px;" placeholder="Seu e-mail">
-            <button class="btn-add-lead" style="width:100%; justify-content:center; padding:14px;" onclick="realizarLogin()">Entrar</button>
-            <div style="margin: 20px 0; color: #cbd5e1;">OU</div>
-            <button class="btn-black-action" style="width:100%; background:white; color:#0f172a; border:1px solid #ddd; display:flex; align-items:center; justify-content:center; gap:10px;" onclick="realizarLoginGoogle()">
-                <img src="https://www.google.com/favicon.ico" width="18"> Continuar com Google
-            </button>
+            <h2 style="margin-bottom:10px;">Acesso Master</h2>
+            <input type="email" id="login-email" class="login-input" placeholder="Seu e-mail">
+            <input type="password" id="login-password" class="login-input" placeholder="Sua senha">
+            <button class="btn-add-lead" style="width:100%; justify-content:center; padding:14px;" onclick="realizarLogin()">Entrar no Painel</button>
+            <p style="font-size:12px; color:gray; margin-top:15px;">*Acesse com as credenciais do Supabase</p>
         </div>
     </div>
 
@@ -132,17 +134,17 @@
             <div class="dashboard-workspace">
                 <div class="left-col">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-address-book"></i> Últimos Leads Recebidos</div>
+                        <div class="box-title">Últimos Leads Recebidos</div>
                         <table class="leads-table"><thead><tr><th>Nome</th><th>Origem</th><th>Status</th><th>Ação</th></tr></thead><tbody id="resumo-table-body"></tbody></table>
                     </section>
                 </div>
                 <div class="right-col">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-calendar-day"></i> Agenda do Dia</div>
+                        <div class="box-title">Agenda do Dia</div>
                         <div class="agenda-item"><div class="agenda-time">10:00</div><div><strong>Reunião João</strong><p style="font-size:11px; color:gray">Proposta</p></div></div>
                     </section>
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado</div>
+                        <div class="box-title">Radar do Mercado</div>
                         <span style="color:var(--primary); font-size:11px; font-weight:800;">EXAME</span>
                         <p style="font-weight:700; margin-top:5px;">Procura por imóveis cresce 14% em SP</p>
                     </section>
@@ -178,7 +180,7 @@
                 <select id="ia-select-lead" class="form-control" style="margin-bottom:20px;"></select>
                 <label style="font-weight:700;">Cole a Conversa do WhatsApp</label>
                 <textarea id="ia-textarea" class="note-area" style="height:200px;" placeholder="Texto aqui..."></textarea>
-                <button class="btn-add-lead" style="width:100%; justify-content:center; margin-top:20px;"><i class="fa-solid fa-wand-magic-sparkles"></i> ANALISAR INTENÇÃO COM IA</button>
+                <button class="btn-add-lead" style="width:100%; justify-content:center; margin-top:20px;"><i class="fa-solid fa-wand-magic-sparkles"></i> ANALISAR COM IA</button>
             </section>
         </div>
     </main>
@@ -213,12 +215,12 @@
 
         async function realizarLogin() {
             const email = document.getElementById('login-email').value;
-            if(!email) return alert("E-mail necessário.");
-            const { error } = await _supabase.auth.signInWithOtp({ email });
-            if(error) alert(error.message); else alert("Link enviado ao e-mail!");
+            const password = document.getElementById('login-password').value;
+            if(!email || !password) return alert("Preencha e-mail e senha.");
+            const { error } = await _supabase.auth.signInWithPassword({ email, password });
+            if(error) alert("Erro: " + error.message); else verificarSessao();
         }
 
-        async function realizarLoginGoogle() { await _supabase.auth.signInWithOAuth({ provider: 'google' }); }
         async function deslogar() { await _supabase.auth.signOut(); location.reload(); }
 
         async function carregarLeads() {
@@ -235,13 +237,15 @@
                 table.innerHTML += `<tr><td><strong>${l.nome}</strong> ${badge}</td><td>${l.origem || 'Manual'}</td><td>Novo</td><td><button class="btn-gerenciar" onclick="abrirPeloId('${l.id}')">Gerenciar</button></td></tr>`;
                 list.innerHTML += `
                     <div class="lead-profile-card hot-border">
-                        <h2>${l.nome} ${badge}</h2>
-                        ${!l.isDemo ? `<button class="btn-delete" onclick="deletarLead('${l.id}')"><i class="fa-solid fa-trash-can"></i></button>` : ''}
-                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:15px; margin-top:15px; font-size:14px;">
-                            <div><p style="color:gray; font-size:11px; font-weight:800;">ORIGEM</p><strong>${l.origem || 'Manual'}</strong></div>
-                            <div><p style="color:gray; font-size:11px; font-weight:800;">WHATSAPP</p><strong>${l.telefone || '-'}</strong></div>
-                            <div><p style="color:gray; font-size:11px; font-weight:800;">BUDGET</p><strong>${l.budget || '-'}</strong></div>
-                            <div><p style="color:gray; font-size:11px; font-weight:800;">INTERESSE</p><strong>${l.interesse || '-'}</strong></div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <h2>${l.nome} ${badge}</h2>
+                            ${!l.isDemo ? `<button class="btn-delete" onclick="deletarLead('${l.id}')"><i class="fa-solid fa-trash-can"></i></button>` : ''}
+                        </div>
+                        <div class="lead-info-grid">
+                            <div><span class="info-label">Origem</span><strong class="info-value">${l.origem || 'Manual'}</strong></div>
+                            <div><span class="info-label">WhatsApp</span><strong class="info-value">${l.telefone || '-'}</strong></div>
+                            <div><span class="info-label">Budget</span><strong class="info-value">${l.budget || '-'}</strong></div>
+                            <div><span class="info-label">Interesse</span><strong class="info-value">${l.interesse || '-'}</strong></div>
                         </div>
                         <button class="btn-black-action" style="margin-top:15px" onclick="abrirPeloId('${l.id}')">Ver Tudo</button>
                     </div>`;
