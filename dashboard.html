@@ -19,7 +19,7 @@
         .login-box { background: white; padding: 40px; border-radius: 16px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 25px rgba(0,0,0,0.3); }
         .login-input { width: 100%; padding: 14px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; }
 
-        /* SIDEBAR */
+        /* SIDEBAR (Desktop) */
         .sidebar { width: 260px; background: #fff; border-right: 1px solid var(--border); position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; display: flex; flex-direction: column; }
         .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: var(--primary); letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
         .sidebar-brand span { color: var(--secondary); }
@@ -27,7 +27,7 @@
         .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: var(--text-muted); font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; transition: 0.2s; }
         .sidebar-menu li.active a, .sidebar-menu li a:hover { background: rgba(242, 183, 5, 0.08); color: #d9a304; }
 
-        /* CONTENT */
+        /* MAIN CONTENT */
         .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; display: none; }
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
@@ -43,7 +43,7 @@
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
         .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 
-        /* WORKSPACE */
+        /* DASHBOARD WORKSPACE */
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
         .content-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
@@ -82,6 +82,7 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
 
+        /* MOBILE FIX */
         @media (max-width: 768px) {
             .sidebar { width: 100%; height: 65px; flex-direction: row; bottom: 0; top: auto; border-top: 1px solid var(--border); border-right: none; }
             .sidebar-brand { display: none; }
@@ -206,7 +207,7 @@
     <script>
         const SUPABASE_URL = 'https://dcwagzqjzeqgqvpgmnlt.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRjd2FnenFqemVxZ3F2cGdtbmx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwMjYzOTcsImV4cCI6MjA5MzYwMjM5N30.YikhYyG7_0Tgx7A6M3g05swwvGRK42x9xIJ0INa52yw';
-        const GEMINI_API_KEY = 'AIzaSyAbUtuXf-zAC3zcAjDhuHCVSV7E4iYBITM'; // Se este erro persistir, verifique a chave no Google AI Studio
+        const GEMINI_API_KEY = 'AIzaSyAbUtuXf-zAC3zcAjDhuHCVSV7E4iYBITM'; 
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         async function analisarIA(tipo) {
@@ -228,7 +229,9 @@
             };
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                // ENDPOINT ATUALIZADO PARA V1 (ESTÁVEL) E MODELO gemini-1.5-flash-latest
+                const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ contents: [{ parts: [{ text: prompts[tipo] + texto }] }] })
@@ -242,10 +245,10 @@
                 } else if (data.error) {
                     resultBox.innerHTML = `<span style="color:red">Erro do Google: ${data.error.message}</span>`;
                 } else {
-                    resultBox.innerHTML = "<span style='color:red'>Resposta vazia do Google. Tente outro texto.</span>";
+                    resultBox.innerHTML = "<span style='color:red'>Erro inesperado. Tente novamente.</span>";
                 }
             } catch (e) {
-                resultBox.innerHTML = "<span style='color:red'>Erro de conexão. Verifique sua rede ou a chave API.</span>";
+                resultBox.innerHTML = "<span style='color:red'>Erro de rede. Verifique sua conexão.</span>";
             } finally {
                 btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> EXECUTAR ANÁLISE COMPLETA';
             }
