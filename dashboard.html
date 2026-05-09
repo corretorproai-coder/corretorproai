@@ -14,36 +14,29 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
         body { background-color: var(--bg); color: var(--secondary); display: flex; min-height: 100vh; overflow-x: hidden; }
 
-        /* LOGIN */
-        #login-screen { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.98); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-        .login-box { background: white; padding: 40px; border-radius: 16px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 25px rgba(0,0,0,0.3); }
-        .login-input { width: 100%; padding: 14px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; }
-
         /* SIDEBAR (Desktop) */
         .sidebar { width: 260px; background: #fff; border-right: 1px solid var(--border); position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; display: flex; flex-direction: column; }
         .sidebar-brand { height: 75px; display: flex; align-items: center; padding: 0 24px; font-size: 22px; font-weight: 900; color: var(--primary); letter-spacing: -1px; border-bottom: 1px solid #f1f5f9; }
         .sidebar-brand span { color: var(--secondary); }
         .sidebar-menu { list-style: none; padding: 24px 16px; flex: 1; }
-        .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: var(--text-muted); font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .sidebar-menu li a { display: flex; align-items: center; gap: 12px; padding: 12px; color: var(--text-muted); font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 6px; cursor: pointer; }
         .sidebar-menu li.active a, .sidebar-menu li a:hover { background: rgba(242, 183, 5, 0.08); color: #d9a304; }
 
         /* MAIN CONTENT */
-        .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; display: none; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        .main-content { flex: 1; margin-left: 260px; padding: 40px; min-height: 100vh; }
+        .tab-content { display: none; width: 100%; }
+        .tab-content.active { display: block; animation: fadeIn 0.2s ease; }
         
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; flex-wrap: wrap; gap: 15px; }
         .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
-        .user-profile { display: flex; align-items: center; gap: 12px; background: #fff; padding: 8px 16px; border-radius: 4px; border: 1px solid var(--border); font-size: 14px; font-weight: 600; }
 
         /* MÉTRICAS */
         .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 35px; }
         .metric-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: space-between; }
-        .metric-info h3 { font-size: 14px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
         .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 
-        /* DASHBOARD WORKSPACE */
+        /* WORKSPACE */
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
         .content-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
@@ -54,44 +47,42 @@
         .progress-bar { width: 100%; height: 8px; background: #e2e8f0; border-radius: 10px; margin-top: 10px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary); border-radius: 10px; }
 
-        /* AGENDA */
-        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid var(--primary); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; }
-        .agenda-time { font-size: 11px; font-weight: 800; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; min-width: 65px; text-align: center; line-height: 1.2; }
-        .agenda-status { font-size: 10px; background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-weight: 800; display: inline-block; margin-top: 4px; }
-
         /* LEADS CARDS */
         .lead-profile-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 18px; border-left: 6px solid #cbd5e1; position: relative; }
         .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .lead-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 12px; font-size: 14px; }
-        .info-label { color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; display: block; margin-bottom: 2px; }
+        .info-label { color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; display: block; }
         .info-value { color: #0f172a; font-weight: 700; }
 
         /* CENTRAL IA */
         .ia-box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-        .ia-actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
-        .btn-ia-tool { background: #f8fafc; border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; color: var(--secondary); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
-        .btn-ia-tool:hover { border-color: var(--primary); background: rgba(242, 183, 5, 0.05); }
-        .ia-textarea { width: 100%; height: 180px; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-top: 10px; resize:none; font-size: 14px; outline: none; }
-        #ia-result { margin-top: 20px; padding: 20px; background: #f1f5f9; border-radius: 8px; display: none; border-left: 4px solid var(--primary); font-size: 14px; line-height: 1.6; color: #0f172a; }
+        .ia-actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 20px; }
+        .btn-ia-tool { background: #f8fafc; border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .ia-textarea { width: 100%; height: 180px; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-top: 10px; resize:none; font-size: 14px; outline:none; }
+        #ia-result { margin-top: 20px; padding: 20px; background: #f1f5f9; border-radius: 8px; display: none; border-left: 4px solid var(--primary); font-size: 14px; line-height: 1.6; }
 
-        /* BUTTONS */
-        .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        /* BOTÕES */
+        .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 8px; }
         .btn-wa-action { background: #25d366; color: white; padding: 8px 16px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
         .btn-black-action { background: var(--secondary); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; border: none; }
         .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 12px; border-radius: 4px; font-weight: 800; cursor: pointer; font-size: 11px; text-transform: uppercase; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+        /* LOGIN */
+        #login-screen { position: fixed; inset: 0; background: #0f172a; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* MOBILE FIX */
         @media (max-width: 768px) {
-            .sidebar { width: 100%; height: 65px; flex-direction: row; bottom: 0; top: auto; border-top: 1px solid var(--border); border-right: none; }
+            .sidebar { width: 100%; height: 70px; flex-direction: row; bottom: 0; top: auto; border-top: 1px solid var(--border); border-right: none; }
             .sidebar-brand { display: none; }
             .sidebar-menu { flex-direction: row; padding: 0; justify-content: space-around; width: 100%; }
             .sidebar-menu li a { flex-direction: column; gap: 4px; font-size: 10px; padding: 10px; }
-            .sidebar-menu li a span { display: block; }
-            .main-content { margin-left: 0; padding: 20px 15px 100px; }
+            .sidebar-menu li a i { font-size: 18px; }
+            .main-content { margin-left: 0; padding: 20px 15px 100px; width: 100%; }
             .metrics-grid, .analytics-container, .dashboard-workspace { grid-template-columns: 1fr; }
-            .metric-card { padding: 15px; }
+            .metric-info p { font-size: 24px; }
+            .dash-header { margin-bottom: 20px; }
         }
     </style>
 </head>
@@ -99,10 +90,10 @@
 
     <div id="login-screen">
         <div class="login-box">
-            <div class="sidebar-brand" style="justify-content:center; border:none; margin-bottom:20px;">Corretor<span>Pro AI</span></div>
-            <input type="email" id="login-email" class="login-input" placeholder="Seu e-mail">
-            <input type="password" id="login-password" class="login-input" placeholder="Sua senha">
-            <button class="btn-add-lead" style="width:100%; justify-content:center; padding:14px;" onclick="realizarLogin()">Entrar no Painel</button>
+            <div style="font-size: 24px; font-weight: 900; color: #f2b705; margin-bottom: 20px;">Corretor<span>Pro AI</span></div>
+            <input type="email" id="login-email" class="login-input" placeholder="E-mail">
+            <input type="password" id="login-password" class="login-input" placeholder="Senha">
+            <button class="btn-add-lead" style="width:100%; justify-content:center;" onclick="realizarLogin()">Entrar no Painel</button>
         </div>
     </div>
 
@@ -112,16 +103,15 @@
             <li id="menu-resumo" class="active"><a onclick="switchTab('resumo')"><i class="fa-solid fa-chart-pie"></i><span>Resumo</span></a></li>
             <li id="menu-leads"><a onclick="switchTab('leads')"><i class="fa-solid fa-address-book"></i><span>Leads</span></a></li>
             <li id="menu-central-ia"><a onclick="switchTab('central-ia')"><i class="fa-solid fa-robot"></i><span>Central IA</span></a></li>
-            <li><a href="https://wa.me/5511919912900" target="_blank"><i class="fa-solid fa-headset"></i><span>Suporte</span></a></li>
             <li><a onclick="deslogar()"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
         </ul>
     </nav>
 
-    <main class="main-content" id="main-content">
+    <main class="main-content" id="main-content" style="display:none;">
         <div id="resumo" class="tab-content active">
             <div class="dash-header">
                 <div class="dash-title"><h1>Painel de Controle</h1><p>Olá, Víctor Ávila</p></div>
-                <div class="user-profile"><i class="fa-solid fa-crown" style="color:var(--primary)"></i> Plano Profissional</div>
+                <div class="user-profile"><i class="fa-solid fa-crown" style="color:var(--primary)"></i> Master</div>
             </div>
             
             <section class="metrics-grid">
@@ -133,7 +123,7 @@
             <div class="dashboard-workspace">
                 <div class="left-col">
                     <section class="content-box">
-                        <div class="box-title">Últimos Leads Recebidos</div>
+                        <div class="box-title">Últimos Leads</div>
                         <div style="overflow-x: auto;">
                             <table style="width:100%; border-collapse:collapse; font-size:14px;">
                                 <thead><tr style="text-align:left; color:gray;"><th style="padding:12px;">Nome</th><th>Origem</th><th>Ação</th></tr></thead>
@@ -144,13 +134,13 @@
                     
                     <div class="analytics-container">
                         <section class="content-box" style="margin-bottom:0;">
-                            <div class="box-title"><i class="fa-solid fa-filter"></i> Funil de Vendas</div>
+                            <div class="box-title"><i class="fa-solid fa-filter"></i> Funil</div>
                             <div class="funnel-step"><span>Novos Leads</span><strong>12</strong></div>
-                            <div class="funnel-step" style="width:90%; margin-left:5%;"><span>Visitas Marcadas</span><strong>4</strong></div>
+                            <div class="funnel-step" style="width:90%; margin-left:5%;"><span>Visitas</span><strong>4</strong></div>
                             <div class="funnel-step" style="width:80%; margin-left:10%; border-color:var(--primary);"><span>Propostas</span><strong>2</strong></div>
                         </section>
                         <section class="content-box" style="margin-bottom:0;">
-                            <div class="box-title"><i class="fa-solid fa-bullseye"></i> Meta do Mês</div>
+                            <div class="box-title"><i class="fa-solid fa-bullseye"></i> Meta</div>
                             <p style="font-size:13px; font-weight:700;">R$ 45.000 / R$ 100.000</p>
                             <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
                         </section>
@@ -159,47 +149,40 @@
 
                 <div class="right-col">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-calendar-day"></i> Agenda de Visitas</div>
+                        <div class="box-title"><i class="fa-solid fa-calendar-day"></i> Agenda</div>
                         <div class="agenda-item">
                             <div class="agenda-time">10:00<br><small>HOJE</small></div>
-                            <div><strong>Visita Marcos da Silva</strong><p style="font-size:11px; color:gray"><i class="fa-solid fa-location-dot"></i> Condomínio Alpha</p><span class="agenda-status">CONFIRMADO</span></div>
+                            <div><strong>Visita Marcos</strong><p style="font-size:11px; color:gray">Condomínio Alpha</p><span class="agenda-status">CONFIRMADO</span></div>
                         </div>
-                        <button style="background:#fff; border:1px solid #ddd; width:100%; padding:10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; margin-top:10px;" onclick="window.open('https://calendar.google.com/','_blank')">
-                            <img src="https://www.google.com/favicon.ico" width="14" style="vertical-align:middle; margin-right:5px;"> Sincronizar Google Agenda
+                        <button style="background:#fff; border:1px solid #ddd; width:100%; padding:10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;" onclick="window.open('https://calendar.google.com/','_blank')">
+                            <img src="https://www.google.com/favicon.ico" width="14" style="vertical-align:middle; margin-right:5px;"> Sincronizar Google
                         </button>
                     </section>
-                    <section class="content-box"><div class="box-title">Radar do Mercado</div><span style="color:var(--primary); font-size:11px; font-weight:800;">EXAME</span><p style="font-weight:700; margin-top:5px;">Procura por imóveis cresce 14% em SP</p></section>
                 </div>
             </div>
         </div>
 
         <div id="leads" class="tab-content">
-            <div class="dash-header"><h1>Gerenciador de Leads</h1></div>
+            <div class="dash-header"><h1>Gerenciador de Leads</h1><button class="btn-add-lead">+ Novo</button></div>
             <div id="leads-list"></div>
         </div>
 
         <div id="central-ia" class="tab-content">
-            <div class="dash-header"><h1>Central de Inteligência Artificial</h1></div>
-            <div class="ia-container">
-                <div class="ia-box">
-                    <label style="font-weight:700; font-size:14px;">Selecione o Cliente</label>
-                    <select id="ia-select-lead" style="width:100%; padding:12px; border:1px solid var(--border); border-radius:8px; margin-top:8px;"></select>
-                    
-                    <label style="font-weight:700; font-size:14px; display:block; margin-top:20px;">Cole a Conversa do WhatsApp</label>
-                    <textarea id="ia-textarea" class="ia-textarea" placeholder="IA analisará budget e interesses..."></textarea>
-                    
-                    <div id="ia-result"></div>
-
-                    <div class="ia-actions-grid">
-                        <button class="btn-ia-tool" onclick="analisarIA('qualificar')"><i class="fa-solid fa-address-card"></i> Qualificar</button>
-                        <button class="btn-ia-tool" onclick="analisarIA('resumir')"><i class="fa-solid fa-file-lines"></i> Resumo IA</button>
-                        <button class="btn-ia-tool" onclick="analisarIA('proximo')"><i class="fa-solid fa-lightbulb"></i> Próximo Passo</button>
-                        <button class="btn-ia-tool" onclick="analisarIA('copy')"><i class="fa-solid fa-bullhorn"></i> Criar Copy</button>
-                    </div>
-                    <button class="btn-add-lead" id="btn-master-ia" style="width:100%; justify-content:center; margin-top:25px; height:50px; font-size:16px;" onclick="analisarIA('completa')">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> EXECUTAR ANÁLISE COMPLETA
-                    </button>
+            <div class="dash-header"><h1>Central de Inteligência</h1></div>
+            <div class="ia-box">
+                <label style="font-weight:700; font-size:14px;">Selecione o Cliente</label>
+                <select id="ia-select-lead" style="width:100%; padding:12px; border:1px solid var(--border); border-radius:8px; margin-top:8px;"></select>
+                <textarea id="ia-textarea" class="ia-textarea" placeholder="Cole a conversa aqui..."></textarea>
+                <div id="ia-result"></div>
+                <div class="ia-actions-grid">
+                    <button class="btn-ia-tool" onclick="analisarIA('qualificar')"><i class="fa-solid fa-address-card"></i> Qualificar</button>
+                    <button class="btn-ia-tool" onclick="analisarIA('resumir')"><i class="fa-solid fa-file-lines"></i> Resumo IA</button>
+                    <button class="btn-ia-tool" onclick="analisarIA('proximo')"><i class="fa-solid fa-lightbulb"></i> Próximo Passo</button>
+                    <button class="btn-ia-tool" onclick="analisarIA('copy')"><i class="fa-solid fa-bullhorn"></i> Criar Copy</button>
                 </div>
+                <button class="btn-add-lead" id="btn-master-ia" style="width:100%; justify-content:center; margin-top:25px; height:50px;" onclick="analisarIA('completa')">
+                    EXECUTAR ANÁLISE MASTER
+                </button>
             </div>
         </div>
     </main>
@@ -207,7 +190,7 @@
     <script>
         const SUPABASE_URL = 'https://dcwagzqjzeqgqvpgmnlt.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRjd2FnenFqemVxZ3F2cGdtbmx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwMjYzOTcsImV4cCI6MjA5MzYwMjM5N30.YikhYyG7_0Tgx7A6M3g05swwvGRK42x9xIJ0INa52yw';
-        const GEMINI_API_KEY = 'AIzaSyAbUtuXf-zAC3zcAjDhuHCVSV7E4iYBITM'; 
+        const GEMINI_API_KEY = 'AIzaSyAbUtuXf-zAC3zcAjDhuHCVSV7E4iYBITM';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         async function analisarIA(tipo) {
@@ -216,41 +199,34 @@
             const btn = document.getElementById('btn-master-ia');
             const resultBox = document.getElementById('ia-result');
             
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ANALISANDO...';
-            resultBox.style.display = 'block'; 
-            resultBox.innerHTML = 'Conectando ao Google Gemini...';
+            btn.innerHTML = 'PROCESSANDO...';
+            resultBox.style.display = 'block'; resultBox.innerHTML = 'IA Conectada...';
 
             const prompts = {
-                qualificar: "Extraia perfil, budget e urgência desta conversa: ",
-                resumir: "Resuma os pontos principais deste atendimento: ",
-                proximo: "Com base na conversa, qual a melhor estratégia de venda agora? ",
-                copy: "Crie uma mensagem curta e persuasiva de WhatsApp para este cliente: ",
-                completa: "Faça uma análise profunda de Budget, Perfil do Imóvel, Urgência e sugira a próxima ação: "
+                qualificar: "Extraia perfil, budget e urgência: ",
+                resumir: "Resuma os pontos principais desta conversa: ",
+                proximo: "Qual o melhor próximo passo de venda agora? ",
+                copy: "Crie uma mensagem curta de WhatsApp para este cliente: ",
+                completa: "Faça uma análise profunda de Budget, Perfil, Urgência e sugira a próxima ação: "
             };
 
             try {
-                // ENDPOINT ATUALIZADO PARA V1 (ESTÁVEL) E MODELO gemini-1.5-flash-latest
-                const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
-                const response = await fetch(url, {
+                // ENDPOINT CORRIGIDO PARA v1beta E NOME DO MODELO SEM "-latest"
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ contents: [{ parts: [{ text: prompts[tipo] + texto }] }] })
                 });
-                
                 const data = await response.json();
-                
-                if (data.candidates && data.candidates[0].content) {
-                    const resposta = data.candidates[0].content.parts[0].text;
-                    resultBox.innerHTML = `<strong>Resultado da IA:</strong><br><br>${resposta.replace(/\n/g, '<br>')}`;
-                } else if (data.error) {
-                    resultBox.innerHTML = `<span style="color:red">Erro do Google: ${data.error.message}</span>`;
+                if (data.candidates) {
+                    resultBox.innerHTML = `<strong>Resultado:</strong><br><br>${data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}`;
                 } else {
-                    resultBox.innerHTML = "<span style='color:red'>Erro inesperado. Tente novamente.</span>";
+                    resultBox.innerHTML = `<span style="color:red">Erro: ${data.error.message}</span>`;
                 }
             } catch (e) {
-                resultBox.innerHTML = "<span style='color:red'>Erro de rede. Verifique sua conexão.</span>";
+                resultBox.innerHTML = "<span style='color:red'>Erro de rede. Tente novamente.</span>";
             } finally {
-                btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> EXECUTAR ANÁLISE COMPLETA';
+                btn.innerHTML = 'EXECUTAR ANÁLISE MASTER';
             }
         }
 
@@ -262,59 +238,35 @@
                 carregarLeads(); 
             }
         }
-
         async function realizarLogin() {
             const email = document.getElementById('login-email').value; 
             const password = document.getElementById('login-password').value;
             const { error } = await _supabase.auth.signInWithPassword({ email, password });
-            if(error) alert("Erro: " + error.message); else verificarSessao();
+            if(error) alert(error.message); else verificarSessao();
         }
-
         function deslogar() { _supabase.auth.signOut(); location.reload(); }
 
         async function carregarLeads() {
             const { data } = await _supabase.from('leads').select('*').order('created_at', { ascending: false });
             let leads = data || [];
             document.getElementById('count-total').innerText = leads.length;
-            document.getElementById('count-elite').innerText = leads.length > 5 ? 2 : Math.min(leads.length, 1);
-            
+            document.getElementById('count-elite').innerText = leads.length > 5 ? 2 : 1;
             const table = document.getElementById('resumo-table-body'); 
             const list = document.getElementById('leads-list'); 
             const iaSelect = document.getElementById('ia-select-lead');
-            
             table.innerHTML = ''; list.innerHTML = ''; iaSelect.innerHTML = '<option value="">Selecione...</option>';
-            
             leads.forEach(l => {
-                table.innerHTML += `<tr><td style="padding:12px;"><strong>${l.nome}</strong></td><td>${l.origem || 'Manual'}</td><td><button class="btn-gerenciar" onclick="switchTab('leads')">Gerenciar</button></td></tr>`;
-                
-                list.innerHTML += `
-                    <div class="lead-profile-card hot-border">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <h2>${l.nome}</h2>
-                            <span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span>
-                        </div>
-                        <div class="lead-info-grid">
-                            <div><span class="info-label">WhatsApp</span><strong class="info-value">${l.telefone || '-'}</strong></div>
-                            <div><span class="info-label">Budget</span><strong class="info-value">${l.budget || '-'}</strong></div>
-                            <div><span class="info-label">Interesse</span><strong class="info-value">${l.interesse || '-'}</strong></div>
-                        </div>
-                        <div style="margin-top:15px; display:flex; gap:10px;">
-                            <a href="https://wa.me/55${(l.telefone||'').replace(/\D/g,'')}" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                            <button class="btn-black-action">Ver Tudo</button>
-                        </div>
-                    </div>`;
-                
+                table.innerHTML += `<tr><td style="padding:12px;"><strong>${l.nome}</strong></td><td>${l.origem || 'Manual'}</td><td><button class="btn-gerenciar" onclick="switchTab('leads')">Ver</button></td></tr>`;
+                list.innerHTML += `<div class="lead-profile-card hot-border"><h2>${l.nome}</h2><div class="lead-info-grid"><div><span class="info-label">WhatsApp</span><strong>${l.telefone || '-'}</strong></div><div><span class="info-label">Budget</span><strong>${l.budget || '-'}</strong></div><div><span class="info-label">Interesse</span><strong>${l.interesse || '-'}</strong></div></div><div style="margin-top:15px; display:flex; gap:10px;"><a href="https://wa.me/55${(l.telefone||'').replace(/\D/g,'')}" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><button class="btn-black-action">Ver Tudo</button></div></div>`;
                 iaSelect.innerHTML += `<option value="${l.id}">${l.nome}</option>`;
             });
         }
-
         function switchTab(t) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
             document.getElementById(t).classList.add('active');
             if(document.getElementById('menu-'+t)) document.getElementById('menu-'+t).classList.add('active');
         }
-
         window.onload = verificarSessao;
     </script>
 </body>
