@@ -28,19 +28,18 @@
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
         
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .user-profile { display: flex; align-items: center; gap: 10px; background: #fff; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 13px; font-weight: 700; }
+        .user-profile { display: flex; align-items: center; gap: 10px; background: #fff; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 13px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
 
-        /* MÉTRICAS */
+        /* GRID & LAYOUT */
         .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 35px; }
         .metric-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: space-between; }
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
-
-        /* WORKSPACE */
+        
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
         .content-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; position: relative; }
         .box-title { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
 
-        /* FUNIL E METAS (DASHBOARD FILLER) */
+        /* FUNIL E METAS */
         .analytics-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
         .funnel-step { background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); font-size: 13px; font-weight: 600; }
         .progress-bar { width: 100%; height: 10px; background: #e2e8f0; border-radius: 10px; margin-top: 15px; overflow: hidden; }
@@ -48,39 +47,29 @@
 
         /* AGENDA & RADAR */
         .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid var(--primary); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; }
-        .agenda-time { font-size: 11px; font-weight: 800; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; min-width: 65px; text-align: center; }
+        .agenda-time { font-size: 11px; font-weight: 800; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; min-width: 65px; text-align: center; line-height: 1.2; }
 
         /* LEADS CARDS */
         .lead-profile-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 18px; border-left: 6px solid #cbd5e1; position: relative; }
-        .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .lead-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 12px; font-size: 14px; }
         .info-label { color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; display: block; margin-bottom: 2px; }
-        .btn-delete-lead { position: absolute; top: 15px; right: 15px; color: #cbd5e1; cursor: pointer; }
+        .btn-delete-lead { position: absolute; top: 20px; right: 20px; color: #cbd5e1; cursor: pointer; transition: 0.2s; font-size: 18px; }
+        .btn-delete-lead:hover { color: var(--danger); }
 
         /* BUTTONS */
         .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 12px 24px; border-radius: 8px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 8px; }
         .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 12px; border-radius: 4px; font-weight: 800; cursor: pointer; font-size: 11px; text-transform: uppercase; }
         .btn-wa-action { background: #25d366; color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
         .btn-black-action { background: var(--secondary); color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; border: none; }
-        .btn-ia-tool { background: #f8fafc; border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; }
 
         /* MODAIS */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
-        .modal-content { background: white; padding: 32px; border-radius: 16px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; }
+        .modal-content { background: white; padding: 32px; border-radius: 16px; width: 90%; max-width: 550px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 768px) {
-            .sidebar { width: 100%; height: 70px; flex-direction: row; bottom: 0; top: auto; border-top: 1px solid var(--border); }
-            .sidebar-brand { display: none; }
-            .sidebar-menu { flex-direction: row; padding: 0; justify-content: space-around; width: 100%; }
-            .sidebar-menu li a { flex-direction: column; gap: 4px; font-size: 10px; padding: 10px; }
-            .main-content { margin-left: 0; padding: 20px 15px 100px; }
-            .metrics-grid, .analytics-container, .dashboard-workspace { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
@@ -90,6 +79,7 @@
         <ul class="sidebar-menu">
             <li id="menu-resumo" class="active"><a onclick="switchTab('resumo')"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a></li>
             <li id="menu-leads"><a onclick="switchTab('leads')"><i class="fa-solid fa-address-book"></i><span>Leads & Fichas</span></a></li>
+            <li id="menu-performance"><a onclick="switchTab('performance')"><i class="fa-solid fa-bullseye"></i><span>Metas & Funil</span></a></li>
             <li id="menu-central-ia"><a onclick="switchTab('central-ia')"><i class="fa-solid fa-robot"></i><span>Central IA</span></a></li>
             <li><a onclick="location.reload()"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
         </ul>
@@ -104,8 +94,8 @@
             
             <section class="metrics-grid">
                 <div class="metric-card"><div class="metric-info"><h3>Total Leads</h3><p id="count-total">0</p></div><div class="metric-icon"><i class="fa-solid fa-users"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Em Atendimento</h3><p id="count-neg">0</p></div><div class="metric-icon"><i class="fa-solid fa-comments"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h3>Alertas</h3><p>3</p></div><div class="metric-icon" style="color:#ef4444; background:rgba(239,68,68,0.1)"><i class="fa-solid fa-bell"></i></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Em Aberto</h3><p id="count-neg">0</p></div><div class="metric-icon"><i class="fa-solid fa-comments"></i></div></div>
+                <div class="metric-card"><div class="metric-info"><h3>Alertas</h3><p>3</p></div><div class="metric-icon" style="color:var(--danger); background:rgba(239,68,68,0.1)"><i class="fa-solid fa-bell"></i></div></div>
             </section>
 
             <div class="dashboard-workspace">
@@ -121,27 +111,24 @@
                     </section>
                     
                     <div class="analytics-container">
-                        <section class="content-box" style="margin-bottom:0;">
+                        <section class="content-box">
                             <div class="box-title"><span><i class="fa-solid fa-filter"></i> Funil de Vendas</span></div>
-                            <div class="funnel-step"><span>Novos</span><strong id="f-novos">0</strong></div>
+                            <div class="funnel-step"><span>Novos</span><strong id="dash-f-novos">0</strong></div>
                             <div class="funnel-step" style="width:90%; margin-left:5%;"><span>Visitas</span><strong>4</strong></div>
                             <div class="funnel-step" style="width:80%; margin-left:10%; border-color:var(--primary);"><span>Propostas</span><strong>2</strong></div>
                         </section>
-                        <section class="content-box" style="margin-bottom:0;">
-                            <div class="box-title">
-                                <span><i class="fa-solid fa-bullseye"></i> Metas do Mês</span>
-                                <i class="fa-solid fa-gear" onclick="toggleMetaModal(true)" style="cursor:pointer; color:gray;"></i>
-                            </div>
-                            <p style="font-size:13px; font-weight:700;"><span id="meta-txt">R$ 0 / R$ 100.000</span></p>
-                            <div class="progress-bar"><div id="meta-bar" class="progress-fill" style="width: 0%;"></div></div>
-                            <p style="font-size:11px; color:gray; margin-top:10px;">Progresso: <span id="meta-perc">0</span>%</p>
+                        <section class="content-box">
+                            <div class="box-title"><span><i class="fa-solid fa-bullseye"></i> Metas do Mês</span><i class="fa-solid fa-gear" onclick="toggleMetaModal(true)" style="cursor:pointer; color:gray;"></i></div>
+                            <p style="font-size:13px; font-weight:700;"><span id="dash-meta-txt">R$ 0 / R$ 100.000</span></p>
+                            <div class="progress-bar"><div id="dash-meta-bar" class="progress-fill" style="width: 0%;"></div></div>
+                            <p style="font-size:11px; color:gray; margin-top:10px;">Progresso: <span id="dash-meta-perc">0</span>%</p>
                         </section>
                     </div>
                 </div>
 
                 <div class="right-col">
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-calendar-day"></i> Agenda de Visitas</div>
+                        <div class="box-title"><span><i class="fa-solid fa-calendar-day"></i> Agenda de Visitas</span></div>
                         <div class="agenda-item">
                             <div class="agenda-time">10:00<br><small>HOJE</small></div>
                             <div><strong>Visita Marcos Silva</strong><p style="font-size:11px; color:gray">Condomínio Alpha</p></div>
@@ -149,9 +136,9 @@
                         <button style="background:#fff; border:1px solid #ddd; width:100%; padding:10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;" onclick="window.open('https://calendar.google.com/','_blank')">Sincronizar Google</button>
                     </section>
                     <section class="content-box">
-                        <div class="box-title"><i class="fa-solid fa-rss"></i> Radar do Mercado</div>
-                        <a href="https://exame.com/esg/mercado-imobiliario-veja-as-tendencias-para-2026/" target="_blank" style="color:var(--primary); font-size:11px; font-weight:800; text-decoration:none; text-transform:uppercase; display:block; margin-bottom:5px;">EXAME</a>
-                        <p style="font-size:14px; font-weight:700; line-height:1.4;">Procura por imóveis de alto padrão cresce 14% em SP.</p>
+                        <div class="box-title"><span><i class="fa-solid fa-rss"></i> Radar do Mercado</span></div>
+                        <span style="color:var(--primary); font-size:11px; font-weight:800; text-transform:uppercase; display:block; margin-bottom:5px;">EXAME</span>
+                        <p style="font-size:14px; font-weight:700; line-height:1.4;">Procura por imóveis cresce 14% em SP.</p>
                         <div style="margin-top:15px; display:flex; gap:10px;">
                             <a href="https://www.zapimoveis.com.br" target="_blank" style="font-size:11px; font-weight:800; color:var(--primary); text-decoration:none;">ZAP</a>
                             <a href="https://www.vivareal.com.br" target="_blank" style="font-size:11px; font-weight:800; color:var(--primary); text-decoration:none;">VIVA REAL</a>
@@ -166,20 +153,39 @@
             <div id="leads-list"></div>
         </div>
 
+        <div id="performance" class="tab-content">
+            <div class="dash-header"><h1>Performance e Metas</h1></div>
+            <div class="dashboard-workspace" style="grid-template-columns: 1fr 1fr;">
+                <section class="content-box">
+                    <div class="box-title">Funil Comercial Detalhado</div>
+                    <div class="funnel-step"><span>Leads Captados</span><strong id="f-cap">0</strong></div>
+                    <div class="funnel-step" style="width:90%; margin-left:5%;"><span>Qualificados</span><strong>8</strong></div>
+                    <div class="funnel-step" style="width:80%; margin-left:10%;"><span>Em Negociação</span><strong>4</strong></div>
+                    <div class="funnel-step" style="width:70%; margin-left:15%; border-color:var(--primary);"><span>Fechamentos</span><strong>2</strong></div>
+                </section>
+                <section class="content-box">
+                    <div class="box-title">Objetivo de Comissões</div>
+                    <p style="font-size:24px; font-weight:800;" id="full-meta-txt">R$ 0 / R$ 100.000</p>
+                    <div class="progress-bar" style="height:20px;"><div id="full-meta-bar" class="progress-fill" style="width:0%"></div></div>
+                    <p style="margin-top:20px; color:gray;">Você atingiu <span id="full-meta-perc">0</span>% da meta mensal.</p>
+                </section>
+            </div>
+        </div>
+
         <div id="central-ia" class="tab-content">
             <div class="dash-header"><h1>Central de Inteligência Artificial</h1></div>
             <div class="content-box">
-                <label style="font-weight:700; font-size:14px;">Cliente</label>
-                <select id="ia-select-lead" style="width:100%; padding:12px; border:1px solid var(--border); border-radius:8px; margin-top:10px;"></select>
-                <textarea id="ia-textarea" style="width:100%; height:180px; border:1px solid var(--border); border-radius:12px; padding:15px; margin-top:15px; resize:none;" placeholder="Cole a conversa aqui..."></textarea>
-                <div id="ia-result" style="margin-top:20px; padding:20px; background:#f1f5f9; border-radius:8px; border-left:4px solid var(--primary); display:none;"></div>
+                <label style="font-weight:700; font-size:14px;">Lead Selecionado</label>
+                <select id="ia-select-lead" style="width:100%; padding:12px; border:1px solid var(--border); border-radius:8px; margin:10px 0 20px;"></select>
+                <textarea id="ia-textarea" style="width:100%; height:180px; border:1px solid var(--border); border-radius:12px; padding:15px; resize:none;" placeholder="Cole a conversa aqui..."></textarea>
+                <div id="ia-result" style="margin-top:20px; padding:20px; background:#f1f5f9; border-radius:8px; border-left:4px solid var(--primary); display:none; font-size:14px; line-height:1.6;"></div>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-top:20px;">
                     <button class="btn-ia-tool" onclick="executarIA('qualificar')">Qualificar Perfil</button>
                     <button class="btn-ia-tool" onclick="executarIA('resumir')">Resumo Proprietário</button>
                     <button class="btn-ia-tool" onclick="executarIA('proximo')">Próximo Passo</button>
                     <button class="btn-ia-tool" onclick="executarIA('copy')">Mensagem Copy</button>
                 </div>
-                <button class="btn-add-lead" style="width:100%; justify-content:center; margin-top:20px; height:55px; font-size:16px;" onclick="executarIA('completa')">EXECUTAR ANÁLISE MASTER</button>
+                <button class="btn-add-lead" id="btn-master-ia" style="width:100%; justify-content:center; margin-top:20px; height:55px; font-size:16px;" onclick="executarIA('completa')">EXECUTAR ANÁLISE MASTER</button>
             </div>
         </div>
     </main>
@@ -188,35 +194,18 @@
         <div class="modal-content">
             <h2 id="f-titulo" style="margin-bottom:20px;">Ficha do Cliente</h2>
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                <div class="form-group"><label>Nome do Lead</label><input type="text" id="f-nome"></div>
+                <div class="form-group"><label>Nome</label><input type="text" id="f-nome"></div>
                 <div class="form-group"><label>WhatsApp</label><input type="text" id="f-phone"></div>
-                <div class="form-group"><label>Budget (R$)</label><input type="text" id="f-budget"></div>
-                <div class="form-group"><label>Status</label>
-                    <select id="f-status">
-                        <option value="Novo">Novo Lead</option>
-                        <option value="Atendimento">Atendimento</option>
-                        <option value="Proposta">Proposta</option>
-                        <option value="Fechado">Venda Concluída</option>
-                    </select>
-                </div>
-                <div class="form-group" style="grid-column: span 2;"><label>Interesse / Imóvel</label><input type="text" id="f-interesse"></div>
-                <div class="form-group" style="grid-column: span 2;"><label>Histórico e Observações</label><textarea id="f-obs" style="height:120px; resize:none;"></textarea></div>
+                <div class="form-group"><label>Budget</label><input type="text" id="f-budget"></div>
+                <div class="form-group"><label>Status</label><select id="f-status"><option value="Novo">Novo</option><option value="Atendimento">Atendimento</option><option value="Proposta">Proposta</option><option value="Venda">Venda</option></select></div>
+                <div class="form-group" style="grid-column: span 2;"><label>Interesse</label><input type="text" id="f-interesse"></div>
+                <div class="form-group" style="grid-column: span 2;"><label>Observações</label><textarea id="f-obs" style="height:100px;"></textarea></div>
             </div>
-            <div style="margin-top:20px; display:flex; gap:10px;">
-                <button class="btn-black-action" style="flex:1;" onclick="toggleModal('modal-ficha', false)">Cancelar</button>
-                <button class="btn-add-lead" style="flex:1; justify-content:center;" onclick="salvarFicha()">Salvar Alterações</button>
-            </div>
+            <div style="margin-top:20px; display:flex; gap:10px;"><button class="btn-black-action" style="flex:1" onclick="toggleModal('modal-ficha', false)">Cancelar</button><button class="btn-add-lead" style="flex:1; justify-content:center" onclick="salvarFicha()">Salvar Alterações</button></div>
         </div>
     </div>
 
-    <div id="modal-metas" class="modal">
-        <div class="modal-content" style="max-width:400px;">
-            <h3>Configurar Objetivos</h3>
-            <div class="form-group" style="margin-top:15px;"><label>Valor Atual (R$)</label><input type="number" id="in-atual"></div>
-            <div class="form-group"><label>Meta Mensal (R$)</label><input type="number" id="in-total"></div>
-            <button class="btn-add-lead" style="width:100%; justify-content:center;" onclick="salvarMetas()">Salvar Meta</button>
-        </div>
-    </div>
+    <div id="modal-metas" class="modal"><div class="modal-content" style="max-width:400px;"><h3>Configurar Metas</h3><div class="form-group" style="margin-top:15px;"><label>Valor Atual</label><input type="number" id="in-atual"></div><div class="form-group"><label>Meta Total</label><input type="number" id="in-total"></div><button class="btn-add-lead" style="width:100%; justify-content:center" onclick="salvarMetas()">Salvar</button></div></div>
 
     <script>
         const SUPABASE_URL = 'https://dcwagzqjzeqgqvpgmnlt.supabase.co';
@@ -224,23 +213,17 @@
         const GEMINI_API_KEY = 'AIzaSyAbUtuXf-zAC3zcAjDhuHCVSV7E4iYBITM';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        let leadsCache = [];
-        let leadIdEdicao = null;
+        let leadsCache = []; let leadIdEdicao = null;
 
         async function carregarDados() {
             const { data } = await _supabase.from('leads').select('*').order('created_at', { ascending: false });
             leadsCache = data || [];
-            
-            const table = document.getElementById('resumo-table-body');
-            const list = document.getElementById('leads-list');
-            const iaSelect = document.getElementById('ia-select-lead');
+            const table = document.getElementById('resumo-table-body'); const list = document.getElementById('leads-list'); const iaSelect = document.getElementById('ia-select-lead');
             table.innerHTML = ''; list.innerHTML = ''; iaSelect.innerHTML = '<option value="">Selecione...</option>';
-
             leadsCache.forEach(l => {
-                const isHot = l.status === 'Proposta' || l.status === 'Atendimento';
                 table.innerHTML += `<tr><td style="padding:12px;"><strong>${l.nome}</strong></td><td>Manual</td><td><button class="btn-gerenciar" onclick="switchTab('leads')">GERENCIAR</button></td></tr>`;
                 list.innerHTML += `
-                    <div class="lead-profile-card ${isHot ? 'hot-border' : ''}">
+                    <div class="lead-profile-card">
                         <i class="fa-solid fa-trash-can btn-delete-lead" onclick="deletarLead('${l.id}')"></i>
                         <h2>${l.nome}</h2>
                         <div class="lead-info-grid">
@@ -256,77 +239,32 @@
                     </div>`;
                 iaSelect.innerHTML += `<option value="${l.id}">${l.nome}</option>`;
             });
-
             document.getElementById('count-total').innerText = leadsCache.length;
-            document.getElementById('f-novos').innerText = leadsCache.length;
+            document.getElementById('dash-f-novos').innerText = leadsCache.length;
+            document.getElementById('f-cap').innerText = leadsCache.length;
             atualizarVisualMetas();
         }
 
-        function abrirFicha(id) {
-            const l = leadsCache.find(x => x.id === id);
-            leadIdEdicao = id;
-            document.getElementById('f-titulo').innerText = `Editando: ${l.nome}`;
-            document.getElementById('f-nome').value = l.nome || '';
-            document.getElementById('f-phone').value = l.telefone || '';
-            document.getElementById('f-budget').value = l.budget || '';
-            document.getElementById('f-status').value = l.status || 'Novo';
-            document.getElementById('f-interesse').value = l.interesse || '';
-            document.getElementById('f-obs').value = l.observacoes || '';
-            toggleModal('modal-ficha', true);
-        }
-
-        async function salvarFicha() {
-            const up = {
-                nome: document.getElementById('f-nome').value,
-                telefone: document.getElementById('f-phone').value,
-                budget: document.getElementById('f-budget').value,
-                status: document.getElementById('f-status').value,
-                interesse: document.getElementById('f-interesse').value,
-                observacoes: document.getElementById('f-obs').value
-            };
-            await _supabase.from('leads').update(up).eq('id', leadIdEdicao);
-            toggleModal('modal-ficha', false); carregarDados();
-        }
-
         async function executarIA(tipo) {
-            const texto = document.getElementById('ia-textarea').value;
-            if(!texto) return alert("Cole uma conversa!");
-            const resultBox = document.getElementById('ia-result');
-            resultBox.style.display = 'block'; resultBox.innerHTML = 'IA Processando...';
+            const texto = document.getElementById('ia-textarea').value; if(!texto) return alert("Cole a conversa!");
+            const btn = document.getElementById('btn-master-ia'); const res = document.getElementById('ia-result');
+            btn.innerHTML = 'ANALISANDO...'; res.style.display = 'block'; res.innerHTML = 'Conectando ao Gemini...';
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: "Analise como corretor profissional: " + texto }] }] })
-                });
-                const data = await response.json();
-                resultBox.innerHTML = `<strong>Resultado IA:</strong><br><br>${data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}`;
-            } catch (e) { resultBox.innerHTML = "Erro na conexão."; }
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+                const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: "Atue como um corretor experiente. Analise: " + texto }] }] }) });
+                const d = await r.json(); res.innerHTML = `<strong>Resultado IA:</strong><br><br>${d.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}`;
+            } catch (e) { res.innerHTML = "Erro na conexão."; } finally { btn.innerHTML = 'EXECUTAR ANÁLISE MASTER'; }
         }
 
-        function salvarMetas() {
-            localStorage.setItem('m_at', document.getElementById('in-atual').value);
-            localStorage.setItem('m_to', document.getElementById('in-total').value);
-            atualizarVisualMetas(); toggleModal('modal-metas', false);
-        }
-
-        function atualizarVisualMetas() {
-            const at = localStorage.getItem('m_at') || 0;
-            const to = localStorage.getItem('m_to') || 100000;
-            const pc = Math.round((at / to) * 100);
-            document.getElementById('meta-txt').innerText = `R$ ${Number(at).toLocaleString()} / R$ ${Number(to).toLocaleString()}`;
-            document.getElementById('meta-bar').style.width = pc + '%';
-            document.getElementById('meta-perc').innerText = pc;
-        }
-
-        async function deletarLead(id) { if(confirm("Deletar lead?")) { await _supabase.from('leads').delete().eq('id', id); carregarDados(); } }
+        function abrirNovoLead() { leadIdEdicao = null; document.getElementById('f-nome').value = ''; document.getElementById('f-phone').value = ''; document.getElementById('f-budget').value = ''; document.getElementById('f-interesse').value = ''; document.getElementById('f-obs').value = ''; toggleModal('modal-ficha', true); }
+        function abrirFicha(id) { leadIdEdicao = id; const l = leadsCache.find(x => x.id === id); document.getElementById('f-nome').value = l.nome; document.getElementById('f-phone').value = l.telefone; document.getElementById('f-budget').value = l.budget; document.getElementById('f-status').value = l.status || 'Novo'; document.getElementById('f-interesse').value = l.interesse; document.getElementById('f-obs').value = l.observacoes || ''; toggleModal('modal-ficha', true); }
+        async function salvarFicha() { const up = { nome: document.getElementById('f-nome').value, telefone: document.getElementById('f-phone').value, budget: document.getElementById('f-budget').value, status: document.getElementById('f-status').value, interesse: document.getElementById('f-interesse').value, observacoes: document.getElementById('f-obs').value }; if(leadIdEdicao) { await _supabase.from('leads').update(up).eq('id', leadIdEdicao); } else { await _supabase.from('leads').insert([up]); } toggleModal('modal-ficha', false); carregarDados(); }
+        async function deletarLead(id) { if(confirm("Deletar lead permanentemente?")) { await _supabase.from('leads').delete().eq('id', id); carregarDados(); } }
+        function salvarMetas() { localStorage.setItem('m_at', document.getElementById('in-atual').value); localStorage.setItem('m_to', document.getElementById('in-total').value); atualizarVisualMetas(); toggleModal('modal-metas', false); }
+        function atualizarVisualMetas() { const at = localStorage.getItem('m_at') || 0; const to = localStorage.getItem('m_to') || 100000; const pc = Math.round((at / to) * 100); document.getElementById('dash-meta-txt').innerText = `R$ ${Number(at).toLocaleString()} / R$ ${Number(to).toLocaleString()}`; document.getElementById('dash-meta-bar').style.width = pc + '%'; document.getElementById('full-meta-txt').innerText = `R$ ${Number(at).toLocaleString()} / R$ ${Number(to).toLocaleString()}`; document.getElementById('full-meta-bar').style.width = pc + '%'; document.getElementById('full-meta-perc').innerText = pc; document.getElementById('dash-meta-perc').innerText = pc; }
         function toggleModal(id, s) { document.getElementById(id).style.display = s ? 'flex' : 'none'; }
         function toggleMetaModal(s) { toggleModal('modal-metas', s); }
-        function switchTab(t) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
-            document.getElementById(t).classList.add('active');
-            if(document.getElementById('menu-'+t)) document.getElementById('menu-'+t).classList.add('active');
-        }
+        function switchTab(t) { document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active')); document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active')); document.getElementById(t).classList.add('active'); if(document.getElementById('menu-'+t)) document.getElementById('menu-'+t).classList.add('active'); }
         window.onload = carregarDados;
     </script>
 </body>
