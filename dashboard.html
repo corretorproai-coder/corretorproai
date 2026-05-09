@@ -30,7 +30,7 @@
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .user-profile { display: flex; align-items: center; gap: 10px; background: #fff; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 13px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
 
-        /* GRID & LAYOUT */
+        /* GRID & CARDS */
         .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 35px; }
         .metric-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: space-between; }
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
@@ -61,17 +61,32 @@
         .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 12px; border-radius: 4px; font-weight: 800; cursor: pointer; font-size: 11px; text-transform: uppercase; }
         .btn-wa-action { background: #25d366; color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
         .btn-black-action { background: var(--secondary); color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; border: none; }
-        
-        /* NOVO: Botão Agenda dentro da Ficha */
-        .btn-google-calendar { background: #fff; color: #4285f4; border: 1px solid #4285f4; padding: 10px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 15px; width: 100%; justify-content: center; transition: 0.2s; }
-        .btn-google-calendar:hover { background: #4285f4; color: #fff; }
 
-        /* MODAIS */
+        /* MODAL PREMIUM (COM SCROLL) */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
-        .modal-content { background: white; padding: 32px; border-radius: 16px; width: 90%; max-width: 550px; max-height: 90vh; overflow-y: auto; }
+        .modal-content { background: white; border-radius: 16px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 0; border: none; }
+        .modal-body { padding: 30px; }
+        
+        /* AÇÕES RÁPIDAS (ESTILO IMAGE_BA0FA3) */
+        .quick-actions-box { background: #d9b36c; padding: 20px; display: flex; justify-content: space-around; align-items: center; border-radius: 12px 12px 0 0; }
+        .qa-btn { text-align: center; color: var(--secondary); font-size: 11px; font-weight: 800; cursor: pointer; text-decoration: none; }
+        .qa-icon { width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-size: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-left: auto; margin-right: auto; }
+        .qa-icon.red { background: #ef4444; color: white; }
+
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; background: #fafafa; }
+
+        /* MOBILE FIX */
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; height: 70px; flex-direction: row; bottom: 0; top: auto; border-top: 1px solid var(--border); border-right: none; }
+            .sidebar-brand { display: none; }
+            .sidebar-menu { flex-direction: row; padding: 0; justify-content: space-around; width: 100%; }
+            .sidebar-menu li a { flex-direction: column; gap: 4px; font-size: 10px; padding: 10px; }
+            .main-content { margin-left: 0; padding: 20px 15px 100px; }
+            .metrics-grid, .dashboard-workspace, .analytics-container { grid-template-columns: 1fr; }
+            .modal-content { width: 95%; }
+        }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -196,25 +211,47 @@
 
     <div id="modal-ficha" class="modal">
         <div class="modal-content">
-            <h2 id="f-titulo" style="margin-bottom:20px;">Ficha do Cliente</h2>
-            
-            <button class="btn-google-calendar" onclick="agendarLeadGoogle()">
-                <i class="fa-brands fa-google"></i> Agendar Visita com este Lead
-            </button>
-
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                <div class="form-group"><label>Nome</label><input type="text" id="f-nome"></div>
-                <div class="form-group"><label>WhatsApp</label><input type="text" id="f-phone"></div>
-                <div class="form-group"><label>Budget</label><input type="text" id="f-budget"></div>
-                <div class="form-group"><label>Status</label><select id="f-status"><option value="Novo">Novo</option><option value="Atendimento">Atendimento</option><option value="Proposta">Proposta</option><option value="Venda">Venda</option></select></div>
-                <div class="form-group" style="grid-column: span 2;"><label>Interesse</label><input type="text" id="f-interesse"></div>
-                <div class="form-group" style="grid-column: span 2;"><label>Observações</label><textarea id="f-obs" style="height:100px;"></textarea></div>
+            <div class="quick-actions-box">
+                <a class="qa-btn" onclick="agendarLeadGoogle()">
+                    <div class="qa-icon"><i class="fa-solid fa-clock"></i></div>
+                    Agendar Visita<br>(Google)
+                </a>
+                <a class="qa-btn" onclick="window.open('https://calendar.google.com/')">
+                    <div class="qa-icon red"><i class="fa-solid fa-calendar-days"></i></div>
+                    Agenda de<br>Visitas
+                </a>
             </div>
-            <div style="margin-top:20px; display:flex; gap:10px;"><button class="btn-black-action" style="flex:1" onclick="toggleModal('modal-ficha', false)">Cancelar</button><button class="btn-add-lead" style="flex:1; justify-content:center" onclick="salvarFicha()">Salvar Alterações</button></div>
+
+            <div class="modal-body">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <h2 id="f-titulo">Ficha do Cliente</h2>
+                    <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:20px;" onclick="toggleModal('modal-ficha', false)"></i>
+                </div>
+                
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                    <div class="form-group"><label><i class="fa-solid fa-user"></i> Nome</label><input type="text" id="f-nome"></div>
+                    <div class="form-group"><label><i class="fa-brands fa-whatsapp"></i> WhatsApp</label><input type="text" id="f-phone"></div>
+                    <div class="form-group"><label><i class="fa-solid fa-wallet"></i> Budget</label><input type="text" id="f-budget"></div>
+                    <div class="form-group"><label><i class="fa-solid fa-tag"></i> Status</label>
+                        <select id="f-status">
+                            <option value="Novo">Novo</option>
+                            <option value="Atendimento">Atendimento</option>
+                            <option value="Proposta">Proposta</option>
+                            <option value="Venda">Venda</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;"><label><i class="fa-solid fa-heart"></i> Interesse</label><input type="text" id="f-interesse"></div>
+                    <div class="form-group" style="grid-column: span 2;"><label><i class="fa-solid fa-pen-to-square"></i> Observações (Histórico do Cliente)</label><textarea id="f-obs" style="height:120px; resize:none;"></textarea></div>
+                </div>
+                <div style="margin-top:20px; display:flex; gap:10px;">
+                    <button class="btn-black-action" style="flex:1" onclick="toggleModal('modal-ficha', false)">Cancelar</button>
+                    <button class="btn-add-lead" style="flex:1; justify-content:center" onclick="salvarFicha()">Salvar Alterações</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="modal-metas" class="modal"><div class="modal-content" style="max-width:400px;"><h3>Configurar Metas</h3><div class="form-group" style="margin-top:15px;"><label>Valor Atual</label><input type="number" id="in-atual"></div><div class="form-group"><label>Meta Total</label><input type="number" id="in-total"></div><button class="btn-add-lead" style="width:100%; justify-content:center" onclick="salvarMetas()">Salvar</button></div></div>
+    <div id="modal-metas" class="modal"><div class="modal-content" style="max-width:400px; padding:30px;"><h3>Configurar Metas</h3><div class="form-group" style="margin-top:15px;"><label>Valor Atual</label><input type="number" id="in-atual"></div><div class="form-group"><label>Meta Total</label><input type="number" id="in-total"></div><button class="btn-add-lead" style="width:100%; justify-content:center" onclick="salvarMetas()">Salvar</button></div></div>
 
     <script>
         const SUPABASE_URL = 'https://dcwagzqjzeqgqvpgmnlt.supabase.co';
@@ -242,19 +279,18 @@
 
         function agendarLeadGoogle() {
             const nome = document.getElementById('f-nome').value;
-            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Visita:+${encodeURIComponent(nome)}`;
-            window.open(url, '_blank');
+            window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Visita:+${encodeURIComponent(nome)}`, '_blank');
         }
 
         async function executarIA(tipo) {
-            const texto = document.getElementById('ia-textarea').value; if(!texto) return;
+            const texto = document.getElementById('ia-textarea').value; if(!texto) return alert("Cole a conversa!");
             const btn = document.getElementById('btn-master-ia'); const res = document.getElementById('ia-result');
-            btn.innerHTML = 'ANALISANDO...'; res.style.display = 'block'; res.innerHTML = 'IA Conectada...';
+            btn.innerHTML = 'ANALISANDO...'; res.style.display = 'block'; res.innerHTML = 'IA Processando...';
             try {
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-                const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: "Analise: " + texto }] }] }) });
-                const d = await r.json(); res.innerHTML = `<strong>Resultado:</strong><br><br>${d.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}`;
-            } catch (e) { res.innerHTML = "Erro."; } finally { btn.innerHTML = 'EXECUTAR ANÁLISE MASTER'; }
+                const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: "Atue como corretor especialista: " + texto }] }] }) });
+                const d = await response.json(); res.innerHTML = `<strong>Resultado IA:</strong><br><br>${d.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}`;
+            } catch (e) { res.innerHTML = "Erro na conexão."; } finally { btn.innerHTML = 'EXECUTAR ANÁLISE MASTER'; }
         }
 
         function abrirNovoLead() { leadIdEdicao = null; document.getElementById('f-nome').value = ''; document.getElementById('f-phone').value = ''; document.getElementById('f-budget').value = ''; document.getElementById('f-status').value = 'Novo'; document.getElementById('f-interesse').value = ''; document.getElementById('f-obs').value = ''; toggleModal('modal-ficha', true); }
@@ -262,8 +298,9 @@
         async function salvarFicha() { const up = { nome: document.getElementById('f-nome').value, telefone: document.getElementById('f-phone').value, budget: document.getElementById('f-budget').value, status: document.getElementById('f-status').value, interesse: document.getElementById('f-interesse').value, observacoes: document.getElementById('f-obs').value }; if(leadIdEdicao) await _supabase.from('leads').update(up).eq('id', leadIdEdicao); else await _supabase.from('leads').insert([up]); toggleModal('modal-ficha', false); carregarDados(); }
         async function deletarLead(id) { if(confirm("Remover?")) { await _supabase.from('leads').delete().eq('id', id); carregarDados(); } }
         function salvarMetas() { localStorage.setItem('m_at', document.getElementById('in-atual').value); localStorage.setItem('m_to', document.getElementById('in-total').value); atualizarVisualMetas(); toggleModal('modal-metas', false); }
-        function atualizarVisualMetas() { const at = localStorage.getItem('m_at') || 0; const to = localStorage.getItem('m_to') || 100000; const pc = Math.round((at / to) * 100); document.getElementById('dash-meta-txt').innerText = `R$ ${Number(at).toLocaleString()} / R$ ${Number(to).toLocaleString()}`; document.getElementById('dash-meta-bar').style.width = pc + '%'; document.getElementById('full-meta-txt').innerText = `R$ ${Number(at).toLocaleString()}`; document.getElementById('full-meta-bar').style.width = pc + '%'; document.getElementById('dash-meta-perc').innerText = pc; }
+        function atualizarVisualMetas() { const at = localStorage.getItem('m_at') || 0; const to = localStorage.getItem('m_to') || 100000; const pc = Math.round((at / to) * 100); document.getElementById('dash-meta-txt').innerText = `R$ ${Number(at).toLocaleString()} / R$ ${Number(to).toLocaleString()}`; document.getElementById('dash-meta-bar').style.width = pc + '%'; document.getElementById('full-meta-txt').innerText = `R$ ${Number(at).toLocaleString()} / R$ ${Number(to).toLocaleString()}`; document.getElementById('full-meta-bar').style.width = pc + '%'; document.getElementById('dash-meta-perc').innerText = pc; }
         function toggleModal(id, s) { document.getElementById(id).style.display = s ? 'flex' : 'none'; }
+        function toggleMetaModal(s) { toggleModal('modal-metas', s); }
         function switchTab(t) { document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active')); document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active')); document.getElementById(t).classList.add('active'); if(document.getElementById('menu-'+t)) document.getElementById('menu-'+t).classList.add('active'); }
         window.onload = carregarDados;
     </script>
