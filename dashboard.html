@@ -43,18 +43,20 @@
         .metric-info p { font-size: 32px; font-weight: 800; color: #0f172a; margin-top: 8px; }
         .metric-icon { width: 48px; height: 48px; background: rgba(242, 183, 5, 0.1); color: #d9a304; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 
-        /* AGENDA & FUNIL */
+        /* WORKSPACE */
         .dashboard-workspace { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
         .content-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-        
+
+        /* FUNIL E METAS */
         .analytics-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
-        .funnel-step { background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); font-size: 13px; }
+        .funnel-step { background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); font-size: 13px; font-weight: 600; }
         .progress-bar { width: 100%; height: 8px; background: #e2e8f0; border-radius: 10px; margin-top: 10px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary); border-radius: 10px; }
 
+        /* AGENDA */
         .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid var(--primary); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; }
-        .agenda-time { font-size: 12px; font-weight: 800; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; min-width: 65px; text-align: center; }
+        .agenda-time { font-size: 11px; font-weight: 800; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; min-width: 65px; text-align: center; line-height: 1.2; }
         .agenda-status { font-size: 10px; background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px; font-weight: 800; display: inline-block; margin-top: 4px; }
 
         /* LEADS CARDS */
@@ -69,8 +71,8 @@
         .ia-actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
         .btn-ia-tool { background: #f8fafc; border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; color: var(--secondary); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .btn-ia-tool:hover { border-color: var(--primary); background: rgba(242, 183, 5, 0.05); }
-        .ia-textarea { width: 100%; height: 180px; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-top: 10px; resize:none; font-size: 14px; }
-        #ia-result { margin-top: 20px; padding: 20px; background: #f1f5f9; border-radius: 8px; display: none; border-left: 4px solid var(--primary); font-size: 14px; line-height: 1.6; }
+        .ia-textarea { width: 100%; height: 180px; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-top: 10px; resize:none; font-size: 14px; outline: none; }
+        #ia-result { margin-top: 20px; padding: 20px; background: #f1f5f9; border-radius: 8px; display: none; border-left: 4px solid var(--primary); font-size: 14px; line-height: 1.6; color: #0f172a; }
 
         /* BUTTONS */
         .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
@@ -81,12 +83,14 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
 
         @media (max-width: 768px) {
-            .sidebar { width: 100%; height: 65px; flex-direction: row; bottom: 0; top: auto; border-top: 1px solid var(--border); }
+            .sidebar { width: 100%; height: 65px; flex-direction: row; bottom: 0; top: auto; border-top: 1px solid var(--border); border-right: none; }
             .sidebar-brand { display: none; }
             .sidebar-menu { flex-direction: row; padding: 0; justify-content: space-around; width: 100%; }
-            .sidebar-menu li a span { display: none; }
+            .sidebar-menu li a { flex-direction: column; gap: 4px; font-size: 10px; padding: 10px; }
+            .sidebar-menu li a span { display: block; }
             .main-content { margin-left: 0; padding: 20px 15px 100px; }
             .metrics-grid, .analytics-container, .dashboard-workspace { grid-template-columns: 1fr; }
+            .metric-card { padding: 15px; }
         }
     </style>
 </head>
@@ -129,10 +133,12 @@
                 <div class="left-col">
                     <section class="content-box">
                         <div class="box-title">Últimos Leads Recebidos</div>
-                        <table style="width:100%; border-collapse:collapse; font-size:14px;">
-                            <thead><tr style="text-align:left; color:gray;"><th style="padding:12px;">Nome</th><th>Origem</th><th>Ação</th></tr></thead>
-                            <tbody id="resumo-table-body"></tbody>
-                        </table>
+                        <div style="overflow-x: auto;">
+                            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                                <thead><tr style="text-align:left; color:gray;"><th style="padding:12px;">Nome</th><th>Origem</th><th>Ação</th></tr></thead>
+                                <tbody id="resumo-table-body"></tbody>
+                            </table>
+                        </div>
                     </section>
                     
                     <div class="analytics-container">
@@ -157,7 +163,7 @@
                             <div class="agenda-time">10:00<br><small>HOJE</small></div>
                             <div><strong>Visita Marcos da Silva</strong><p style="font-size:11px; color:gray"><i class="fa-solid fa-location-dot"></i> Condomínio Alpha</p><span class="agenda-status">CONFIRMADO</span></div>
                         </div>
-                        <button style="background:#fff; border:1px solid #ddd; width:100%; padding:10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;" onclick="window.open('https://calendar.google.com/','_blank')">
+                        <button style="background:#fff; border:1px solid #ddd; width:100%; padding:10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; margin-top:10px;" onclick="window.open('https://calendar.google.com/','_blank')">
                             <img src="https://www.google.com/favicon.ico" width="14" style="vertical-align:middle; margin-right:5px;"> Sincronizar Google Agenda
                         </button>
                     </section>
@@ -167,7 +173,7 @@
         </div>
 
         <div id="leads" class="tab-content">
-            <div class="dash-header"><h1>Gerenciador de Leads</h1><button class="btn-add-lead" onclick="toggleModal(true)">+ Novo Lead</button></div>
+            <div class="dash-header"><h1>Gerenciador de Leads</h1></div>
             <div id="leads-list"></div>
         </div>
 
@@ -185,7 +191,7 @@
 
                     <div class="ia-actions-grid">
                         <button class="btn-ia-tool" onclick="analisarIA('qualificar')"><i class="fa-solid fa-address-card"></i> Qualificar</button>
-                        <button class="btn-ia-tool" onclick="analisarIA('resumir')"><i class="fa-solid fa-file-lines"></i> Resumo p/ Proprietário</button>
+                        <button class="btn-ia-tool" onclick="analisarIA('resumir')"><i class="fa-solid fa-file-lines"></i> Resumo IA</button>
                         <button class="btn-ia-tool" onclick="analisarIA('proximo')"><i class="fa-solid fa-lightbulb"></i> Próximo Passo</button>
                         <button class="btn-ia-tool" onclick="analisarIA('copy')"><i class="fa-solid fa-bullhorn"></i> Criar Copy</button>
                     </div>
@@ -197,20 +203,10 @@
         </div>
     </main>
 
-    <div id="modal-add-lead" class="form-modal">
-        <div class="modal-content">
-            <h2 style="margin-bottom:20px;">Novo Lead</h2>
-            <div style="margin-bottom:10px;"><label style="font-size:11px; font-weight:700;">NOME</label><input type="text" id="new-nome" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px;"></div>
-            <div style="margin-bottom:10px;"><label style="font-size:11px; font-weight:700;">WHATSAPP</label><input type="text" id="new-phone" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px;"></div>
-            <div style="margin-bottom:20px;"><label style="font-size:11px; font-weight:700;">BUDGET</label><input type="text" id="new-budget" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px;"></div>
-            <div style="display:flex; gap:10px;"><button class="btn-black-action" style="flex:1;" onclick="toggleModal(false)">Cancelar</button><button class="btn-add-lead" style="flex:1; justify-content:center;" onclick="salvarLead()">Salvar</button></div>
-        </div>
-    </div>
-
     <script>
         const SUPABASE_URL = 'https://dcwagzqjzeqgqvpgmnlt.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRjd2FnenFqemVxZ3F2cGdtbmx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwMjYzOTcsImV4cCI6MjA5MzYwMjM5N30.YikhYyG7_0Tgx7A6M3g05swwvGRK42x9xIJ0INa52yw';
-        const GEMINI_API_KEY = 'AIzaSyAbUtuXf-zAC3zcAjDhuHCVSV7E4iYBITM';
+        const GEMINI_API_KEY = 'AIzaSyAbUtuXf-zAC3zcAjDhuHCVSV7E4iYBITM'; // Se este erro persistir, verifique a chave no Google AI Studio
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         async function analisarIA(tipo) {
@@ -218,19 +214,20 @@
             if(!texto) return alert("Cole uma conversa!");
             const btn = document.getElementById('btn-master-ia');
             const resultBox = document.getElementById('ia-result');
+            
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ANALISANDO...';
-            resultBox.style.display = 'block'; resultBox.innerHTML = 'IA Processando...';
+            resultBox.style.display = 'block'; 
+            resultBox.innerHTML = 'Conectando ao Google Gemini...';
 
             const prompts = {
-                qualificar: "Extraia perfil, budget e urgência: ",
-                resumir: "Resumo profissional para o proprietário: ",
-                proximo: "Qual o melhor próximo passo? ",
-                copy: "Crie uma mensagem persuasiva de WhatsApp: ",
-                completa: "Análise completa de Budget, Interesse, Urgência e Ação: "
+                qualificar: "Extraia perfil, budget e urgência desta conversa: ",
+                resumir: "Resuma os pontos principais deste atendimento: ",
+                proximo: "Com base na conversa, qual a melhor estratégia de venda agora? ",
+                copy: "Crie uma mensagem curta e persuasiva de WhatsApp para este cliente: ",
+                completa: "Faça uma análise profunda de Budget, Perfil do Imóvel, Urgência e sugira a próxima ação: "
             };
 
             try {
-                // Chamada usando o método 'simple' para evitar bloqueios de CORS em chaves novas
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -238,13 +235,17 @@
                 });
                 
                 const data = await response.json();
-                if(data.candidates) {
-                    resultBox.innerHTML = `<strong>Resultado da IA:</strong><br><br>${data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}`;
+                
+                if (data.candidates && data.candidates[0].content) {
+                    const resposta = data.candidates[0].content.parts[0].text;
+                    resultBox.innerHTML = `<strong>Resultado da IA:</strong><br><br>${resposta.replace(/\n/g, '<br>')}`;
+                } else if (data.error) {
+                    resultBox.innerHTML = `<span style="color:red">Erro do Google: ${data.error.message}</span>`;
                 } else {
-                    resultBox.innerHTML = `<span style="color:red">Erro: ${data.error.message || 'O Google recusou a conexão.'}</span>`;
+                    resultBox.innerHTML = "<span style='color:red'>Resposta vazia do Google. Tente outro texto.</span>";
                 }
             } catch (e) {
-                resultBox.innerHTML = "<span style='color:red'>Erro crítico de rede. Tente abrir o site em modo anônimo.</span>";
+                resultBox.innerHTML = "<span style='color:red'>Erro de conexão. Verifique sua rede ou a chave API.</span>";
             } finally {
                 btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> EXECUTAR ANÁLISE COMPLETA';
             }
@@ -252,39 +253,65 @@
 
         async function verificarSessao() {
             const { data: { session } } = await _supabase.auth.getSession();
-            if (session) { document.getElementById('login-screen').style.display = 'none'; document.getElementById('main-content').style.display = 'block'; carregarLeads(); }
+            if (session) { 
+                document.getElementById('login-screen').style.display = 'none'; 
+                document.getElementById('main-content').style.display = 'block'; 
+                carregarLeads(); 
+            }
         }
+
         async function realizarLogin() {
-            const email = document.getElementById('login-email').value; const password = document.getElementById('login-password').value;
+            const email = document.getElementById('login-email').value; 
+            const password = document.getElementById('login-password').value;
             const { error } = await _supabase.auth.signInWithPassword({ email, password });
-            if(error) alert(error.message); else verificarSessao();
+            if(error) alert("Erro: " + error.message); else verificarSessao();
         }
+
         function deslogar() { _supabase.auth.signOut(); location.reload(); }
 
         async function carregarLeads() {
             const { data } = await _supabase.from('leads').select('*').order('created_at', { ascending: false });
             let leads = data || [];
             document.getElementById('count-total').innerText = leads.length;
-            document.getElementById('count-elite').innerText = leads.length > 5 ? 2 : 1;
-            const table = document.getElementById('resumo-table-body'); const list = document.getElementById('leads-list'); const iaSelect = document.getElementById('ia-select-lead');
+            document.getElementById('count-elite').innerText = leads.length > 5 ? 2 : Math.min(leads.length, 1);
+            
+            const table = document.getElementById('resumo-table-body'); 
+            const list = document.getElementById('leads-list'); 
+            const iaSelect = document.getElementById('ia-select-lead');
+            
             table.innerHTML = ''; list.innerHTML = ''; iaSelect.innerHTML = '<option value="">Selecione...</option>';
+            
             leads.forEach(l => {
                 table.innerHTML += `<tr><td style="padding:12px;"><strong>${l.nome}</strong></td><td>${l.origem || 'Manual'}</td><td><button class="btn-gerenciar" onclick="switchTab('leads')">Gerenciar</button></td></tr>`;
-                list.innerHTML += `<div class="lead-profile-card hot-border"><div style="display:flex; justify-content:space-between; align-items:center;"><h2>${l.nome}</h2><span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span></div><div class="lead-info-grid"><div><span class="info-label">WhatsApp</span><strong class="info-value">${l.telefone || '-'}</strong></div><div><span class="info-label">Budget</span><strong class="info-value">${l.budget || '-'}</strong></div><div><span class="info-label">Interesse</span><strong class="info-value">${l.interesse || '-'}</strong></div></div><div style="margin-top:15px; display:flex; gap:10px;"><a href="https://wa.me/55${(l.telefone||'').replace(/\D/g,'')}" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><button class="btn-black-action">Ver Tudo</button></div></div>`;
+                
+                list.innerHTML += `
+                    <div class="lead-profile-card hot-border">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <h2>${l.nome}</h2>
+                            <span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span>
+                        </div>
+                        <div class="lead-info-grid">
+                            <div><span class="info-label">WhatsApp</span><strong class="info-value">${l.telefone || '-'}</strong></div>
+                            <div><span class="info-label">Budget</span><strong class="info-value">${l.budget || '-'}</strong></div>
+                            <div><span class="info-label">Interesse</span><strong class="info-value">${l.interesse || '-'}</strong></div>
+                        </div>
+                        <div style="margin-top:15px; display:flex; gap:10px;">
+                            <a href="https://wa.me/55${(l.telefone||'').replace(/\D/g,'')}" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                            <button class="btn-black-action">Ver Tudo</button>
+                        </div>
+                    </div>`;
+                
                 iaSelect.innerHTML += `<option value="${l.id}">${l.nome}</option>`;
             });
         }
-        async function salvarLead() {
-            const up = { nome: document.getElementById('new-nome').value, telefone: document.getElementById('new-phone').value, budget: document.getElementById('new-budget').value, origem: 'Manual' };
-            await _supabase.from('leads').insert([up]); toggleModal(false); carregarLeads();
-        }
-        function toggleModal(s) { document.getElementById('modal-add-lead').style.display = s ? 'flex' : 'none'; }
+
         function switchTab(t) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
             document.getElementById(t).classList.add('active');
             if(document.getElementById('menu-'+t)) document.getElementById('menu-'+t).classList.add('active');
         }
+
         window.onload = verificarSessao;
     </script>
 </body>
