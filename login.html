@@ -3,51 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrar | CorretorPro AI</title>
+    <title>Acesso | CorretorPro AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
         body { background-color: #0f172a; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; color: #ffffff; }
-        .login-container { background: #1e293b; width: 100%; max-width: 420px; border-radius: 8px; border: 1px solid #334155; padding: 40px 30px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); text-align: center; }
-        .logo { font-size: 28px; font-weight: 900; color: #f2b705; text-decoration: none; letter-spacing: -1px; margin-bottom: 10px; display: block; }
+        
+        .login-container { background: #1e293b; width: 100%; max-width: 420px; border-radius: 12px; border: 1px solid #334155; padding: 40px 30px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); text-align: center; }
+        
+        .logo { font-size: 28px; font-weight: 900; color: #d9b36c; text-decoration: none; letter-spacing: -1px; margin-bottom: 10px; display: block; }
         .logo span { color: #ffffff; }
+        
         .login-subtitle { font-size: 15px; color: #94a3b8; margin-bottom: 30px; }
+        
+        /* Alternância de Telas */
+        #signup-form { display: none; }
+        
         .form-group { text-align: left; margin-bottom: 20px; }
         .form-group label { display: block; font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
+        
         .input-wrapper { position: relative; display: flex; align-items: center; }
         .input-wrapper i { position: absolute; left: 14px; color: #64748b; font-size: 16px; }
-        .form-control { width: 100%; background: #0f172a; border: 1px solid #334155; padding: 12px 14px 12px 42px; border-radius: 4px; color: #ffffff; font-size: 15px; }
-        .form-control:focus { border-color: #f2b705; outline: none; }
+        
+        .form-control { width: 100%; background: #0f172a; border: 1px solid #334155; padding: 12px 14px 12px 42px; border-radius: 8px; color: #ffffff; font-size: 15px; transition: 0.3s; }
+        .form-control:focus { border-color: #d9b36c; outline: none; box-shadow: 0 0 0 3px rgba(217, 179, 108, 0.1); }
+        
         .form-options { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 25px; }
-        .forgot-link { color: #f2b705; text-decoration: none; font-weight: 600; }
-        .btn-login { width: 100%; background: #f2b705; color: #0f172a; padding: 14px; border: none; border-radius: 4px; font-size: 16px; font-weight: 800; cursor: pointer; display: block; text-decoration: none; box-shadow: 0 4px 12px rgba(242, 183, 5, 0.2); }
-        .btn-login:hover { background: #d9a304; }
+        .forgot-link { color: #d9b36c; text-decoration: none; font-weight: 600; }
+        
+        .btn-login { width: 100%; background: #d9b36c; color: #0f172a; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: 800; cursor: pointer; display: block; text-decoration: none; box-shadow: 0 4px 12px rgba(217, 179, 108, 0.2); transition: 0.3s; }
+        .btn-login:hover { background: #c49a56; transform: translateY(-1px); }
+        
         .signup-footer { margin-top: 30px; font-size: 14px; color: #94a3b8; border-top: 1px solid #334155; padding-top: 20px; }
-        .signup-footer a { color: #f2b705; text-decoration: none; font-weight: 700; }
+        .signup-footer a { color: #d9b36c; text-decoration: none; font-weight: 700; cursor: pointer; }
+        
         .back-to-site { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; color: #64748b; text-decoration: none; font-size: 13px; font-weight: 600; }
+        .back-to-site:hover { color: #cbd5e1; }
+
+        /* Animação suave */
+        .fade-in { animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="login-container">
         <a href="index.html" class="logo">Corretor<span>Pro AI</span></a>
-        <p class="login-subtitle">Acesse sua carteira de leads e central de IA</p>
-        <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
-            <div class="form-group">
-                <label>E-mail corporativo</label>
-                <div class="input-wrapper"><i class="fa-solid fa-envelope"></i><input type="email" class="form-control" placeholder="seu@email.com" required></div>
-            </div>
-            <div class="form-group">
-                <label>Sua senha</label>
-                <div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" class="form-control" placeholder="••••••••" required></div>
-            </div>
-            <div class="form-options">
-                <label><input type="checkbox"> Lembrar de mim</label>
-                <a href="https://wa.me/5511919912900?text=Olá!%20Esqueci%20minha%20senha%20de%20acesso%20ao%20CorretorPro%20AI%20e%20preciso%20de%20ajuda." target="_blank" class="forgot-link">Esqueceu a senha?</a>
-            </div>
-            <button type="submit" class="btn-login">Entrar no Painel</button>
-        </form>
-        <div class="signup-footer">Não tem uma conta? <a href="index.html#precos">Começar teste de 7 dias</a></div>
+        
+        <!-- TELA DE LOGIN -->
+        <div id="login-form" class="fade-in">
+            <p class="login-subtitle">Acesse sua carteira e central de IA</p>
+            <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+                <div class="form-group">
+                    <label>E-mail corporativo</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-envelope"></i><input type="email" class="form-control" placeholder="seu@email.com" required></div>
+                </div>
+                <div class="form-group">
+                    <label>Sua senha</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" class="form-control" placeholder="••••••••" required></div>
+                </div>
+                <div class="form-options">
+                    <label style="cursor: pointer;"><input type="checkbox"> Lembrar de mim</label>
+                    <a href="https://wa.me/5511919912900?text=Olá!%20Esqueci%20minha%20senha" target="_blank" class="forgot-link">Esqueceu a senha?</a>
+                </div>
+                <button type="submit" class="btn-login">Entrar no Painel</button>
+            </form>
+            <div class="signup-footer">Não tem uma conta? <a onclick="toggleForm('signup')">Criar conta grátis</a></div>
+        </div>
+
+        <!-- TELA DE CADASTRO -->
+        <div id="signup-form" class="fade-in">
+            <p class="login-subtitle">Comece seus 7 dias de teste grátis agora</p>
+            <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-user"></i><input type="text" class="form-control" placeholder="Seu nome" required></div>
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-phone"></i><input type="tel" class="form-control" placeholder="(11) 99999-9999" required></div>
+                </div>
+                <div class="form-group">
+                    <label>E-mail de trabalho</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-envelope"></i><input type="email" class="form-control" placeholder="nome@imobiliaria.com" required></div>
+                </div>
+                <button type="submit" class="btn-login">Ativar Teste Grátis</button>
+            </form>
+            <div class="signup-footer">Já possui cadastro? <a onclick="toggleForm('login')">Fazer Login</a></div>
+        </div>
+
         <a href="index.html" class="back-to-site"><i class="fa-solid fa-arrow-left"></i> Voltar para o site</a>
     </div>
+
+    <script>
+        function toggleForm(type) {
+            const login = document.getElementById('login-form');
+            const signup = document.getElementById('signup-form');
+            
+            if(type === 'signup') {
+                login.style.display = 'none';
+                signup.style.display = 'block';
+            } else {
+                login.style.display = 'block';
+                signup.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
