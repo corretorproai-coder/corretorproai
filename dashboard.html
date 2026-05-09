@@ -58,8 +58,12 @@
         /* AGENDA & RADAR */
         .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid var(--primary); border-radius: 4px; border: 1px solid var(--border); }
         .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; }
+        .news-tag { color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase; }
+        .news-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; }
 
         /* LEADS CARDS */
+        .leads-controls { display: flex; justify-content: flex-end; margin-bottom: 20px; }
+        .btn-add-lead { background: var(--primary); color: var(--secondary); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
         .lead-profile-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #cbd5e1; }
         .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; font-size: 14px; margin-top: 15px; }
@@ -68,9 +72,17 @@
         .btn-wa-action { background: #25d366; color: white; padding: 10px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; }
         .btn-black-action { background: var(--secondary); color: white; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer; border: none; font-size: 14px; margin-left: 10px; }
 
-        /* TELA DE DETALHES */
+        /* FORMULÁRIO NOVO LEAD */
+        .form-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; }
+
+        /* TELA DE DETALHES E EDIÇÃO */
         .client-detail-view { display: none; animation: fadeIn 0.4s ease; }
         .client-header { background: var(--secondary); color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .edit-input { width: 100%; padding: 8px; border: 1px solid var(--primary); border-radius: 4px; font-weight: 700; font-size: 14px; color: var(--secondary); display: none; }
         .note-area { width: 100%; height: 150px; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-top: 10px; resize: none; font-size: 14px; }
 
         /* CENTRAL IA */
@@ -83,25 +95,14 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 📱 AJUSTES PARA CELULAR (RESPONSIVIDADE) */
         @media (max-width: 768px) {
             .sidebar { width: 100%; height: 65px; flex-direction: row; top: auto; bottom: 0; border-right: none; border-top: 1px solid var(--border); }
             .sidebar-brand { display: none; }
-            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; gap: 0; }
+            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; }
             .sidebar-menu li a { flex-direction: column; font-size: 10px; gap: 4px; padding: 8px 4px; text-align: center; }
-            .sidebar-menu li a i { font-size: 18px; }
-            .sidebar-menu li a span { display: block; }
-            
             .main-content { margin-left: 0; padding: 20px 15px 100px; }
-            
-            .metrics-grid { grid-template-columns: 1fr; gap: 15px; }
+            .metrics-grid { grid-template-columns: 1fr; }
             .dashboard-workspace { grid-template-columns: 1fr; }
-            
-            .dash-title h1 { font-size: 22px; }
-            .client-header { flex-direction: column; text-align: center; gap: 15px; padding: 20px; }
-            .btn-black-action { margin-left: 0; margin-top: 10px; width: 100%; }
-            .btn-wa-action { width: 100%; justify-content: center; }
-            
             .whatsapp-float { width: 50px; height: 50px; bottom: 85px; right: 20px; font-size: 25px; }
         }
     </style>
@@ -145,9 +146,9 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>Marcos da Silva</strong></td>
-                                        <td><i class="fa-brands fa-facebook" style="color:#1877f2"></i> Facebook</td>
+                                        <td>Facebook</td>
                                         <td><span style="color:var(--primary); font-weight:800">Novo</span></td>
-                                        <td><button class="btn-gerenciar" onclick="openLeadDetails('Marcos da Silva', 'Facebook Ads', 'R$ 400.000', 'Casa 3 Dorms')">Gerenciar</button></td>
+                                        <td><button class="btn-gerenciar" onclick="openLeadDetails('Marcos da Silva', 'Facebook Ads', '(11) 99999-1234', 'R$ 400.000', 'Casa 3 Dorms')">Gerenciar</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -164,29 +165,49 @@
                     </section>
                     <section class="content-box">
                         <div class="box-title"><i class="fa-solid fa-newspaper"></i> Radar do Mercado</div>
-                        <div style="font-size: 14px; font-weight: 700; color: var(--primary);">EXAME</div>
-                        <p style="font-size: 14px; font-weight: 700;">Procura por imóveis cresce 14% em SP</p>
+                        <span class="news-tag">EXAME</span>
+                        <p class="news-title">Procura por imóveis cresce 14% em SP</p>
                     </section>
                 </div>
             </div>
         </div>
 
         <div id="leads" class="tab-content">
-            <div class="dash-header"><h1>Gerenciador de Leads</h1></div>
-            <div class="lead-profile-card hot-border">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px;">
-                    <h2>Marcos da Silva</h2>
-                    <span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span>
+            <div class="dash-header">
+                <h1>Gerenciador de Leads</h1>
+                <button class="btn-add-lead" onclick="toggleModal(true)"><i class="fa-solid fa-plus"></i> Novo Lead</button>
+            </div>
+
+            <div id="leads-list">
+                <div class="lead-profile-card hot-border">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2>Marcos da Silva</h2>
+                        <span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span>
+                    </div>
+                    <div class="lead-profile-info-grid">
+                        <div class="info-item"><span class="info-label">Origem</span><span class="info-value">Facebook Ads</span></div>
+                        <div class="info-item"><span class="info-label">WhatsApp</span><span class="info-value">(11) 99999-1234</span></div>
+                        <div class="info-item"><span class="info-label">Budget</span><span class="info-value">R$ 400.000</span></div>
+                        <div class="info-item"><span class="info-label">Interesse</span><span class="info-value">Casa 3 Dorms</span></div>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <a href="https://wa.me/5511999991234" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                        <button class="btn-black-action" onclick="openLeadDetails('Marcos da Silva', 'Facebook Ads', '(11) 99999-1234', 'R$ 400.000', 'Casa 3 Dorms')">Ver Tudo</button>
+                    </div>
                 </div>
-                <div class="lead-profile-info-grid">
-                    <div class="info-item"><span class="info-label">Origem</span><span class="info-value">Facebook Ads</span></div>
-                    <div class="info-item"><span class="info-label">WhatsApp</span><span class="info-value">(11) 99999-1234</span></div>
-                    <div class="info-item"><span class="info-label">Budget</span><span class="info-value">R$ 400.000</span></div>
-                    <div class="info-item"><span class="info-label">Interesse</span><span class="info-value">Casa 3 Dorms</span></div>
-                </div>
-                <div style="margin-top:15px; display: flex; flex-wrap: wrap; gap: 5px;">
-                    <a href="https://wa.me/5511999991234" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                    <button class="btn-black-action" onclick="openLeadDetails('Marcos da Silva', 'Facebook Ads', 'R$ 400.000', 'Casa 3 Dorms')">Ver Tudo</button>
+            </div>
+        </div>
+
+        <div id="modal-add-lead" class="form-modal">
+            <div class="modal-content">
+                <h2 style="margin-bottom: 20px;">Cadastrar Novo Lead</h2>
+                <div class="form-group"><label>Nome Completo</label><input type="text" class="form-control" placeholder="Ex: João Souza"></div>
+                <div class="form-group"><label>WhatsApp</label><input type="text" class="form-control" placeholder="(11) 99999-9999"></div>
+                <div class="form-group"><label>Budget (Orçamento)</label><input type="text" class="form-control" placeholder="R$ 500.000"></div>
+                <div class="form-group"><label>Interesse</label><input type="text" class="form-control" placeholder="Ex: Apartamento 2 quartos"></div>
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                    <button class="btn-black-action" style="margin-left:0; flex:1;" onclick="toggleModal(false)">Cancelar</button>
+                    <button class="btn-add-lead" style="flex:1; justify-content:center;" onclick="alert('Lead cadastrado! (Simulação)'); toggleModal(false);">Cadastrar</button>
                 </div>
             </div>
         </div>
@@ -194,21 +215,24 @@
         <div id="lead-detail-view" class="client-detail-view">
             <button onclick="switchTab('leads')" style="background:none; border:none; color:var(--text-muted); cursor:pointer; margin-bottom:20px; font-weight:bold;"><i class="fa-solid fa-arrow-left"></i> Voltar para lista</button>
             <div class="client-header">
-                <div><h1 id="det-name">Nome</h1><p id="det-origin" style="opacity:0.8">Origem</p></div>
-                <span style="background:#ef4444; padding:5px 12px; border-radius:4px; font-weight:800; font-size:12px;">LEAD SELECIONADO</span>
+                <div>
+                    <h1 id="det-name">Nome</h1>
+                    <input type="text" id="edit-name" class="edit-input" style="font-size: 24px;">
+                    <p id="det-origin" style="opacity:0.8">Origem</p>
+                </div>
+                <button class="btn-gerenciar" id="btn-edit-mode" onclick="toggleEditMode()">Editar Dados</button>
             </div>
+            
             <div class="dashboard-workspace">
                 <div class="left-col">
-                    <div class="content-box">
-                        <div class="box-title">Bloco de Notas</div>
-                        <textarea class="note-area" placeholder="Anotações estratégicas..."></textarea>
-                    </div>
+                    <div class="content-box"><div class="box-title">Bloco de Notas</div><textarea class="note-area" placeholder="Anotações..."></textarea></div>
                 </div>
                 <div class="right-col">
                     <div class="content-box">
-                        <div class="box-title">Perfil de Compra</div>
-                        <p class="info-label">Orçamento</p><p id="det-budget" class="info-value">-</p><br>
-                        <p class="info-label">Desejo</p><p id="det-interest" class="info-value">-</p>
+                        <div class="box-title">Contato</div>
+                        <p class="info-label">WhatsApp</p><p id="det-phone" class="info-value">-</p><input type="text" id="edit-phone" class="edit-input"><br>
+                        <p class="info-label">Orçamento</p><p id="det-budget" class="info-value">-</p><input type="text" id="edit-budget" class="edit-input"><br>
+                        <p class="info-label">Interesse</p><p id="det-interest" class="info-value">-</p><input type="text" id="edit-interest" class="edit-input">
                     </div>
                 </div>
             </div>
@@ -217,16 +241,18 @@
         <div id="central-ia" class="tab-content">
             <div class="dash-header"><h1>Central de Inteligência Artificial</h1></div>
             <section class="content-box" style="max-width:800px; margin: 0 auto; padding:30px;">
-                <label class="ia-label-step">1. Selecione o Cliente</label>
-                <select class="ia-select-prof"><option>Marcos da Silva</option></select>
-                <label class="ia-label-step">2. Histórico da conversa</label>
-                <textarea class="ia-textarea-prof" style="height: 200px;" placeholder="Cole aqui o texto da conversa..."></textarea>
-                <button class="btn-ai-magic"><i class="fa-solid fa-wand-magic-sparkles"></i> ANALISAR INTENÇÃO COM IA</button>
+                <label class="ia-label-step">1. Selecione o Cliente</label><select class="ia-select-prof"><option>Marcos da Silva</option></select>
+                <label class="ia-label-step">2. Conversa</label><textarea class="ia-textarea-prof" style="height: 200px;" placeholder="Cole o texto..."></textarea>
+                <button class="btn-ai-magic"><i class="fa-solid fa-wand-magic-sparkles"></i> ANALISAR COM IA</button>
             </section>
         </div>
     </main>
 
     <script>
+        let isEditMode = false;
+
+        function toggleModal(show) { document.getElementById('modal-add-lead').style.display = show ? 'flex' : 'none'; }
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.getElementById('lead-detail-view').style.display = 'none';
@@ -235,13 +261,38 @@
             if(document.getElementById('menu-' + tabId)) document.getElementById('menu-' + tabId).classList.add('active');
         }
 
-        function openLeadDetails(name, origin, budget, interest) {
+        function openLeadDetails(name, origin, phone, budget, interest) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.getElementById('lead-detail-view').style.display = 'block';
             document.getElementById('det-name').innerText = name;
             document.getElementById('det-origin').innerText = 'Origem: ' + origin;
+            document.getElementById('det-phone').innerText = phone;
             document.getElementById('det-budget').innerText = budget;
             document.getElementById('det-interest').innerText = interest;
+            document.getElementById('edit-name').value = name;
+            document.getElementById('edit-phone').value = phone;
+            document.getElementById('edit-budget').value = budget;
+            document.getElementById('edit-interest').value = interest;
+        }
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const btn = document.getElementById('btn-edit-mode');
+            const displays = ['det-name', 'det-phone', 'det-budget', 'det-interest'];
+            const inputs = ['edit-name', 'edit-phone', 'edit-budget', 'edit-interest'];
+            if (isEditMode) {
+                btn.innerText = "Salvar Alterações"; btn.style.background = "#22c55e"; btn.style.color = "white";
+                displays.forEach(id => document.getElementById(id).style.display = 'none');
+                inputs.forEach(id => document.getElementById(id).style.display = 'block');
+            } else {
+                document.getElementById('det-name').innerText = document.getElementById('edit-name').value;
+                document.getElementById('det-phone').innerText = document.getElementById('edit-phone').value;
+                document.getElementById('det-budget').innerText = document.getElementById('edit-budget').value;
+                document.getElementById('det-interest').innerText = document.getElementById('edit-interest').value;
+                btn.innerText = "Editar Dados"; btn.style.background = "var(--secondary)"; btn.style.color = "var(--primary)";
+                displays.forEach(id => document.getElementById(id).style.display = 'block');
+                inputs.forEach(id => document.getElementById(id).style.display = 'none');
+            }
         }
     </script>
 </body>
