@@ -32,7 +32,7 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
         
-        .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; flex-wrap: wrap; gap: 15px; }
         .dash-title h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
         .user-profile { display: flex; align-items: center; gap: 12px; background: #ffffff; padding: 8px 16px; border-radius: 4px; border: 1px solid var(--border); font-size: 14px; font-weight: 600; }
 
@@ -49,20 +49,21 @@
         .box-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
 
         /* TABELA RESUMO */
-        .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        .leads-table-wrapper { width: 100%; overflow-x: auto; }
+        .leads-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; min-width: 400px; }
         .leads-table th { background: #f8fafc; padding: 12px 14px; color: var(--text-muted); border-bottom: 1px solid var(--border); }
         .leads-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
         .btn-gerenciar { background: var(--secondary); color: var(--primary); border: none; padding: 6px 14px; border-radius: 4px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 11px; text-transform: uppercase; }
 
         /* AGENDA & RADAR */
-        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid #f2b705; border-radius: 4px; border: 1px solid #e2e8f0; }
+        .agenda-item { display: flex; align-items: center; gap: 14px; padding: 14px; background: #f8fafc; border-left: 4px solid var(--primary); border-radius: 4px; border: 1px solid var(--border); }
         .agenda-time { font-size: 13px; font-weight: 800; color: #0f172a; background: #ffffff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; text-align: center; }
 
         /* LEADS CARDS */
         .lead-profile-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #cbd5e1; }
         .lead-profile-card.hot-border { border-left-color: #ef4444; }
         .lead-profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; font-size: 14px; margin-top: 15px; }
-        .info-label { color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; }
+        .info-label { color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; }
         .info-value { color: #0f172a; font-weight: 700; }
         .btn-wa-action { background: #25d366; color: white; padding: 10px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; }
         .btn-black-action { background: var(--secondary); color: white; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer; border: none; font-size: 14px; margin-left: 10px; }
@@ -81,6 +82,28 @@
         .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px; background-color: #25d366; color: #FFF; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 100000; text-decoration: none; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 📱 AJUSTES PARA CELULAR (RESPONSIVIDADE) */
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; height: 65px; flex-direction: row; top: auto; bottom: 0; border-right: none; border-top: 1px solid var(--border); }
+            .sidebar-brand { display: none; }
+            .sidebar-menu { flex-direction: row; width: 100%; padding: 0; justify-content: space-around; gap: 0; }
+            .sidebar-menu li a { flex-direction: column; font-size: 10px; gap: 4px; padding: 8px 4px; text-align: center; }
+            .sidebar-menu li a i { font-size: 18px; }
+            .sidebar-menu li a span { display: block; }
+            
+            .main-content { margin-left: 0; padding: 20px 15px 100px; }
+            
+            .metrics-grid { grid-template-columns: 1fr; gap: 15px; }
+            .dashboard-workspace { grid-template-columns: 1fr; }
+            
+            .dash-title h1 { font-size: 22px; }
+            .client-header { flex-direction: column; text-align: center; gap: 15px; padding: 20px; }
+            .btn-black-action { margin-left: 0; margin-top: 10px; width: 100%; }
+            .btn-wa-action { width: 100%; justify-content: center; }
+            
+            .whatsapp-float { width: 50px; height: 50px; bottom: 85px; right: 20px; font-size: 25px; }
+        }
     </style>
 </head>
 <body>
@@ -102,7 +125,7 @@
         
         <div id="resumo" class="tab-content active">
             <div class="dash-header">
-                <div class="dash-title"><h1>Painel de Controle</h1><p>Bem-vindo de volta, Víctor Ávila</p></div>
+                <div class="dash-title"><h1>Painel de Controle</h1><p>Olá, Víctor Ávila</p></div>
                 <div class="user-profile"><i class="fa-solid fa-circle-user" style="color:var(--primary)"></i> Plano Profissional</div>
             </div>
 
@@ -116,17 +139,19 @@
                 <div class="left-col">
                     <section class="content-box">
                         <div class="box-title"><i class="fa-solid fa-address-book"></i> Últimos Leads Recebidos</div>
-                        <table class="leads-table">
-                            <thead><tr><th>Nome</th><th>Origem</th><th>Status</th><th>Ação</th></tr></thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Marcos da Silva</strong></td>
-                                    <td><i class="fa-brands fa-facebook" style="color:#1877f2"></i> Facebook</td>
-                                    <td><span style="color:var(--primary); font-weight:800">Novo</span></td>
-                                    <td><button class="btn-gerenciar" onclick="openLeadDetails('Marcos da Silva', 'Facebook Ads', 'R$ 400.000', 'Casa 3 Dorms')">Gerenciar</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="leads-table-wrapper">
+                            <table class="leads-table">
+                                <thead><tr><th>Nome</th><th>Origem</th><th>Status</th><th>Ação</th></tr></thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Marcos da Silva</strong></td>
+                                        <td><i class="fa-brands fa-facebook" style="color:#1877f2"></i> Facebook</td>
+                                        <td><span style="color:var(--primary); font-weight:800">Novo</span></td>
+                                        <td><button class="btn-gerenciar" onclick="openLeadDetails('Marcos da Silva', 'Facebook Ads', 'R$ 400.000', 'Casa 3 Dorms')">Gerenciar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
                 </div>
                 <div class="right-col">
@@ -149,7 +174,7 @@
         <div id="leads" class="tab-content">
             <div class="dash-header"><h1>Gerenciador de Leads</h1></div>
             <div class="lead-profile-card hot-border">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px;">
                     <h2>Marcos da Silva</h2>
                     <span style="background:#ef4444; color:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:800;">QUENTE</span>
                 </div>
@@ -159,7 +184,7 @@
                     <div class="info-item"><span class="info-label">Budget</span><span class="info-value">R$ 400.000</span></div>
                     <div class="info-item"><span class="info-label">Interesse</span><span class="info-value">Casa 3 Dorms</span></div>
                 </div>
-                <div style="margin-top:15px;">
+                <div style="margin-top:15px; display: flex; flex-wrap: wrap; gap: 5px;">
                     <a href="https://wa.me/5511999991234" target="_blank" class="btn-wa-action"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
                     <button class="btn-black-action" onclick="openLeadDetails('Marcos da Silva', 'Facebook Ads', 'R$ 400.000', 'Casa 3 Dorms')">Ver Tudo</button>
                 </div>
