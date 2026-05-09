@@ -23,164 +23,108 @@
         .hub-utility-bar { width: 100%; height: 38px; background: #f6f9fc; border-bottom: 1px solid #cbd5e1; display: flex; align-items: center; position: fixed; top: 0; left: 0; z-index: 10001; }
         .hub-utility-bar .utility-wrapper { display: flex; justify-content: flex-end; align-items: center; gap: 20px; width: 100%; }
         .hub-utility-bar a { color: #475569; text-decoration: none; font-size: 13px; font-weight: 600; }
-        .hub-utility-bar a:hover { color: #f2b705; }
+        .hub-utility-bar a:hover { color: #d9b36c; }
 
         header { width: 100%; height: 75px; background: #ffffff; border-bottom: 1px solid #e2e8f0; position: fixed; top: 38px; left: 0; z-index: 10000; box-shadow: 0 2px 10px rgba(0,0,0,0.01); display: flex; align-items: center; }
         .header-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         
-        .logo { font-size: 26px; font-weight: 900; color: #f2b705; text-decoration: none; display: flex; align-items: center; gap: 6px; letter-spacing: -1px; }
+        .logo { font-size: 26px; font-weight: 900; color: #d9b36c; text-decoration: none; display: flex; align-items: center; gap: 6px; letter-spacing: -1px; }
         .logo span { color: #0f172a; }
         
         .nav-menu { display: flex; list-style: none; gap: 30px; font-size: 16px; font-weight: 700; }
         .nav-menu li a { color: #334155; text-decoration: none; transition: 0.15s; }
-        .nav-menu li a:hover { color: #f2b705; }
+        .nav-menu li a:hover { color: #d9b36c; }
 
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .btn-login { font-size: 16px; font-weight: 700; color: #334155; text-decoration: none; transition: 0.15s; }
         
-        /* BOTÕES DE CONVERSÃO EM AMARELO COMERCIAL */
-        .btn-orange-filled { background: #f2b705; color: #0f172a; padding: 12px 24px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; border: 2px solid #f2b705; transition: all 0.15s ease-in-out; cursor: pointer; display: inline-block; text-align: center; box-shadow: 0 3px 10px rgba(242, 183, 5, 0.2); }
-        .btn-orange-filled:hover { background: #d9a304; border-color: #d9a304; transform: translateY(-1px); }
+        /* BOTÕES DOURADOS */
+        .btn-orange-filled { background: #d9b36c; color: #0f172a; padding: 12px 24px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; border: 2px solid #d9b36c; transition: all 0.15s ease-in-out; cursor: pointer; display: inline-block; text-align: center; box-shadow: 0 3px 10px rgba(217, 179, 108, 0.2); }
+        .btn-orange-filled:hover { background: #c49a56; border-color: #c49a56; transform: translateY(-1px); }
         
         .btn-orange-stroke { background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 12px 24px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; border: 2px solid #ffffff; transition: all 0.15s ease-in-out; cursor: pointer; display: inline-block; text-align: center; backdrop-filter: blur(4px); }
         .btn-orange-stroke:hover { background: #ffffff; color: #0f172a; transform: translateY(-1px); }
 
-        /* HERO SECTION OTIMIZADA COM FONTES COMPACTAS */
+        /* HERO SECTION */
         .hero-section { min-height: 75vh; padding-top: 140px; padding-bottom: 60px; background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover; background-attachment: fixed; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #cbd5e1; }
         .hero-content { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .hero-tagline { font-size: 13px; font-weight: 800; color: #f2b705; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .hero-tagline { font-size: 13px; font-weight: 800; color: #d9b36c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
         
         .hero-title { font-family: 'Georgia', serif; font-size: 46px; font-weight: 700; color: #ffffff; line-height: 1.25; max-width: 850px; letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); }
-        .hero-title span { color: #f2b705; }
+        .hero-title span { color: #d9b36c; }
         
         .hero-description { font-size: 18px; color: #ffffff; max-width: 700px; line-height: 1.5; margin-top: 20px; margin-bottom: 35px; font-weight: 400; opacity: 0.9; }
         .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .hero-footer-text { font-size: 13px; color: #cbd5e1; margin-top: 18px; font-weight: 600; }
 
-        /* FAIXA DE PROVA SOCIAL COMPACTA */
+        /* SOCIAL PROOF */
         .social-proof-bar { width: 100%; border-bottom: 1px solid #e2e8f0; padding: 40px 0; background: #ffffff; }
         .social-proof-content { display: flex; flex-direction: column; align-items: center; }
         .social-proof-title { font-size: 18px; font-weight: 700; color: #334155; margin-bottom: 25px; text-align: center; max-width: 750px; }
         .logos-flex { display: flex; justify-content: center; align-items: center; gap: 70px; flex-wrap: wrap; font-weight: 900; font-size: 26px; color: #64748b; letter-spacing: -1px; opacity: 0.75; }
-        .logo-item i { color: #f2b705; margin-right: 8px; font-size: 28px; }
+        .logo-item i { color: #d9b36c; margin-right: 8px; font-size: 28px; }
 
-        /* HEADLINE DO MEIO */
+        /* SECTION HEADLINE */
         .section-headline-block { text-align: center; padding: 80px 0 40px 0; width: 100%; }
         .section-headline-block h2 { font-family: 'Georgia', serif; font-size: 38px; color: #0f172a; max-width: 850px; margin: 0 auto; line-height: 1.25; font-weight: 400; letter-spacing: -0.5px; }
         .section-headline-block p { font-size: 19px; color: #000000; max-width: 750px; margin: 18px auto 0 auto; line-height: 1.5; font-weight: 600; }
 
-        /* RECURSOS EM LINHA AJUSTADOS */
+        /* BODY ROW */
         .body-row-section { width: 100%; padding: 50px 0; display: flex; gap: 60px; align-items: center; justify-content: space-between; }
-        .body-row-section .row-text-side { flex: 1; }
-        .body-row-section .row-visual-side { flex: 1; }
-
-        /* SEÇÃO INTEIRA DO WHATSAPP REESTRUTURADA E MAIS ENXUTA */
-        .whatsapp-outer-section { width: 100%; background: #f6f9fc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 70px 0; }
-        .row-inner-container { display: flex; gap: 60px; align-items: center; justify-content: space-between; width: 100%; }
-        .row-inner-container .row-text-side { flex: 1; }
-        .row-inner-container .row-visual-side { flex: 1; }
-
-        .row-text-side { display: flex; flex-direction: column; gap: 18px; }
-        .row-badge { background: rgba(242, 183, 5, 0.1); color: #d9a304; font-size: 13px; font-weight: 800; padding: 4px 12px; border-radius: 4px; text-transform: uppercase; width: fit-content; letter-spacing: 1px; }
+        .row-text-side { flex: 1; display: flex; flex-direction: column; gap: 18px; }
+        .row-badge { background: rgba(217, 179, 108, 0.1); color: #c49a56; font-size: 13px; font-weight: 800; padding: 4px 12px; border-radius: 4px; text-transform: uppercase; width: fit-content; letter-spacing: 1px; }
         .row-title { font-family: 'Georgia', serif; font-size: 34px; color: #0f172a; line-height: 1.2; font-weight: 400; letter-spacing: -0.5px; }
         .row-desc { font-size: 18px; color: #475569; line-height: 1.5; }
         
         .row-bullets { list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 16px; color: #1e293b; font-weight: 600; }
         .row-bullets li { display: flex; align-items: center; gap: 10px; }
-        .row-bullets li i { color: #f2b705; font-size: 16px; background: rgba(242, 183, 5, 0.08); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(242, 183, 5, 0.15); }
+        .row-bullets li i { color: #d9b36c; font-size: 16px; background: rgba(217, 179, 108, 0.08); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(217, 179, 108, 0.15); }
 
-        .row-visual-side { height: 380px; border-radius: 8px; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1); border: 1px solid #cbd5e1; overflow: hidden; position: relative; width: 100%; }
+        .row-visual-side { height: 380px; border-radius: 8px; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1); border: 1px solid #cbd5e1; overflow: hidden; position: relative; width: 100%; flex: 1; }
         .visual-img { width: 100%; height: 100%; object-fit: cover; }
-        .visual-floating-card { position: absolute; bottom: 20px; left: 20px; right: 20px; background: #0f172a; color: #ffffff; padding: 16px; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.25); border-left: 4px solid #f2b705; font-size: 13px; }
+        .visual-floating-card { position: absolute; bottom: 20px; left: 20px; right: 20px; background: #0f172a; color: #ffffff; padding: 16px; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.25); border-left: 4px solid #d9b36c; font-size: 13px; }
 
-        /* SEÇÃO DE PREÇOS COMPACTA E ATUALIZADA */
+        /* WHATSAPP SECTION */
+        .whatsapp-outer-section { width: 100%; background: #f6f9fc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 70px 0; }
+        .row-inner-container { display: flex; gap: 60px; align-items: center; justify-content: space-between; width: 100%; }
+
+        /* PRICING */
         .pricing-section { padding: 80px 0; background: #f6f9fc; border-top: 1px solid #e2e8f0; width: 100%; }
         .pricing-section-title { text-align: center; margin-bottom: 40px; }
         .pricing-section-title h2 { font-family: 'Georgia', serif; font-size: 38px; color: #0f172a; font-weight: 400; letter-spacing: -0.5px; }
-        .pricing-section-title p { font-size: 19px; color: #475569; margin-top: 12px; }
         
         .pricing-grid { display: flex; gap: 24px; justify-content: space-between; align-items: stretch; margin-top: 40px; width: 100%; flex-wrap: wrap; }
-        
         .pricing-card { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 35px 30px; text-align: left; display: flex; flex-direction: column; gap: 20px; transition: all 0.3s ease; position: relative; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04); flex: 1; min-width: 300px; }
-        .pricing-card:hover { border-color: #f2b705; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08); transform: translateY(-2px); }
+        .pricing-card:hover { border-color: #d9b36c; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08); transform: translateY(-2px); }
         
-        .pricing-card.featured { border-color: #f2b705; border-width: 2px; box-shadow: 0 15px 30px rgba(242, 183, 5, 0.1); }
-        .featured-badge { position: absolute; top: 12px; right: -30px; background: #f2b705; color: #0f172a; font-size: 11px; font-weight: 800; padding: 6px 35px; transform: rotate(45deg); text-transform: uppercase; letter-spacing: 1px; }
+        .pricing-card.featured { border-color: #d9b36c; border-width: 2px; box-shadow: 0 15px 30px rgba(217, 179, 108, 0.1); }
+        .featured-badge { position: absolute; top: 12px; right: -30px; background: #d9b36c; color: #0f172a; font-size: 11px; font-weight: 800; padding: 6px 35px; transform: rotate(45deg); text-transform: uppercase; letter-spacing: 1px; }
 
         .plan-name { font-size: 22px; font-weight: 800; color: #0f172a; }
-        .plan-desc { font-size: 14px; color: #475569; min-height: 42px; line-height: 1.4; }
         .plan-price { font-size: 42px; font-weight: 800; color: #0f172a; letter-spacing: -1px; margin: 5px 0; }
-        .plan-price span { font-size: 15px; color: #64748b; font-weight: 600; }
-        
-        .plan-features-list { list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: #334155; border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 5px; }
-        .plan-features-list li { display: flex; align-items: center; gap: 10px; }
-        .plan-features-list li i { color: #22c55e; font-size: 16px; }
+        .plan-features-list li i { color: #d9b36c; font-size: 16px; }
 
-        /* BANNER FINAL CTA */
+        /* FINAL CTA CORRIGIDA */
         .final-cta-section { background: #0f172a; color: #ffffff; padding: 90px 0; text-align: center; background: linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.95)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920&auto=format&fit=crop') center center/cover; background-attachment: fixed; width: 100%; }
-        .final-cta-content { display: flex; flex-direction: column; align-items: center; gap: 25px; }
-        .final-cta-title { font-family: 'Georgia', serif; font-size: 42px; font-weight: 400; max-width: 800px; line-height: 1.2; }
-        .final-cta-desc { font-size: 19px; color: #cbd5e1; max-width: 650px; line-height: 1.5; }
+        .final-cta-title { font-family: 'Georgia', serif; font-size: 42px; font-weight: 400; max-width: 800px; line-height: 1.2; margin: 0 auto 20px; }
+        .final-cta-desc { font-size: 19px; color: #cbd5e1; max-width: 650px; line-height: 1.5; margin: 0 auto; }
+        .btn-cta-footer { margin-top: 35px !important; } /* Ajuste de espaçamento do botão */
 
-        /* BOTÃO WHATSAPP FLUTUANTE */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 100000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            color: #FFF;
-        }
+        /* WHATSAPP FLOAT */
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px; background-color: #25d366; color: #FFF; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 2px 2px 3px #999; z-index: 100000; text-decoration: none; transition: transform 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); color: #FFF; }
 
-        /* RESPONSIVIDADE CELULAR */
+        /* MOBILE */
         @media (max-width: 768px) {
             .hub-utility-bar { display: none; }
             header { top: 0; height: 70px; }
             .nav-menu { display: none; }
-            .nav-right { gap: 12px; }
-            .logo { font-size: 24px; }
-
-            .hero-section { padding-top: 110px; padding-bottom: 50px; }
             .hero-title { font-size: 32px; }
-            .hero-description { font-size: 16px; margin-top: 15px; margin-bottom: 25px; }
-
-            .body-row-section { flex-direction: column; gap: 30px; padding: 40px 0; }
-            .whatsapp-outer-section { padding: 40px 0; }
-            .row-inner-container { flex-direction: column; gap: 30px; }
-            
+            .body-row-section, .row-inner-container { flex-direction: column; gap: 30px; }
             .row-title { font-size: 24px; }
-            .row-desc, .row-bullets { font-size: 14px; }
             .row-visual-side { height: 260px; }
-
-            .pricing-grid { flex-direction: column; gap: 20px; }
-            .pricing-card { padding: 30px 20px; min-width: 100%; }
-            .plan-price { font-size: 36px; }
-            
+            .pricing-grid { flex-direction: column; }
             .final-cta-title { font-size: 26px; }
-            .final-cta-desc { font-size: 14px; }
-
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 20px;
-                font-size: 25px;
-            }
         }
     </style>
 </head>
@@ -230,6 +174,8 @@
         </div>
     </section>
 
+    <!-- RESTANTE DO CÓDIGO IGUAL... -->
+
     <section class="social-proof-bar">
         <div class="container social-proof-content">
             <h3 class="social-proof-title">Mais de 280.000 empresas em todo o mundo aceleram suas conversões com esta arquitetura de dados.</h3>
@@ -262,7 +208,7 @@
             <div class="row-visual-side">
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" class="visual-img" alt="Automação">
                 <div class="visual-floating-card">
-                    <div style="font-weight: 800; color: #f2b705; margin-bottom: 4px; font-size: 11px; text-transform: uppercase;">⚡ Fluxo Ativo</div>
+                    <div style="font-weight: 800; color: #d9b36c; margin-bottom: 4px; font-size: 11px; text-transform: uppercase;">⚡ Fluxo Ativo</div>
                     <p>"Lead capturado via formulário enviado para a nuvem com sucesso."</p>
                 </div>
             </div>
@@ -316,7 +262,7 @@
                     <div class="plan-name">Básico</div>
                     <p class="plan-desc">Acesso individual completo para corretores independentes acelerarem suas conversões.</p>
                     <div class="plan-price">R$ 59 <span>/mês</span></div>
-                    <a href="login.html" class="btn-orange-stroke" style="width: 100%; text-align: center; border-color: #f2b705; color: #0f172a; text-decoration: none;">Assinar Plano</a>
+                    <a href="login.html" class="btn-orange-stroke" style="width: 100%; text-align: center; border-color: #d9b36c; color: #0f172a; text-decoration: none;">Assinar Plano</a>
                     <ul class="plan-features-list">
                         <li><i class="fa-solid fa-check"></i> 1 Usuário Ativo</li>
                         <li><i class="fa-solid fa-check"></i> Captura Ativa de Leads</li>
@@ -346,7 +292,7 @@
         <div class="container final-cta-content">
             <h2 class="final-cta-title">Pronto para dominar o gerenciamento dos seus clientes?</h2>
             <p class="final-cta-desc">Elimine as perdas de leads, otimize o tempo de resposta da sua equipe e impulsione seu fechamento usando IA.</p>
-            <a href="login.html" class="btn-orange-filled" style="font-size: 20px; padding: 16px 45px; text-decoration: none;">Criar Conta Gratuita</a>
+            <a href="login.html" class="btn-orange-filled btn-cta-footer" style="font-size: 20px; padding: 16px 45px; text-decoration: none;">Criar Conta Gratuita</a>
         </div>
     </section>
 
