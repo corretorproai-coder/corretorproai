@@ -38,7 +38,6 @@
         .tab-content.active { display: block; }
         .card-elite { background: white; padding: 30px; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.02); margin-bottom: 25px; }
 
-        /* PERFORMANCE VISUALS */
         .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
         .progress-circle { width: 140px; height: 140px; border-radius: 50%; background: conic-gradient(var(--primary) 75%, #f1f5f9 0); display: flex; align-items: center; justify-content: center; position: relative; margin: 0 auto; }
         .progress-circle::after { content: '75%'; position: absolute; width: 110px; height: 110px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 24px; }
@@ -46,19 +45,22 @@
         .bar-item { flex: 1; border-radius: 12px; position: relative; transition: 0.5s ease; min-height: 20px; }
         .bar-label { position: absolute; top: -30px; width: 100%; text-align: center; font-weight: 800; font-size: 11px; }
 
-        /* TIMELINE (AGENDA PRO) */
         .timeline { position: relative; padding-left: 30px; border-left: 2px solid #e2e8f0; margin-top: 20px; }
         .timeline-item { position: relative; margin-bottom: 25px; }
         .timeline-item::before { content: ''; position: absolute; left: -37px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); border: 3px solid white; box-shadow: 0 0 0 3px var(--primary); }
 
-        /* FORMS & MODAL */
         .btn-elite { background: var(--secondary); color: var(--primary); border: none; padding: 12px 24px; border-radius: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s; justify-content: center; }
         .btn-elite:hover { background: var(--primary); color: var(--secondary); }
         .input-group { margin-bottom: 18px; }
         .input-group label { display: block; font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; }
         .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #e2e8f0; outline: none; font-size: 14px; }
+
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(5px); z-index: 2000; align-items: center; justify-content: center; }
         .modal-content { background: white; padding: 40px; border-radius: 28px; width: 90%; max-width: 500px; box-shadow: var(--shadow); }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; color: var(--text-muted); font-size: 10px; text-transform: uppercase; padding: 12px; border-bottom: 2px solid #f1f5f9; }
+        td { padding: 12px; font-size: 13px; border-bottom: 1px solid #f1f5f9; }
 
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -78,6 +80,7 @@
             <div class="menu-label">Conta</div>
             <li class="menu-item" onclick="switchTab('perfil', event)"><i class="fa-solid fa-circle-user"></i><span>Perfil</span></li>
             <li class="menu-item" onclick="switchTab('config', event)"><i class="fa-solid fa-sliders"></i><span>Configurações</span></li>
+            <li class="menu-item" style="margin-top:auto; color:var(--danger)" onclick="window.location.href='index.html'"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></li>
         </ul>
     </nav>
 
@@ -98,15 +101,17 @@
                 <div>
                     <div class="card-elite" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center;">
                         <div><h3>Total Resumo</h3><p style="font-size: 28px; font-weight: 800;">50%</p></div>
-                        <div><h3>Leads Hoje</h3><p style="font-size: 28px; font-weight: 800; color: var(--accent);" id="dash-leads-count">+0</p></div>
+                        <div><h3>Leads Hoje</h3><p style="font-size: 28px; font-weight: 800; color: var(--accent);" id="dash-leads-count">+2</p></div>
                         <div><h3>Conversão</h3><p style="font-size: 28px; font-weight: 800; color: var(--success);">12%</p></div>
                     </div>
                     <div class="card-elite">
                         <h2 style="margin-bottom: 20px;">Lista de Clientes Recentes</h2>
-                        <table style="width: 100%;">
-                            <thead><tr style="text-align: left; font-size: 11px; color: var(--text-muted);"><th>CLIENTE</th><th>ORIGEM</th><th>BUDGET</th><th>STATUS</th></tr></thead>
-                            <tbody id="dash-leads-list"></tbody>
-                        </table>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead><tr><th>CLIENTE</th><th>TEL</th><th>ORIGEM</th><th>TIPO</th><th>BUDGET</th><th>STATUS</th></tr></thead>
+                                <tbody id="dash-leads-list"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -146,13 +151,32 @@
             </div>
         </div>
 
+        <!-- LEADS -->
+        <div id="leads" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="font-weight: 800;">Base de Clientes</h2>
+                <button class="btn-elite" onclick="abrirModal()"><i class="fa-solid fa-plus"></i> NOVO LEAD</button>
+            </div>
+            <div class="card-elite">
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead><tr><th>NOME</th><th>TEL</th><th>ORIGEM</th><th>TIPO</th><th>BUDGET</th><th>STATUS</th><th>AÇÕES</th></tr></thead>
+                        <tbody id="leads-list-full"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <!-- CENTRAL IA -->
         <div id="central-ia" class="tab-content">
             <div class="dashboard-grid">
                 <div class="card-elite">
-                    <h2 style="margin-bottom: 15px;"><i class="fa-solid fa-robot"></i> Central de Inteligência</h2>
+                    <h2 style="margin-bottom: 15px;"><i class="fa-solid fa-robot"></i> Central IA</h2>
                     <textarea id="ia-chat-input" placeholder="Cole a conversa aqui..." style="width: 100%; height: 300px; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; background: #f8fafc; outline: none; resize: none; font-size: 14px;"></textarea>
-                    <button class="btn-elite" onclick="processarIACompleto()" style="width: 100%; margin-top: 20px; justify-content: center; padding: 18px;">ANALISAR E SALVAR LEAD</button>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:20px;">
+                        <button class="btn-elite" onclick="processarIACompleto()">EXTRAIR DADOS</button>
+                        <button class="btn-elite" style="background:#f1f5f9; color:var(--secondary);" onclick="alert('IA sugerindo abordagem...')">GERAR SCRIPT</button>
+                    </div>
                 </div>
                 <div class="card-elite">
                     <h3>Radar AI Match</h3>
@@ -167,60 +191,20 @@
         <div id="agenda" class="tab-content">
             <div class="dashboard-grid">
                 <div class="card-elite">
-                    <h2>Linha do Tempo de Compromissos</h2>
-                    <div class="timeline">
+                    <h2>Linha do Tempo</h2>
+                    <div class="timeline" id="agenda-timeline">
                         <div class="timeline-item">
-                            <span style="font-size: 12px; font-weight: 800; color: var(--primary);">09:00 - 10:30</span>
-                            <h4>Visita: Apto Edifício Horizonte</h4>
-                            <p style="font-size: 12px; color: var(--text-muted);">Cliente: Maria José | Local: Centro</p>
-                        </div>
-                        <div class="timeline-item">
-                            <span style="font-size: 12px; font-weight: 800; color: var(--primary);">14:00 - 15:30</span>
-                            <h4>Reunião de Fechamento</h4>
-                            <p style="font-size: 12px; color: var(--text-muted);">Lead via IA | Guarulhos</p>
+                            <span style="font-size: 12px; font-weight: 800; color: var(--primary);">09:00 - Hoje</span>
+                            <h4>Exemplo: Visita no Edifício Horizonte</h4>
                         </div>
                     </div>
                 </div>
                 <div class="card-elite">
                     <h3>Agendar Nova Tarefa</h3>
-                    <div class="input-group" style="margin-top: 20px;"><label>Evento</label><input type="text" placeholder="Ex: Ligar para cliente"></div>
-                    <div class="input-group"><label>Data/Hora</label><input type="datetime-local"></div>
-                    <button class="btn-elite" style="width: 100%;">AGENDAR AGORA</button>
+                    <div class="input-group" style="margin-top: 20px;"><label>Evento</label><input type="text" id="task-name" placeholder="Ex: Ligar para cliente"></div>
+                    <div class="input-group"><label>Horário</label><input type="time" id="task-time"></div>
+                    <button class="btn-elite" style="width: 100%;" onclick="addAgendaTask()">SALVAR NA AGENDA</button>
                 </div>
-            </div>
-        </div>
-
-        <!-- CONFIGURAÇÕES -->
-        <div id="config" class="tab-content">
-            <div class="card-elite" style="max-width: 600px;">
-                <h2 style="margin-bottom: 35px; font-weight: 800;">Configurações do Sistema</h2>
-                <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
-                    <div style="font-weight: 600; color: var(--text-main);">Inteligência Artificial Automática</div>
-                    <input type="checkbox" checked style="width: 22px; height: 22px; accent-color: var(--primary); cursor: pointer;">
-                </div>
-                <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
-                    <div style="font-weight: 600; color: var(--text-main);">Sincronizar Google Agenda</div>
-                    <input type="checkbox" checked style="width: 22px; height: 22px; accent-color: var(--primary); cursor: pointer;">
-                </div>
-                <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
-                    <div style="font-weight: 600; color: var(--text-main);">Notificações de Novos Leads</div>
-                    <input type="checkbox" checked style="width: 22px; height: 22px; accent-color: var(--primary); cursor: pointer;">
-                </div>
-                <button class="btn-elite" style="width: 100%; margin-top: 15px; padding: 15px;" onclick="alert('Configurações salvas!')">SALVAR CONFIGURAÇÕES</button>
-            </div>
-        </div>
-
-        <!-- LEADS -->
-        <div id="leads" class="tab-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                <h2 style="font-weight: 800;">Gestão de Leads</h2>
-                <button class="btn-elite" onclick="abrirModal()"><i class="fa-solid fa-plus"></i> NOVO LEAD</button>
-            </div>
-            <div class="card-elite">
-                <table style="width: 100%;">
-                    <thead><tr style="text-align: left; font-size: 11px; color: var(--text-muted);"><th>NOME</th><th>ORIGEM</th><th>BUDGET</th><th>STATUS</th><th>AÇÕES</th></tr></thead>
-                    <tbody id="leads-list-full"></tbody>
-                </table>
             </div>
         </div>
 
@@ -229,15 +213,25 @@
             <div class="card-elite" style="max-width: 800px;">
                 <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 35px;">
                     <img src="https://i.pravatar.cc/150?u=victor" id="profile-img-large" style="width: 110px; height: 110px; border-radius: 24px; object-fit: cover; border: 4px solid var(--primary);">
-                    <div><h2>Víctor Ávila</h2><p style="color: var(--text-muted); font-weight: 500;">Corretor Elite | Guarulhos, SP</p></div>
+                    <div><h2>Víctor Ávila</h2><p style="color: var(--text-muted);">Corretor Elite | Guarulhos, SP</p></div>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="input-group"><label>Nome Profissional</label><input type="text" id="p-nome" value="Víctor Soati Ávila Trivinho"></div>
+                    <div class="input-group"><label>Nome Profissional</label><input type="text" value="Víctor Soati Ávila Trivinho"></div>
                     <div class="input-group"><label>WhatsApp</label><input type="text" value="(11) 98765-4321"></div>
                     <div class="input-group"><label>CRECI</label><input type="text" placeholder="Ex: 000000-F"></div>
                     <div class="input-group"><label>Email</label><input type="text" value="victor@corretorpro.ai"></div>
                 </div>
-                <button class="btn-elite" style="width: 100%; margin-top: 25px; padding: 15px;">SALVAR PERFIL</button>
+                <button class="btn-elite" style="width: 100%; margin-top: 25px;" onclick="alert('Perfil salvo!')">SALVAR ALTERAÇÕES</button>
+            </div>
+        </div>
+
+        <!-- CONFIG -->
+        <div id="config" class="tab-content">
+            <div class="card-elite" style="max-width: 600px;">
+                <h2 style="margin-bottom: 35px; font-weight: 800;">Preferências</h2>
+                <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;"><div style="font-weight: 600;">IA Automática</div><input type="checkbox" checked style="width: 22px; height: 22px; accent-color: var(--primary);"></div>
+                <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;"><div style="font-weight: 600;">Google Agenda</div><input type="checkbox" checked style="width: 22px; height: 22px; accent-color: var(--primary);"></div>
+                <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;"><div style="font-weight: 600;">Notificações Push</div><input type="checkbox" checked style="width: 22px; height: 22px; accent-color: var(--primary);"></div>
             </div>
         </div>
 
@@ -247,11 +241,12 @@
     <div id="modal-lead" class="modal">
         <div class="modal-content">
             <h3 style="margin-bottom: 25px; font-weight: 800;">Novo Lead Manual</h3>
-            <div class="input-group"><label>Nome</label><input type="text" id="in-nome" placeholder="Nome do cliente"></div>
-            <div class="input-group"><label>WhatsApp</label><input type="text" id="in-tel" placeholder="(11) 99999-9999"></div>
-            <div class="input-group"><label>Budget</label><input type="text" id="in-budget" placeholder="R$ 500.000"></div>
-            <div class="input-group"><label>Origem</label><select id="in-origem"><option value="Manual">Manual</option><option value="Google">Google</option><option value="Facebook Ads">Facebook Ads</option></select></div>
-            <div style="display: flex; gap: 12px; margin-top: 10px;">
+            <div class="input-group"><label>NOME</label><input type="text" id="in-nome"></div>
+            <div class="input-group"><label>WHATSAPP</label><input type="text" id="in-tel"></div>
+            <div class="input-group"><label>BUDGET</label><input type="text" id="in-budget"></div>
+            <div class="input-group"><label>TIPO</label><select id="in-tipo"><option value="Apto">Apartamento</option><option value="Casa">Casa</option><option value="Sobrado">Sobrado</option></select></div>
+            <div class="input-group"><label>ORIGEM</label><select id="in-origem"><option value="Manual">Manual</option><option value="Google Ads">Google Ads</option><option value="Facebook">Facebook</option><option value="Viva Real">Viva Real</option></select></div>
+            <div style="display: flex; gap: 12px; margin-top: 15px;">
                 <button class="btn-elite" style="flex: 1;" onclick="salvarLead()">SALVAR</button>
                 <button class="btn-elite" style="flex: 1; background: #f1f5f9; color: #64748b;" onclick="fecharModal()">CANCELAR</button>
             </div>
@@ -284,7 +279,14 @@
             let vendasCount = 0;
             leads.forEach((l, i) => {
                 if(l.status === 'Venda') vendasCount++;
-                const row = `<tr><td style="font-weight:700; padding:12px 0;">${l.nome}</td><td>${l.origem || 'Manual'}</td><td>R$ ${l.budget}</td><td style="color:var(--primary); font-weight:800;">${l.status}</td>`;
+                const row = `<tr>
+                    <td style="font-weight:700;">${l.nome}</td>
+                    <td>${l.telefone || '-'}</td>
+                    <td>${l.origem || 'Manual'}</td>
+                    <td>${l.tipo || 'Apto'}</td>
+                    <td>R$ ${l.budget}</td>
+                    <td style="color:var(--primary); font-weight:800;">${l.status}</td>`;
+                
                 if(i < 5) dashList.innerHTML += row + '</tr>';
                 fullList.innerHTML += row + `<td><button onclick="removerLead('${l.id}')" style="background:none; border:none; color:var(--danger); cursor:pointer;"><i class="fa-solid fa-trash"></i></button></td></tr>`;
             });
@@ -297,18 +299,28 @@
         async function salvarLead() {
             const nome = document.getElementById('in-nome').value;
             const budget = document.getElementById('in-budget').value;
+            const tel = document.getElementById('in-tel').value;
+            const tipo = document.getElementById('in-tipo').value;
             const origem = document.getElementById('in-origem').value;
             if(!nome) return;
-            await _supabase.from('leads').insert([{ nome, budget, origem, status: 'Novo' }]);
+            await _supabase.from('leads').insert([{ nome, budget, telefone: tel, tipo, origem, status: 'Novo' }]);
             fecharModal(); carregarDados();
         }
 
-        async function removerLead(id) { if(confirm("Excluir lead?")) { await _supabase.from('leads').delete().eq('id', id); carregarDados(); } }
+        async function removerLead(id) { if(confirm("Excluir?")) { await _supabase.from('leads').delete().eq('id', id); carregarDados(); } }
+
+        function addAgendaTask() {
+            const name = document.getElementById('task-name').value;
+            const time = document.getElementById('task-time').value;
+            if(!name || !time) return alert("Preencha os campos!");
+            const timeline = document.getElementById('agenda-timeline');
+            timeline.innerHTML += `<div class="timeline-item"><span style="font-size: 12px; font-weight: 800; color: var(--primary);">${time}</span><h4>${name}</h4></div>`;
+        }
 
         async function processarIACompleto() {
-            document.getElementById('ia-match-status').innerText = "Processando conversa...";
+            document.getElementById('ia-match-status').innerText = "Analisando perfil...";
             setTimeout(() => {
-                document.getElementById('ia-match-status').innerText = "✅ Lead Identificado e Salvo!";
+                document.getElementById('ia-match-status').innerText = "✅ Lead Processado!";
                 document.getElementById('notif-count').innerText = parseInt(document.getElementById('notif-count').innerText) + 1;
                 carregarDados();
             }, 1200);
